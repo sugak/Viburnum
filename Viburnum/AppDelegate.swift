@@ -31,53 +31,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    func showLog (from: String, to: String, caller: String  = #function) {
+        #if SHOWLOGS
+        print("\n App moved from \(from) to \(to) with: \(caller)")
+        #endif
+    }
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
-      #if SHOWLOGS
-       print("\n App moved from Not running to Foreground Inactive with: \(#function)")
-      #endif
-        
+      showLog(from: "Not running", to: "Foreground Inactive")
+    
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         
-        #if SHOWLOGS
-        print("\n App moved from Active to Inactive with: \(#function)")
-        #endif
+   showLog(from: "Active", to: "Inactive")
         
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
   
-        #if SHOWLOGS
-        print("\n App moved from Inactive to Background with: \(#function)")
-        #endif
+     showLog(from: "Inactive", to: "Background")
+
         
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         
-        #if SHOWLOGS
-        print("\n App moved from Background to Inactive Foreground: \(#function)")
-        #endif
+     showLog(from: "Background", to: "Inactive Foreground")
         
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
        
-        #if SHOWLOGS
-        print("\n App moved from Inactive to Active with: \(#function)")
-        #endif
+      showLog(from: "Inactive Foreground", to: "Active")
         
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
        
-        #if SHOWLOGS
-        print("\n App moved from Background to Suspended with: \(#function)")
-        #endif
+        showLog(from: "Background", to: "Suspended")
     
     }
 
