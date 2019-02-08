@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+  
+  // MARK: - showLogForView()
     func showLogForView (caller: String  = #function) {
         #if SHOWLOGS
         print("\n \n View is loaded into memory with: \(caller)")
@@ -17,47 +18,33 @@ class ViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        showLogForView()
-
+      super.viewDidLoad()
+      showLogForView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        showLogForView()
-        
+      super.viewWillAppear(true)
+      showLogForView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        showLogForView()
-        
+      super.viewDidAppear(true)
+      showLogForView()
     }
     
     override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        showLogForView()
+      super.viewWillLayoutSubviews()
+      showLogForView()
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        showLogForView()
+      super.viewDidLayoutSubviews()
+      showLogForView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        
-        showLogForView()
+      super.viewWillDisappear(true)
+      showLogForView()
     }
-    
-
-    
-    
-
 }
 

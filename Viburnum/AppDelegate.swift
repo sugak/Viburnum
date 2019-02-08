@@ -20,7 +20,6 @@
 //     NOTES:
 //     - Задание со звездочкой решено с помощью Conditional Compilation.
 //       В проекте две схемы: Viburnum ShowLogs пишет в консоль, Viburnum не пишет.
-
 //     - В схемах отключены логи системных сообщений ОС через OS_ACTIVITY_MODE = disable
 
 
@@ -30,50 +29,37 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    func showLog (from: String, to: String, caller: String  = #function) {
+  
+  //MARK: - ShowLog()
+    func showLog (from: String, to: String, caller: String = #function) {
         #if SHOWLOGS
         print("\n App moved from \(from) to \(to) with: \(caller)")
         #endif
     }
-    
-
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       
       showLog(from: "Not running", to: "Foreground Inactive")
-    
-        return true
+      return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        
-   showLog(from: "Active", to: "Inactive")
-        
+      showLog(from: "Active", to: "Inactive")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-  
-     showLog(from: "Inactive", to: "Background")
-
-        
+      showLog(from: "Inactive", to: "Background")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        
-     showLog(from: "Background", to: "Inactive Foreground")
-        
+      showLog(from: "Background", to: "Inactive Foreground")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-       
       showLog(from: "Inactive Foreground", to: "Active")
-        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-       
-        showLog(from: "Background", to: "Suspended")
-    
+      showLog(from: "Background", to: "Suspended")
     }
 
 
