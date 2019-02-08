@@ -21,7 +21,7 @@
 //     - Задание со звездочкой решено с помощью Conditional Compilation.
 //       В проекте две схемы: Viburnum ShowLogs пишет в консоль, Viburnum не пишет.
 
-//     - В схеме отключены логи системных сообщений ОС через OS_ACTIVITY_MODE = disable
+//     - В схемах отключены логи системных сообщений ОС через OS_ACTIVITY_MODE = disable
 
 
 import UIKit
