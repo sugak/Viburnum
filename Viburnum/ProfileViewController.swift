@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  var animated = false  // По рекомендации преподавателя после ДЗ 1 флаг анимации вынесен в одно место
 
   func editButtonStyle (for button: UIButton) {
     button.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -29,6 +31,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     image.clipsToBounds = true
   }
   
+  //MARK: - Asterisk task
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
     
@@ -39,7 +42,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         
-        self.present(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: self.animated, completion: nil)
         imagePicker.delegate = self
       } else {
         print("Какая-то херня с галереей")
@@ -53,7 +56,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
         
-        self.present(imagePicker, animated: true, completion: nil)
+        self.present(imagePicker, animated: self.animated, completion: nil)
         imagePicker.delegate = self
       } else {
         print("Какая-то херня с камерой")
@@ -65,9 +68,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     choosePhotoMenu.addAction(galleryButton)
     choosePhotoMenu.addAction(cameraButton)
     
-    present(choosePhotoMenu, animated: true, completion: nil)
+    present(choosePhotoMenu, animated: animated, completion: nil)
   }
 
+ // ----------------------------------------------------------
   
   @IBOutlet weak var photoImageView: UIImageView! {
     didSet {
@@ -102,7 +106,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       photoImageView.contentMode = .scaleAspectFill
     }
     
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: animated, completion: nil)
   }
 
 
