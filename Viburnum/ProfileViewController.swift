@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
   func editButtonStyle (for button: UIButton) {
     button.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -27,6 +27,45 @@ class ProfileViewController: UIViewController {
   func photoImageViewStyle (for image: UIImageView) {
     image.layer.cornerRadius = photoButtonOutlet.bounds.width / 2
     image.clipsToBounds = true
+  }
+  
+  func choosePhoto() {
+    let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
+    
+    let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+    let galleryButton = UIAlertAction(title: "Выбрать из галереи", style: .default, handler: { (action) in
+      if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+        let imagePicker  = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        self.present(imagePicker, animated: true, completion: nil)
+        imagePicker.delegate = self
+      } else {
+        print("Какая-то херня с галереей")
+      }
+      
+    })
+    
+    let cameraButton = UIAlertAction(title: "Сделать снимок", style: .default, handler: { (action) in
+      if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        let imagePicker  = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        
+        self.present(imagePicker, animated: true, completion: nil)
+        imagePicker.delegate = self
+      } else {
+        print("Какая-то херня с камерой")
+      }
+      
+    })
+    
+    choosePhotoMenu.addAction(cancelButton)
+    choosePhotoMenu.addAction(galleryButton)
+    choosePhotoMenu.addAction(cameraButton)
+    
+    present(choosePhotoMenu, animated: true, completion: nil)
   }
 
   
@@ -50,13 +89,21 @@ class ProfileViewController: UIViewController {
 
   @IBAction func pushPhotoButton(_ sender: UIButton) {
       print("Выбери изображение профиля")
+      choosePhoto()
   }
   
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+    }
+
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      photoImageView.image = selectedImage
+      photoImageView.contentMode = .scaleAspectFill
     }
     
+    dismiss(animated: true, completion: nil)
+  }
 
 
 }

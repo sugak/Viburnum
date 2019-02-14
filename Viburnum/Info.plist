@@ -34,6 +34,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Необходимо предоставить приложению доступ к Галерее для выбора фото</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Необходимо предоставить приложению доступ к Камере</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
