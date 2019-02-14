@@ -5,6 +5,12 @@
 //  Created by Maksim Sugak on 14/02/2019.
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
+/*
+ NOTES:
+ 
+ В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи камеры для задания со звездочкой
+ 
+ */
 
 import UIKit
 
@@ -79,6 +85,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
            }
   }
   
+  // Outlets:
   @IBOutlet weak var photoButtonOutlet: UIButton! {
     didSet {
       photoButtonStyle(for: photoButtonOutlet)
@@ -90,23 +97,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
            editButtonStyle(for: editButtonOutlet)
            }
   }
-
+  // Actions:
   @IBAction func pushPhotoButton(_ sender: UIButton) {
       print("Выбери изображение профиля")
       choosePhoto()
   }
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage
       photoImageView.contentMode = .scaleAspectFill
     }
-    
     dismiss(animated: animated, completion: nil)
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
   }
 
 
