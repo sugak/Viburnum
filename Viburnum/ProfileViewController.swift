@@ -15,6 +15,7 @@
 // TODO: Разобраться с цветами
 // TODO: Разобраться со вторым лейблом
 // TODO: Убрать "какую-то херню"
+// TODO: Анимация?
 
 import UIKit
 
@@ -94,13 +95,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
  // ----------------------------------------------------------
   
+  // Light button animation
+  func buttonAnimation (for button: UIButton) {
+    UIView.animate(withDuration: 0.1,
+                   animations: {
+                  button.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    },
+                   completion: { _ in
+                    UIView.animate(withDuration: 0.1) {
+                    button.transform = CGAffineTransform.identity
+                    }
+    })
+  }
+  
+   // Outlets:
   @IBOutlet weak var photoImageView: UIImageView! {
     didSet {
       photoImageViewStyle(for: photoImageView)
            }
   }
-  
-  // Outlets:
+ 
   @IBOutlet weak var photoButtonOutlet: UIButton! {
     didSet {
       photoButtonStyle(for: photoButtonOutlet)
@@ -114,7 +128,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   // Actions:
   @IBAction func pushPhotoButton(_ sender: UIButton) {
-      print("Выбери изображение профиля")
+      buttonAnimation(for: sender)
       choosePhoto()
   }
   
