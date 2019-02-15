@@ -21,11 +21,17 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  convenience init(){
-    self.init(nibName:nil, bundle:nil)
-    print("test")
-    print(editButtonOutlet.frame)
-  }
+//  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//  //  print("Init()")
+//  }
+//
+//  required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//  }
+  
+  
+  
   
   // По рекомендации преподавателя после ДЗ 1 флаг анимации вынесен в одно место:
   var animated = true
@@ -41,6 +47,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Stying photo button:
   func photoButtonStyle (for button: UIButton) {
+    button.backgroundColor = UIColor(red:0.25, green:0.47, blue:0.94, alpha:1.0)
     button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20) // redusing camera image inside the button
     button.layer.cornerRadius = button.bounds.width / 2 // To make sure it will be circle
     button.clipsToBounds = true
@@ -122,15 +129,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   // Actions:
   @IBAction func pushPhotoButton(_ sender: UIButton) {
-      buttonAnimation(for: sender)
-      choosePhoto()
+      buttonAnimation(for: sender)  // Starting button animation
+      choosePhoto() // Opening ActionSheet menu
   }
   
   // imagePickerController delegate:
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage // Loading photo into ImageView
-      photoImageView.contentMode = .scaleAspectFill //Saving aspect ratio
+      photoImageView.contentMode = .scaleAspectFill //Saving ratio
     }
     dismiss(animated: animated, completion: nil)
   }
@@ -148,5 +155,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   override func viewDidAppear(_ animated: Bool) {
      super.viewWillAppear(animated)
       print("viewDidAppear: \(editButtonOutlet.frame)")
+    
+    /*
+     Методы, связанные с установкой Auto Layout, вызываются внутри viewWillAppear.
+     Среди них есть  updateViewConstraints, updateConstraints и др. Соответственно, в этом месте
+     обновляются Constraints, которые изначально были установлены в интерфейсе Builder-а для
+     iPhone SE (или в .xib).
+     А метод viewDidAppear вызывается позже, поэтому уже имеет обновленные constraints и frames.
+    */
   }
 }
