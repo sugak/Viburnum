@@ -5,14 +5,15 @@
 //  Created by Maksim Sugak on 14/02/2019.
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
+
 /*
  NOTES:
  
- В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи камеры для задания со звездочкой
-
+ 1. В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи и камеры для задания со звездочкой
+ 2. В тренировочных целях добавлена легкая анимация buttonAnimation (for button: UIButton), которая увеличивает кнопку выбора фото в полтора раза по тапу
+ 
  */
 
-// TODO: Разобраться с цветами
 // TODO: Разобраться со вторым лейблом
 // TODO: Убрать "какую-то херню"
 
@@ -94,7 +95,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
  // ----------------------------------------------------------
   
-  // Light button animation
+  // Button animation
   func buttonAnimation (for button: UIButton) {
     UIView.animate(withDuration: 0.1, animations: { button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5) }, completion: { _ in
                     button.transform = CGAffineTransform.identity
@@ -136,11 +137,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print(editButtonOutlet.frame)
+       print("viewDidLoad: \(editButtonOutlet.frame)")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    print("WillAppear: \(editButtonOutlet.frame)")
   }
   
   override func viewDidAppear(_ animated: Bool) {
      super.viewWillAppear(animated)
-     print(editButtonOutlet.frame)
+      print("viewDidAppear: \(editButtonOutlet.frame)")
   }
 }

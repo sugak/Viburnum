@@ -52,11 +52,10 @@
                                     <action selector="pushPhotoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hr8-RB-Ry7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l35-CS-6FN">
-                                <rect key="frame" x="16" y="387" width="288" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👨🏻‍💻Люблю программировать под iOS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l35-CS-6FN">
+                                <rect key="frame" x="16" y="386" width="288" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
@@ -67,11 +66,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eNP-UP-MIR" secondAttribute="trailing" constant="16" id="0Ua-on-RD8"/>
                             <constraint firstItem="nxi-0M-8cE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="2rZ-H6-tOB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nxi-0M-8cE" secondAttribute="trailing" constant="16" id="5kr-ft-gjm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="l35-CS-6FN" secondAttribute="trailing" constant="16" id="9Mm-Nz-PpA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lYd-iy-XmU" secondAttribute="trailing" constant="16" id="AhF-Ms-LCJ"/>
                             <constraint firstItem="nxi-0M-8cE" firstAttribute="top" secondItem="UZ4-Ma-90O" secondAttribute="bottom" constant="16" id="LbI-vf-gu1"/>
+                            <constraint firstItem="eNP-UP-MIR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="l35-CS-6FN" secondAttribute="bottom" constant="8" id="TKc-xb-4TN"/>
+                            <constraint firstItem="l35-CS-6FN" firstAttribute="top" secondItem="nxi-0M-8cE" secondAttribute="bottom" constant="16" id="UzT-fA-YZN"/>
                             <constraint firstItem="eNP-UP-MIR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XQh-mL-ozb"/>
                             <constraint firstItem="nxi-0M-8cE" firstAttribute="top" secondItem="lYd-iy-XmU" secondAttribute="bottom" constant="16" id="hMM-qS-opB"/>
                             <constraint firstItem="UZ4-Ma-90O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iX2-uV-Qcv"/>
+                            <constraint firstItem="l35-CS-6FN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="neR-WD-7pu"/>
                             <constraint firstItem="UZ4-Ma-90O" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="wTF-C0-KpX"/>
                             <constraint firstAttribute="trailing" secondItem="UZ4-Ma-90O" secondAttribute="trailing" constant="16" id="zZr-YU-9ue"/>
                         </constraints>
