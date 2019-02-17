@@ -9,8 +9,10 @@
 /*
  NOTES:
  
- 1. В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи и камеры для задания со звездочкой
- 2. В тренировочных целях добавлена легкая анимация buttonAnimation (for button: UIButton), которая увеличивает кнопку выбора фото в полтора раза по тапу
+ 1. Для кастомизации фото-кнопки создан отдельный класс PhotoButton.
+ 2. В тренировочных целях добавлена легкая анимация buttonAnimation, которая увеличивает кнопку выбора фото в полтора раза по тапу
+ 3. Задание со звёздочкой отмечено через MARK
+ 4. В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи и камеры для задания со звездочкой
  
  */
 
@@ -18,17 +20,17 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
+  // Init for ViewController
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-  print(editButtonOutlet?.frame ?? "Failed to get button frame")
+    print(editButtonOutlet?.frame ?? "Failed to get button frame")
     /*
     Инициализация ViewController не включает в себя работу с View. Это делается, начиная с вызова
      метода LoadView(). Поэтому на этапе инициализации VC еще ничего не знает о UI.
      */
   }
   
-
-  // Styling edit button:
+  // Styling Edit button:
   func editButtonStyle (for button: UIButton) {
     button.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -37,40 +39,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     button.clipsToBounds = true
   }
   
-  
-  // Stying image container:
+  // Styling image view:
   func photoImageViewStyle (for image: UIImageView) {
-    image.layer.cornerRadius = 40.0 //photoButtonOutlet.bounds.width / 2 // To make sure radius is the same as photo button has
+    image.layer.cornerRadius = Constants.cornerRadius
     image.clipsToBounds = true
   }
   
-  //MARK: - Задание со звёздочкой
+  //MARK: - Задание со звёздочкой -----------------------------
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
-    
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-    
-    let galleryButton = UIAlertAction(title: "Выбрать из галереи", style: .default, handler: { (action) in
-      if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-        let imagePicker  = UIImagePickerController()
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        self.present(imagePicker, animated: Constants.animated, completion: nil)
-        imagePicker.delegate = self // Using self delegate
-      }
-    })
-    
-    let cameraButton = UIAlertAction(title: "Сделать снимок", style: .default, handler: { (action) in
-      if UIImagePickerController.isSourceTypeAvailable(.camera) {
-        let imagePicker  = UIImagePickerController()
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        
-        self.present(imagePicker, animated: Constants.animated, completion: nil)
-        imagePicker.delegate = self // Using self delegate
-      }
-    })
+    let galleryButton = actionForPhotoPickUp(title: "Выбрать из галереи", sourceType: .photoLibrary)
+    let cameraButton = actionForPhotoPickUp(title: "Сделать снимок", sourceType: .camera)
     
     // Adding buttons on action sheet:
     choosePhotoMenu.addAction(cancelButton)
@@ -80,18 +60,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Showing action sheet:
     present(choosePhotoMenu, animated: Constants.animated, completion: nil)
   }
- // ----------------------------------------------------------
   
-  
-   // Outlets:
-  @IBOutlet weak var photoImageView: UIImageView!
-  @IBOutlet weak var editButtonOutlet: UIButton!
-  
-  // Actions:
-  @IBAction func pushPhotoButton(_ sender: PhotoButton) {
-     // buttonAnimation(for: sender)  // Starting button animation
-      sender.buttonAnimation()
-      choosePhoto() // Opening ActionSheet menu
+  // Function for action buttons to pick uo photo from Gallery or Camera
+  func actionForPhotoPickUp (title: String, sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
+    return UIAlertAction(title: title, style: .default, handler: { (action) in
+      if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+        let imagePicker  = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = sourceType
+        
+        self.present(imagePicker, animated: Constants.animated, completion: nil)
+        imagePicker.delegate = self // Using self delegate
+      }
+    })
   }
   
   // imagePickerController delegate:
@@ -102,15 +83,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     dismiss(animated: Constants.animated, completion: nil)
   }
+  // ----------------------------------------------------------
+  
+  // Outlets:
+  @IBOutlet weak var photoImageView: UIImageView!
+  @IBOutlet weak var editButtonOutlet: UIButton!
+  
+  // Actions:
+  @IBAction func pushPhotoButton(_ sender: PhotoButton) {
+      sender.buttonAnimation() // Making short button animation
+      choosePhoto() // Opening ActionSheet menu
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-       print("viewDidLoad: \(editButtonOutlet.frame)")
+       print("viewDidLoad: \(editButtonOutlet.frame)") // Task 4.3
   }
   
   override func viewDidAppear(_ animated: Bool) {
      super.viewWillAppear(Constants.animated)
-      print("viewDidAppear: \(editButtonOutlet.frame)")
+      print("viewDidAppear: \(editButtonOutlet.frame)") // Task 4.4
     
     /*
      Методы, связанные с установкой Auto Layout, вызываются внутри viewWillAppear.
@@ -124,9 +116,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
+    // Layout for UI elements
     photoImageViewStyle(for: photoImageView)
- //   photoButtonStyle(for: photoButtonOutlet)
     editButtonStyle(for: editButtonOutlet)
-    
   }
 }
