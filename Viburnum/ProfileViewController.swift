@@ -14,27 +14,19 @@
  
  */
 
-// TODO: Разобраться со вторым лейблом
-// TODO: Убрать "какую-то херню"
-
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-//  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//  //  print("Init()")
-//  }
-//
-//  required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//  }
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  print(editButtonOutlet?.frame ?? "Failed to get button frame")
+    /*
+    Инициализация ViewController не включает в себя работу с View. Это делается, начиная с вызова
+     метода LoadView(). Поэтому на этапе инициализации VC еще ничего не знает о UI.
+     */
+  }
   
-  
-  
-  
-  // По рекомендации преподавателя после ДЗ 1 флаг анимации вынесен в одно место:
-  var animated = true
 
   // Styling edit button:
   func editButtonStyle (for button: UIButton) {
@@ -45,21 +37,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     button.clipsToBounds = true
   }
   
-  // Stying photo button:
-  func photoButtonStyle (for button: UIButton) {
-    button.backgroundColor = UIColor(red:0.25, green:0.47, blue:0.94, alpha:1.0)
-    button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20) // redusing camera image inside the button
-    button.layer.cornerRadius = button.bounds.width / 2 // To make sure it will be circle
-    button.clipsToBounds = true
-  }
   
   // Stying image container:
   func photoImageViewStyle (for image: UIImageView) {
-    image.layer.cornerRadius = photoButtonOutlet.bounds.width / 2 // To make sure radius is the same as photo button has
+    image.layer.cornerRadius = 40.0 //photoButtonOutlet.bounds.width / 2 // To make sure radius is the same as photo button has
     image.clipsToBounds = true
   }
   
-  //MARK: - Asterisk task
+  //MARK: - Задание со звёздочкой
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
     
@@ -71,10 +56,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         
-        self.present(imagePicker, animated: self.animated, completion: nil)
+        self.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
-      } else {
-        print("Какая-то херня с галереей")
       }
     })
     
@@ -84,10 +67,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
         
-        self.present(imagePicker, animated: self.animated, completion: nil)
+        self.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
-      } else {
-        print("Какая-то херня с камерой")
       }
     })
     
@@ -97,39 +78,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     choosePhotoMenu.addAction(cameraButton)
     
     // Showing action sheet:
-    present(choosePhotoMenu, animated: animated, completion: nil)
+    present(choosePhotoMenu, animated: Constants.animated, completion: nil)
   }
-
  // ----------------------------------------------------------
   
-  // Button animation
-  func buttonAnimation (for button: UIButton) {
-    UIView.animate(withDuration: 0.1, animations: { button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5) }, completion: { _ in
-                    button.transform = CGAffineTransform.identity
-    })
-  }
   
    // Outlets:
-  @IBOutlet weak var photoImageView: UIImageView! {
-    didSet {
-      photoImageViewStyle(for: photoImageView)
-           }
-  }
- 
-  @IBOutlet weak var photoButtonOutlet: UIButton! {
-    didSet {
-      photoButtonStyle(for: photoButtonOutlet)
-           }
-  }
+  @IBOutlet weak var photoImageView: UIImageView!
+  @IBOutlet weak var editButtonOutlet: UIButton!
   
-  @IBOutlet weak var editButtonOutlet: UIButton! {
-    didSet {
-           editButtonStyle(for: editButtonOutlet)
-           }
-  }
   // Actions:
-  @IBAction func pushPhotoButton(_ sender: UIButton) {
-      buttonAnimation(for: sender)  // Starting button animation
+  @IBAction func pushPhotoButton(_ sender: PhotoButton) {
+     // buttonAnimation(for: sender)  // Starting button animation
+      sender.buttonAnimation()
       choosePhoto() // Opening ActionSheet menu
   }
   
@@ -139,7 +100,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       photoImageView.image = selectedImage // Loading photo into ImageView
       photoImageView.contentMode = .scaleAspectFill //Saving ratio
     }
-    dismiss(animated: animated, completion: nil)
+    dismiss(animated: Constants.animated, completion: nil)
   }
   
   override func viewDidLoad() {
@@ -147,13 +108,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
        print("viewDidLoad: \(editButtonOutlet.frame)")
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    print("WillAppear: \(editButtonOutlet.frame)")
-  }
-  
   override func viewDidAppear(_ animated: Bool) {
-     super.viewWillAppear(animated)
+     super.viewWillAppear(Constants.animated)
       print("viewDidAppear: \(editButtonOutlet.frame)")
     
     /*
@@ -163,5 +119,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
      iPhone SE (или в .xib).
      А метод viewDidAppear вызывается позже, поэтому уже имеет обновленные constraints и frames.
     */
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    photoImageViewStyle(for: photoImageView)
+ //   photoButtonStyle(for: photoButtonOutlet)
+    editButtonStyle(for: editButtonOutlet)
+    
   }
 }
