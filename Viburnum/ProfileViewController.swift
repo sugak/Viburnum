@@ -7,6 +7,7 @@
 //
 
 /*
+ 
  NOTES:
  
  1. Для кастомизации фото-кнопки создан отдельный класс PhotoButton.
@@ -30,6 +31,42 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
      */
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    print("viewDidLoad: \(editButtonOutlet.frame)") // Task 4.3
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewWillAppear(Constants.animated)
+    print("viewDidAppear: \(editButtonOutlet.frame)") // Task 4.4
+    
+    /*
+     Методы, связанные с установкой Auto Layout, вызываются внутри viewWillAppear.
+     Среди них есть  updateViewConstraints, updateConstraints и др. Соответственно, в этом месте
+     обновляются Constraints, которые изначально были установлены в интерфейсе Builder-а для
+     iPhone SE (или в .xib).
+     А метод viewDidAppear вызывается позже, поэтому уже имеет обновленные constraints и frames.
+     */
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    // Layout for UI elements
+    photoImageViewStyle(for: photoImageView)
+    editButtonStyle(for: editButtonOutlet)
+  }
+  
+  // Outlets:
+  @IBOutlet weak var photoImageView: UIImageView!
+  @IBOutlet weak var editButtonOutlet: UIButton!
+  
+  // Actions:
+  @IBAction func pushPhotoButton(_ sender: PhotoButton) {
+    sender.buttonAnimation() // Making short button animation
+    choosePhoto() // Opening ActionSheet menu
+  }
+  
   // Styling Edit button:
   func editButtonStyle (for button: UIButton) {
     button.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -39,13 +76,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     button.clipsToBounds = true
   }
   
-  // Styling image view:
+  // Styling photo image view:
   func photoImageViewStyle (for image: UIImageView) {
     image.layer.cornerRadius = Constants.cornerRadius
     image.clipsToBounds = true
   }
   
-  //MARK: - Задание со звёздочкой -----------------------------
+  //MARK: - Задание со звёздочкой
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
@@ -82,42 +119,5 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       photoImageView.contentMode = .scaleAspectFill //Saving ratio
     }
     dismiss(animated: Constants.animated, completion: nil)
-  }
-  // ----------------------------------------------------------
-  
-  // Outlets:
-  @IBOutlet weak var photoImageView: UIImageView!
-  @IBOutlet weak var editButtonOutlet: UIButton!
-  
-  // Actions:
-  @IBAction func pushPhotoButton(_ sender: PhotoButton) {
-      sender.buttonAnimation() // Making short button animation
-      choosePhoto() // Opening ActionSheet menu
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-       print("viewDidLoad: \(editButtonOutlet.frame)") // Task 4.3
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-     super.viewWillAppear(Constants.animated)
-      print("viewDidAppear: \(editButtonOutlet.frame)") // Task 4.4
-    
-    /*
-     Методы, связанные с установкой Auto Layout, вызываются внутри viewWillAppear.
-     Среди них есть  updateViewConstraints, updateConstraints и др. Соответственно, в этом месте
-     обновляются Constraints, которые изначально были установлены в интерфейсе Builder-а для
-     iPhone SE (или в .xib).
-     А метод viewDidAppear вызывается позже, поэтому уже имеет обновленные constraints и frames.
-    */
-  }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
-    // Layout for UI elements
-    photoImageViewStyle(for: photoImageView)
-    editButtonStyle(for: editButtonOutlet)
   }
 }
