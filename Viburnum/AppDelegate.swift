@@ -41,15 +41,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) { showLog(from: "Active", to: "Inactive") }
+    func applicationWillResignActive(_ application: UIApplication) {
+      showLog(from: "Active", to: "Inactive")
+    }
 
-    func applicationDidEnterBackground(_ application: UIApplication) { showLog(from: "Inactive", to: "Background") }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+      showLog(from: "Inactive", to: "Background")
+    }
 
-    func applicationWillEnterForeground(_ application: UIApplication) { showLog(from: "Background", to: "Inactive Foreground") }
+    func applicationWillEnterForeground(_ application: UIApplication) {
+      showLog(from: "Background", to: "Inactive Foreground")
+    }
 
-    func applicationDidBecomeActive(_ application: UIApplication) { showLog(from: "Inactive Foreground", to: "Active") }
+    func applicationDidBecomeActive(_ application: UIApplication) {
+      showLog(from: "Inactive Foreground", to: "Active")
+    }
 
-    func applicationWillTerminate(_ application: UIApplication) { showLog(from: "Background", to: "Suspended") }
+    func applicationWillTerminate(_ application: UIApplication) {
+      showLog(from: "Background", to: "Suspended")
+    }
 
 }
 
