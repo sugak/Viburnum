@@ -16,12 +16,6 @@
 ////                                                   //
 //// --------------------------------------------------//
 
-//     NOTES:
-//     - Задание со звездочкой решено с помощью Conditional Compilation, использован флаг ShowLogs.
-//       В проекте две схемы: Viburnum ShowLogs пишет в консоль, Viburnum не пишет.
-//     - В схемах отключены логи системных сообщений ОС через OS_ACTIVITY_MODE = disable
-
-
 import UIKit
 
 @UIApplicationMain
