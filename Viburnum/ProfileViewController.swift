@@ -14,7 +14,7 @@
  2. В тренировочных целях добавлена легкая анимация buttonAnimation, которая увеличивает кнопку выбора фото в полтора раза по тапу
  3. Задание со звёздочкой отмечено через MARK
  4. В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи и камеры для задания со звездочкой
- 
+ 5. 20.02.19 Добавлен обработчик ошибок камеры и галереи
  */
 
 import UIKit
@@ -109,6 +109,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
       } else {
+        
+        // Camera and Gallery error handler:
         let photoFailedAlert = UIAlertController(title: "Ошибка", message: (sourceType == .camera) ? "На вашем смартфоне не работает камера или она не доступна" : "На вашем смартфоне не доступна галерея", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         photoFailedAlert.addAction(okButton)
