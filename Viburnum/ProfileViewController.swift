@@ -109,7 +109,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
       } else {
-        
         // Camera and Gallery error handler:
         let photoFailedAlert = UIAlertController(title: "Ошибка", message: (sourceType == .camera) ? "На вашем смартфоне не работает камера или она не доступна" : "На вашем смартфоне не доступна галерея", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
