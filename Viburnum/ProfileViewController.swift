@@ -6,48 +6,9 @@
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
 
-/*
- 
- NOTES:
- 
- 1. Для кастомизации фото-кнопки создан отдельный класс PhotoButton.
- 2. В тренировочных целях добавлена легкая анимация buttonAnimation, которая увеличивает кнопку выбора фото в полтора раза по тапу
- 3. Задание со звёздочкой отмечено через MARK
- 4. В info.plist добавлены два ключа для запроса разрешения пользователя на использование галереи и камеры для задания со звездочкой
- 5. 20.02.19 Добавлен обработчик ошибок камеры и галереи
- */
-
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
-  // Init for ViewController
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    print(editButtonOutlet?.frame ?? "Failed to get button frame")
-    /*
-    Инициализация ViewController не включает в себя работу с View. Это делается, начиная с вызова
-     метода LoadView(). Поэтому на этапе инициализации VC еще ничего не знает о UI.
-     */
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    print("viewDidLoad: \(editButtonOutlet.frame)") // Task 4.3
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewWillAppear(Constants.animated)
-    print("viewDidAppear: \(editButtonOutlet.frame)") // Task 4.4
-    
-    /*
-     Методы, связанные с установкой Auto Layout, вызываются внутри viewWillAppear.
-     Среди них есть  updateViewConstraints, updateConstraints и др. Соответственно, в этом месте
-     обновляются Constraints, которые изначально были установлены в интерфейсе Builder-а для
-     iPhone SE (или в .xib).
-     А метод viewDidAppear вызывается позже, поэтому уже имеет обновленные constraints и frames.
-     */
-  }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
