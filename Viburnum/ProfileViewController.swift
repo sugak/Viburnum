@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     image.clipsToBounds = true
   }
   
-  //MARK: - Задание со звёздочкой
+  // Photo uploading from Gallery or Camera
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
