@@ -9,25 +9,10 @@
 import Foundation
 
 let talkerNames = ["Taker 1", "Talker 2", "Talker 3"]
-
 let lastMessages = ["Message 1", nil ,"Message 3"]
 let datesStrings = ["2019-02-23 10:34","2019-02-23 11:15","2019-02-20 14:20"]
 let ifOnline = [true, false, true]
-let ifUnreadedMessage = [false, true, true]
+let ifMessageUnread = [false, true, true]
+let stringDates = ["23.02.2019 14:34","24.02.2019 11:20","20.02.2019 21:30"]
 
 
-//var messagesDates: [Date] =
-
-
-
-
-
-extension String {
-  func getMyDate() -> DateComponents {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:MM"
-    let date = dateFormatter.date(from: self)
-    let dateComp = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: date!)
-    return dateComp
-  }
-}

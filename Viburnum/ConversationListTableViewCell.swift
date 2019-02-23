@@ -10,6 +10,7 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
+  
   // Conform to protocol:
   var name: String? {
     didSet {
@@ -58,6 +59,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
 
     override func awakeFromNib() {
         super.awakeFromNib()
+       self.selectionStyle = .none    // Убираем выделение при тапе
         // Initialization code
     }
 

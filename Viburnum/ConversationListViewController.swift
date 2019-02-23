@@ -28,18 +28,39 @@ class ConversationListViewController: UITableViewController {
   }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+      
+      // Считаем количество записей для каждой секции (вроде правильно)
+      let onlineNumber = ifOnline.filter{$0}.count
+      let offlineNumber = ifOnline.count - onlineNumber
+      let numberOfRowsInSectionsArray = [onlineNumber, offlineNumber]
+      print(onlineNumber)
+      print(offlineNumber)
+      return numberOfRowsInSectionsArray[section]
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
+      
+      if indexPath.section == 0 {
+        if ifOnline[indexPath.row] {
       cell.name = talkerNames[indexPath.row]
       cell.message = lastMessages[indexPath.row]
       cell.online = ifOnline[indexPath.row]
-      cell.hasUnreadMessages = ifUnreadedMessage[indexPath.row]
-      
+      cell.hasUnreadMessages = ifMessageUnread[indexPath.row]
+        }
+      } else {
+        cell.name = talkerNames[indexPath.row]
+        cell.message = lastMessages[indexPath.row]
+        cell.online = ifOnline[indexPath.row]
+        cell.hasUnreadMessages = ifMessageUnread[indexPath.row]
+      }
         return cell
     }
+  
+  func implementCell (forSection: Int, forRow: Int) {
+    
+  }
+  
 
 }
