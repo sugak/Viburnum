@@ -16,6 +16,7 @@
 		288DEA84220C25AF007D5263 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */; };
 		28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */; };
 		28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD122208C5A00C190F4 /* Protocols.swift */; };
+		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		288DEA85220C25AF007D5263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListTableViewCell.swift; sourceTree = "<group>"; };
 		28AB8DD122208C5A00C190F4 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		28AB8DD32221344F00C190F4 /* TempoModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoModelData.swift; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
 				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
+				28AB8DD32221344F00C190F4 /* TempoModelData.swift */,
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
 				287F40C02219CF8C00C87D11 /* Constants.swift */,
@@ -157,6 +160,7 @@
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
+				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

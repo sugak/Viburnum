@@ -9,7 +9,7 @@
 import UIKit
 
 class ConversationListViewController: UITableViewController {
-  let cell = "conversationСell"
+  
   let sections = ["Online","History"]
 
     override func viewDidLoad() {
@@ -33,7 +33,12 @@ class ConversationListViewController: UITableViewController {
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as! ConversationListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
+      cell.name = talkerNames[indexPath.row]
+      cell.message = lastMessages[indexPath.row]
+      cell.online = ifOnline[indexPath.row]
+      cell.hasUnreadMessages = ifUnreadedMessage[indexPath.row]
+      
         return cell
     }
 
