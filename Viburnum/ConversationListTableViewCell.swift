@@ -10,7 +10,7 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
-  
+ 
   // Conform to protocol:
   var name: String? {
     didSet {
@@ -21,19 +21,29 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var message: String? {
     didSet {
       guard message != nil else {
-        // TODO: поменять шрифт
+        lastMessageLabel.font = UIFont(name: "Futura", size: 16.0)
         lastMessageLabel.text = "No messages yet"
         return
       }
       lastMessageLabel.text = message
     }
   }
-  var date: Date?
+  var date: Date? {
+    didSet {
+      let dateFormatter = DateFormatter()
+      if Calendar.current.isDateInToday(date!) {
+        dateFormatter.dateFormat = "HH:mm"
+      } else {
+        dateFormatter.dateFormat = "dd MMM"
+      }
+      lastMessageDateLabel.text = dateFormatter.string(from: date!)
+    }
+  }
   
   var online: Bool = false {
     didSet {
       if online {
-        self.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 1, green: 0.9478314519, blue: 0.8266604543, alpha: 1)
       } else {
         self.backgroundColor = .white
       }
