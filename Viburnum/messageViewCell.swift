@@ -10,27 +10,20 @@ import UIKit
 
 class messageViewCell: UITableViewCell, messageCellConfiguration {
   
+  override func layoutSubviews() {
+    super .layoutSubviews()
+    messageView.layer.cornerRadius = 12.0
+    messageView.clipsToBounds = true
+  }
+    
   var textMess: String? {
     didSet{
-      incomeMessageLabel.text = textMess
+      messageText.text = textMess
     }
   }
   
-  @IBOutlet var incomeMessageLabel: UILabel!
-  @IBOutlet var outcomeMessageLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.layer.cornerRadius = 20.0
-        self.clipsToBounds = true
-
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-      super.setSelected(selected, animated: Constants.animated)
-   
-
-        // Configure the view for the selected state
-    }
-
+  
+  @IBOutlet var messageView: UIView!
+  @IBOutlet var messageText: UILabel!
+  
 }

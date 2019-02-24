@@ -15,9 +15,9 @@ class ConversationListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
-        self.tableView.separatorStyle = .none // Убираем стандартный разделитель
       
-        navigationController?.navigationBar.prefersLargeTitles = true // Увеличиваем шрифт в тайтле навбара
+      self.tableView.separatorStyle = .none // Убираем стандартный разделитель
+      navigationController?.navigationBar.prefersLargeTitles = true // Увеличиваем шрифт в тайтле навбара
     }
 
     // MARK: - Table view data source
