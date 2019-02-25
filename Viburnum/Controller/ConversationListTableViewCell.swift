@@ -30,6 +30,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   
   var date: Date? {
     didSet {
+      // Задание со звездочкой:
       if date != nil {
         let dateFormatter = DateFormatter()
           if Calendar.current.isDateInToday(date!) {
@@ -47,7 +48,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var online: Bool = false {
     didSet {
       if online {
-        self.backgroundColor = #colorLiteral(red: 0.9488946795, green: 0.9413331151, blue: 0.8294835687, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.965354383, green: 0.9575526118, blue: 0.8513519168, alpha: 1)
       } else {
         self.backgroundColor = .white
       }
@@ -60,6 +61,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  // Function to get initials of name for avatar:
   var avatarSymbols = "" {
     didSet {
       let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
@@ -67,21 +69,20 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  // Function to update last message font:
   private func fontUpdate () {
     lastMessageLabel.textColor = UIColor.darkGray
     lastMessageLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-    
-    if message == nil {
-      lastMessageLabel.font = UIFont(name: "Futura", size: 14.0)
-      lastMessageLabel.textColor = UIColor.darkGray
-    } else {
-      if hasUnreadMessages {
-        lastMessageLabel.textColor = UIColor.black
-        lastMessageLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+      if message == nil {
+        lastMessageLabel.font = UIFont(name: "Futura", size: 14.0)
+        lastMessageLabel.textColor = UIColor.darkGray
+      } else {
+        if hasUnreadMessages {
+          lastMessageLabel.textColor = UIColor.black
+          lastMessageLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        }
       }
-    }
   }
-  
   
   // Outlets:
   @IBOutlet var talkerNameLabel: UILabel!
@@ -89,14 +90,13 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   @IBOutlet var lastMessageDateLabel: UILabel!
   @IBOutlet var avatarLabel: UILabel!
   
-
   override func layoutSubviews() {
     super.layoutSubviews()
+    // No selection for rows:
     self.selectionStyle = .none
     
+    // Setting up the avatar label:
     avatarLabel.layer.cornerRadius = 25.0
     avatarLabel.clipsToBounds = true
-   
   }
-
 }

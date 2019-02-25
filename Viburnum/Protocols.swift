@@ -16,7 +16,6 @@ protocol ConversationCellConfiguration : AnyObject {
   var hasUnreadMessages: Bool {get set}
 }
 
-// TODO: Change back to text..
 protocol messageCellConfiguration: AnyObject {
   var textMess: String? {get set}
 }

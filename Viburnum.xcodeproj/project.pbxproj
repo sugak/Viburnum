@@ -71,16 +71,12 @@
 			isa = PBXGroup;
 			children = (
 				2890F1572224687400F42965 /* Model */,
-				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
-				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
-				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
-				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
-				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
-				28D181372215721200E56148 /* ProfileViewController.swift */,
+				2890F1582224887800F42965 /* Controller */,
+				288DEA7D220C25AD007D5263 /* Main.storyboard */,
 				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
 				287F40C02219CF8C00C87D11 /* Constants.swift */,
 				287F40BE2219C61400C87D11 /* PhotoButton.swift */,
-				288DEA7D220C25AD007D5263 /* Main.storyboard */,
+				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 				288DEA80220C25AF007D5263 /* Assets.xcassets */,
 				288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */,
 				288DEA85220C25AF007D5263 /* Info.plist */,
@@ -94,6 +90,18 @@
 				28AB8DD32221344F00C190F4 /* TempoModelData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2890F1582224887800F42965 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
+				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
+				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
+				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
+				28D181372215721200E56148 /* ProfileViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

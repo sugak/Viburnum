@@ -56,7 +56,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PKc-iW-UoS" userLabel="Separator">
-                                            <rect key="frame" x="70" y="74" width="250" height="1"/>
+                                            <rect key="frame" x="70" y="83.5" width="250" height="1"/>
                                             <color key="backgroundColor" red="0.74909451013894257" green="0.74909451013894257" blue="0.74909451013894257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="CKq-h9-ord"/>
@@ -76,12 +76,13 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="2cY-Mi-7gI" firstAttribute="top" secondItem="Bch-di-g3b" secondAttribute="top" constant="20" id="KDE-rk-4Is"/>
+                                        <constraint firstAttribute="bottom" secondItem="PKc-iW-UoS" secondAttribute="bottom" id="KjU-R3-bSJ"/>
                                         <constraint firstAttribute="trailing" secondItem="2cY-Mi-7gI" secondAttribute="trailing" constant="20" id="QU3-mo-RZp"/>
                                         <constraint firstItem="fvh-lI-3gv" firstAttribute="top" secondItem="IR7-fM-UyE" secondAttribute="bottom" constant="5" id="SDf-ST-cUE"/>
                                         <constraint firstItem="PKc-iW-UoS" firstAttribute="leading" secondItem="2lU-Mp-v6s" secondAttribute="trailing" constant="10" id="UUT-cW-u3I"/>
                                         <constraint firstAttribute="trailing" secondItem="PKc-iW-UoS" secondAttribute="trailing" id="UVL-4d-8H7"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="trailing" constant="10" id="Weu-F2-W4l"/>
-                                        <constraint firstItem="PKc-iW-UoS" firstAttribute="top" secondItem="fvh-lI-3gv" secondAttribute="bottom" constant="15" id="ZJz-VI-Bjd"/>
+                                        <constraint firstItem="PKc-iW-UoS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="bottom" constant="15" id="ZJz-VI-Bjd"/>
                                         <constraint firstItem="fvh-lI-3gv" firstAttribute="leading" secondItem="2lU-Mp-v6s" secondAttribute="trailing" constant="10" id="a7X-nY-K2n"/>
                                         <constraint firstItem="2lU-Mp-v6s" firstAttribute="leading" secondItem="Bch-di-g3b" secondAttribute="leading" constant="10" id="bjp-1r-IjD"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="bottom" constant="10" id="hux-R4-hNF"/>

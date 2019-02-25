@@ -8,8 +8,10 @@
 
 import Foundation
 
+// Sections:
 let sections = ["Online","History"]
 
+//People in chat list:
 let TalkerName = [
   ["Чак Паланик",
    "Льюис Кэролл",
@@ -34,6 +36,7 @@ let TalkerName = [
    "Александр Милн"]
 ]
 
+//Last messages:
 let lastMessage = [
   ["Почему ты захардкодил меня первым в списке сообщений?",
    "Если в мире все бессмысленно, что мешает выдумать какой-нибудь смысл?",
@@ -68,8 +71,8 @@ let ifMessageUnread = [
   [false, false, true, false, true, false, true, false, false, true]
 ]
 
-let stringDate = [
-  ["25.02.2019 14:34",
+var stringDate = [
+  ["24.02.2019 14:40",
    "23.02.2019 11:20",
    nil,
    "20.02.2019 18:20",
@@ -92,6 +95,7 @@ let stringDate = [
    "22.01.2019 18:21"]
 ]
 
+//Chat messages:
 struct ChatMessage {
   let text: String
   let incomingMessage: Bool
@@ -101,7 +105,11 @@ let sampleMessages = [
   ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit", incomingMessage: true),
   ChatMessage(text: "Ut enim ad minim veniam", incomingMessage: false),
   ChatMessage(text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", incomingMessage: true),
-  ChatMessage(text: "Lorem ipsum!", incomingMessage: false)
+  ChatMessage(text: "In voluptate velit esse cillum dolore eu fugiat nulla pariatur", incomingMessage: false),
+  ChatMessage(text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.", incomingMessage: true),
+  ChatMessage(text: "Lorem ipsum! Ut enim ad minim veniam.", incomingMessage: true),
+  ChatMessage(text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.", incomingMessage: false)
+  
 ]
 
 
