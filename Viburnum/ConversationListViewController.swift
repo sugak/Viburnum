@@ -10,13 +10,17 @@ import UIKit
 
 class ConversationListViewController: UITableViewController {
   
-    override func viewDidLoad() {
+  @IBOutlet var chatAvatar: UIImageView!
+  
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
       
       // Remove separator + large navbar title:
       self.tableView.separatorStyle = .none
       navigationController?.navigationBar.prefersLargeTitles = true
+    
     }
 
     // MARK: - Table view data source
@@ -41,6 +45,7 @@ class ConversationListViewController: UITableViewController {
       cell.message = lastMessage[indexPath.section][indexPath.row]
       cell.online = ifOnline[indexPath.section][indexPath.row]
       cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
+      cell.avatarSymbols = TalkerName[indexPath.section][indexPath.row]
 
       // Decoding date from String source:
       let formatter  = DateFormatter()

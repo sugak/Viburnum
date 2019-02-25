@@ -10,6 +10,9 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
+
+
+  
   // Conform to protocol:
   var name: String? {
     didSet {
@@ -30,6 +33,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var date: Date? {
     didSet {
       let dateFormatter = DateFormatter()
+      // TODO: Сделать гард на нулевую дату
       if Calendar.current.isDateInToday(date!) {
         dateFormatter.dateFormat = "HH:mm"
       } else {
@@ -42,7 +46,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var online: Bool = false {
     didSet {
       if online {
-        self.backgroundColor = #colorLiteral(red: 1, green: 0.9478314519, blue: 0.8266604543, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.9488946795, green: 0.9413331151, blue: 0.8294835687, alpha: 1)
       } else {
         self.backgroundColor = .white
       }
@@ -52,6 +56,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var hasUnreadMessages = false {
     didSet {
       if hasUnreadMessages {
+      lastMessageLabel.textColor = UIColor.black
       lastMessageLabel.font = .boldSystemFont(ofSize: 16.0)
       } else {
         // TODO: // lastMessageLabel.font =  //.lightSystemFont(ofSize: 16.0)
@@ -59,23 +64,29 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  var avatarSymbols = "" {
+    didSet {
+      let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
+      avatarLabel.text = initials
+    }
+  }
+  
+  
+  
   // Outlets:
   @IBOutlet var talkerNameLabel: UILabel!
   @IBOutlet var lastMessageLabel: UILabel!
   @IBOutlet var lastMessageDateLabel: UILabel!
+  @IBOutlet var avatarLabel: UILabel!
   
 
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       self.selectionStyle = .none    // Убираем выделение при тапе
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    self.selectionStyle = .none
+    
+    avatarLabel.layer.cornerRadius = 25.0
+    avatarLabel.clipsToBounds = true
+   
+  }
 
 }

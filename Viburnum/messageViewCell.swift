@@ -12,6 +12,7 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
   
   override func layoutSubviews() {
     super .layoutSubviews()
+    self.selectionStyle = .none 
     messageView.layer.cornerRadius = 12.0
     messageView.clipsToBounds = true
   }
@@ -23,7 +24,9 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
   }
   
   
+  
   @IBOutlet var messageView: UIView!
   @IBOutlet var messageText: UILabel!
+  
   
 }
