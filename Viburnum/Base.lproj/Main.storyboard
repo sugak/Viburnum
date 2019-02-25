@@ -44,7 +44,7 @@
                                             </subviews>
                                         </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No messages yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-lI-3gv">
-                                            <rect key="frame" x="16" y="48.5" width="264" height="20.5"/>
+                                            <rect key="frame" x="16" y="48.5" width="132" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                         <constraint firstItem="2cY-Mi-7gI" firstAttribute="leading" secondItem="Bch-di-g3b" secondAttribute="leading" constant="16" id="OLR-tj-sfD"/>
                                         <constraint firstAttribute="trailing" secondItem="2cY-Mi-7gI" secondAttribute="trailing" constant="40" id="QU3-mo-RZp"/>
                                         <constraint firstItem="fvh-lI-3gv" firstAttribute="top" secondItem="IR7-fM-UyE" secondAttribute="bottom" constant="12" id="SDf-ST-cUE"/>
-                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="trailing" constant="40" id="Weu-F2-W4l"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="trailing" constant="40" id="Weu-F2-W4l"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="fvh-lI-3gv" secondAttribute="bottom" constant="10" id="hux-R4-hNF"/>
                                         <constraint firstItem="fvh-lI-3gv" firstAttribute="leading" secondItem="Bch-di-g3b" secondAttribute="leading" constant="16" id="iwB-uB-ztl"/>
                                     </constraints>
@@ -76,11 +76,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="bNr-bO-iiX">
                         <barButtonItem key="backBarButtonItem" title="          " id="Dv9-79-Buz"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="EKs-4R-7Vw">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="hrL-XT-EEO"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="EKs-4R-7Vw"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pG-l7-Kam" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -205,13 +201,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="UZ4-Ma-90O">
-                                <rect key="frame" x="16" y="80" width="288" height="288"/>
+                                <rect key="frame" x="16" y="36" width="288" height="288"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UZ4-Ma-90O" secondAttribute="height" multiplier="1:1" id="SVl-7U-HKI"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Максим Сугак" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxi-0M-8cE">
-                                <rect key="frame" x="16" y="384" width="288" height="31.5"/>
+                                <rect key="frame" x="16" y="340" width="288" height="31.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -226,7 +222,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-iy-XmU" customClass="PhotoButton" customModule="Viburnum" customModuleProvider="target">
-                                <rect key="frame" x="224" y="288" width="80" height="80"/>
+                                <rect key="frame" x="224" y="244" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="gbe-5l-9fH"/>
                                     <constraint firstAttribute="height" constant="80" id="uu3-pf-X78"/>
@@ -237,7 +233,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="👨🏻‍💻Люблю программировать под iOS 👨‍🏫Изучать новые технологии 👨🏻‍🎓Помогаю развиваться другим" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l35-CS-6FN">
-                                <rect key="frame" x="16" y="431.5" width="288" height="57.5"/>
+                                <rect key="frame" x="16" y="387.5" width="288" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -271,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-164" y="852"/>
+            <point key="canvasLocation" x="664" y="-745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jHa-V0-Ebb">

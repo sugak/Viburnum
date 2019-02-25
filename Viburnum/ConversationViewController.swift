@@ -12,10 +12,11 @@ class ConversationViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      self.tableView.dataSource = self
           
       self.tableView.separatorStyle = .none // Убираем стандартный разделитель
       navigationController?.navigationBar.prefersLargeTitles = true // Увеличиваем шрифт в тайтле навбара
-   //   tableView.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
       tableView.rowHeight = UITableView.automaticDimension
       tableView.estimatedRowHeight = 44
     
@@ -26,13 +27,17 @@ class ConversationViewController: UITableViewController {
           return sampleMessages.count
     }
   
-  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellID = sampleMessages[indexPath.row].incomingMessage ? "incomeCell" : "outcomeCell"
     
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
     cell.textMess = sampleMessages[indexPath.row].text
-   // cell.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+   
+    /*
+    if indexPath.row == numberOfSections(in: tableView) {
+      cell.textMess = lastMessage[indexPath.section][indexPath.row]
+    }
+     */
     return cell
 
     }

@@ -10,14 +10,13 @@ import UIKit
 
 class ConversationListViewController: UITableViewController {
   
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
       
-      self.tableView.separatorStyle = .none // Убираем стандартный разделитель
-      navigationController?.navigationBar.prefersLargeTitles = true // Увеличиваем шрифт в тайтле навбара
+      // Remove separator + large navbar title:
+      self.tableView.separatorStyle = .none
+      navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     // MARK: - Table view data source
@@ -43,6 +42,7 @@ class ConversationListViewController: UITableViewController {
       cell.online = ifOnline[indexPath.section][indexPath.row]
       cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
 
+      // Decoding date from String source:
       let formatter  = DateFormatter()
       formatter.dateFormat = "dd.MM.yyyy HH:mm"
       let messageDateFromString = formatter.date(from: stringDate[indexPath.section][indexPath.row])

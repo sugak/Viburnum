@@ -10,7 +10,6 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
- 
   // Conform to protocol:
   var name: String? {
     didSet {
@@ -21,7 +20,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var message: String? {
     didSet {
       guard message != nil else {
-        lastMessageLabel.font = UIFont(name: "Futura", size: 16.0)
+        lastMessageLabel.font = UIFont(name: "Futura", size: 14.0)
         lastMessageLabel.text = "No messages yet"
         return
       }
