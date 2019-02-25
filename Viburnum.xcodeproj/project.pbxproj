@@ -70,12 +70,12 @@
 		288DEA78220C25AD007D5263 /* Viburnum */ = {
 			isa = PBXGroup;
 			children = (
+				2890F1572224687400F42965 /* Model */,
 				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
 				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
 				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
 				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
-				28AB8DD32221344F00C190F4 /* TempoModelData.swift */,
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
 				287F40C02219CF8C00C87D11 /* Constants.swift */,
@@ -86,6 +86,14 @@
 				288DEA85220C25AF007D5263 /* Info.plist */,
 			);
 			path = Viburnum;
+			sourceTree = "<group>";
+		};
+		2890F1572224687400F42965 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				28AB8DD32221344F00C190F4 /* TempoModelData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

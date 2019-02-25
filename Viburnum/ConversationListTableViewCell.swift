@@ -10,9 +10,6 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
-
-
-  
   // Conform to protocol:
   var name: String? {
     didSet {
@@ -22,24 +19,28 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   
   var message: String? {
     didSet {
-      guard message != nil else {
-        lastMessageLabel.font = UIFont(name: "Futura", size: 14.0)
+      fontUpdate()
+      if message != nil {
+        lastMessageLabel.text = message
+      } else {
         lastMessageLabel.text = "No messages yet"
-        return
       }
-      lastMessageLabel.text = message
     }
   }
+  
   var date: Date? {
     didSet {
-      let dateFormatter = DateFormatter()
-      // TODO: Сделать гард на нулевую дату
-      if Calendar.current.isDateInToday(date!) {
-        dateFormatter.dateFormat = "HH:mm"
+      if date != nil {
+        let dateFormatter = DateFormatter()
+          if Calendar.current.isDateInToday(date!) {
+            dateFormatter.dateFormat = "HH:mm"
+          } else {
+            dateFormatter.dateFormat = "dd MMM"
+          }
+        lastMessageDateLabel.text = dateFormatter.string(from: date!)
       } else {
-        dateFormatter.dateFormat = "dd MMM"
+        lastMessageDateLabel.text = ""
       }
-      lastMessageDateLabel.text = dateFormatter.string(from: date!)
     }
   }
   
@@ -55,12 +56,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   
   var hasUnreadMessages = false {
     didSet {
-      if hasUnreadMessages {
-      lastMessageLabel.textColor = UIColor.black
-      lastMessageLabel.font = .boldSystemFont(ofSize: 16.0)
-      } else {
-        // TODO: // lastMessageLabel.font =  //.lightSystemFont(ofSize: 16.0)
-      }
+      fontUpdate()
     }
   }
   
@@ -71,6 +67,20 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  private func fontUpdate () {
+    lastMessageLabel.textColor = UIColor.darkGray
+    lastMessageLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
+    
+    if message == nil {
+      lastMessageLabel.font = UIFont(name: "Futura", size: 14.0)
+      lastMessageLabel.textColor = UIColor.darkGray
+    } else {
+      if hasUnreadMessages {
+        lastMessageLabel.textColor = UIColor.black
+        lastMessageLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+      }
+    }
+  }
   
   
   // Outlets:

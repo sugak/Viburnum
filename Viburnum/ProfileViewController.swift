@@ -15,21 +15,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Layout for UI elements
     photoImageViewStyle(for: photoImageView)
-    editButtonStyle(for: editButtonOutlet)
+    buttonGeneralStyle(for: editButtonOutlet)
   }
   
   // Outlets:
-  @IBOutlet weak var photoImageView: UIImageView!
-  @IBOutlet weak var editButtonOutlet: UIButton!
+  @IBOutlet var photoImageView: UIImageView!
+  @IBOutlet var editButtonOutlet: UIButton!
   
   // Actions:
+  @IBAction func dismissButton(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
   @IBAction func pushPhotoButton(_ sender: PhotoButton) {
     sender.buttonAnimation() // Making short button animation
     choosePhoto() // Opening ActionSheet menu
   }
   
   // Styling Edit button:
-  func editButtonStyle (for button: UIButton) {
+  func buttonGeneralStyle (for button: UIButton) {
     button.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     button.layer.borderWidth = 1.0
