@@ -9,10 +9,7 @@
 import UIKit
 
 class ConversationListViewController: UITableViewController {
-  
-  @IBOutlet var chatAvatar: UIImageView!
-  
-  
+
   override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -21,6 +18,7 @@ class ConversationListViewController: UITableViewController {
       self.tableView.separatorStyle = .none
       navigationController?.navigationBar.prefersLargeTitles = true
     
+      self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0.1578164101, green: 0.611730516, blue: 0.2583292723, alpha: 1)
     }
 
     // MARK: - Table view data source
