@@ -10,13 +10,14 @@ import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
   
-  // Conform to protocol:
+  // Conform to protocol. Setting name:
   var name: String? {
     didSet {
       talkerNameLabel.text = name
     }
   }
   
+  // Conform to protocol. Setting message:
   var message: String? {
     didSet {
       fontUpdate()
@@ -28,9 +29,11 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  // Conform to protocol. Setting date:
   var date: Date? {
     didSet {
-      // Задание со звездочкой:
+      
+      // Checking date and time for date format:
       if date != nil {
         let dateFormatter = DateFormatter()
           if Calendar.current.isDateInToday(date!) {
@@ -45,6 +48,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  // Conform to protocol. Checking online status:
   var online: Bool = false {
     didSet {
       if online {
@@ -55,6 +59,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
     }
   }
   
+  // Conform to protocol. Checking if unread messages there:
   var hasUnreadMessages = false {
     didSet {
       fontUpdate()
@@ -92,6 +97,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    
     // No selection for rows:
     self.selectionStyle = .none
     

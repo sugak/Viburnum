@@ -12,6 +12,7 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
   
   override func layoutSubviews() {
     super .layoutSubviews()
+    
     //Styling chat bubbles:
     self.selectionStyle = .none 
     messageView.layer.cornerRadius = 12.0
@@ -26,6 +27,6 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
   }
   
   // Outlets:
-  @IBOutlet var messageView: UIView! // View as bubble background
+  @IBOutlet var messageView: UIView! // View for bubble background
   @IBOutlet var messageText: UILabel!
 }

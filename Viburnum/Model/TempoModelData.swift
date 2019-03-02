@@ -102,7 +102,7 @@ struct ChatMessage {
 }
 
 let sampleMessages = [
-  ChatMessage(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit", incomingMessage: true),
+  ChatMessage(text: "Lorem", incomingMessage: true),
   ChatMessage(text: "Ut enim ad minim veniam", incomingMessage: false),
   ChatMessage(text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", incomingMessage: true),
   ChatMessage(text: "In voluptate velit esse cillum dolore eu fugiat nulla pariatur", incomingMessage: false),

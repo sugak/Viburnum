@@ -70,16 +70,12 @@
 		288DEA78220C25AD007D5263 /* Viburnum */ = {
 			isa = PBXGroup;
 			children = (
-				2890F1572224687400F42965 /* Model */,
-				2890F1582224887800F42965 /* Controller */,
-				288DEA7D220C25AD007D5263 /* Main.storyboard */,
-				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
-				287F40C02219CF8C00C87D11 /* Constants.swift */,
-				287F40BE2219C61400C87D11 /* PhotoButton.swift */,
-				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 				288DEA80220C25AF007D5263 /* Assets.xcassets */,
-				288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */,
 				288DEA85220C25AF007D5263 /* Info.plist */,
+				2890F1572224687400F42965 /* Model */,
+				28B2DEEA222A7CE000F2DAA6 /* View */,
+				2890F1582224887800F42965 /* Controller */,
+				28B2DEEB222A7CE800F2DAA6 /* Other */,
 			);
 			path = Viburnum;
 			sourceTree = "<group>";
@@ -102,6 +98,26 @@
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		28B2DEEA222A7CE000F2DAA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				288DEA7D220C25AD007D5263 /* Main.storyboard */,
+				288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */,
+				287F40BE2219C61400C87D11 /* PhotoButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28B2DEEB222A7CE800F2DAA6 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
+				287F40C02219CF8C00C87D11 /* Constants.swift */,
+				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
