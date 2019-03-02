@@ -117,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pG-l7-Kam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-165" y="22.183098591549296"/>
+            <point key="canvasLocation" x="-218" y="22"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="QRx-J7-A4t">
@@ -226,7 +226,59 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxe-pM-7Dk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663.75" y="22.183098591549296"/>
+            <point key="canvasLocation" x="664" y="22"/>
+        </scene>
+        <!--Themes View Controller-->
+        <scene sceneID="qAd-gA-yyj">
+            <objects>
+                <viewController id="Du1-iP-bPf" customClass="ThemesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CWQ-jt-goo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="vsv-8T-WFb">
+                                <rect key="frame" x="129.5" y="199" width="61" height="170"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xus-z4-NWK">
+                                        <rect key="frame" x="0.0" y="0.0" width="61" height="30"/>
+                                        <state key="normal" title="Theme 1"/>
+                                        <connections>
+                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="MRP-ep-dOc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxx-ZL-4RD">
+                                        <rect key="frame" x="0.0" y="70" width="61" height="30"/>
+                                        <state key="normal" title="Them 2"/>
+                                        <connections>
+                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="X7K-1x-eu7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-Yq-SOv">
+                                        <rect key="frame" x="0.0" y="140" width="61" height="30"/>
+                                        <state key="normal" title="Theme 3"/>
+                                        <connections>
+                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="Is3-tC-KBv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vsv-8T-WFb" firstAttribute="centerY" secondItem="CWQ-jt-goo" secondAttribute="centerY" id="XVb-Ve-uba"/>
+                            <constraint firstItem="vsv-8T-WFb" firstAttribute="centerX" secondItem="CWQ-jt-goo" secondAttribute="centerX" id="vn8-Pp-cLY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ByC-dd-xEe"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="themeChooseButtons" destination="xus-z4-NWK" id="YaM-nG-aUT"/>
+                        <outletCollection property="themeChooseButtons" destination="Zxx-ZL-4RD" id="v7g-3g-kfm"/>
+                        <outletCollection property="themeChooseButtons" destination="XJo-Yq-SOv" id="wrq-Se-WKV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oeh-Ge-2Ju" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-219" y="-746"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">

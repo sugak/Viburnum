@@ -18,8 +18,8 @@
 		28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */; };
 		28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD122208C5A00C190F4 /* Protocols.swift */; };
 		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
-		28B2DEFD222A8E6900F2DAA6 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
-		28B2DEFF222A90F300F2DAA6 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFE222A90F300F2DAA6 /* Themes.m */; };
+		28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFE222A90F300F2DAA6 /* Themes.m */; };
+		28B2DF04222A97ED00F2DAA6 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +43,7 @@
 		28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
 		28B2DEFE222A90F300F2DAA6 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
+		28B2DF05222A9C5F00F2DAA6 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,10 +84,11 @@
 				28B2DEEA222A7CE000F2DAA6 /* View */,
 				2890F1582224887800F42965 /* Controller */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
-				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
+				28B2DF05222A9C5F00F2DAA6 /* Themes.h */,
 				28B2DEFE222A90F300F2DAA6 /* Themes.m */,
-				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
+				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
 				28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */,
+				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
 				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
 			);
 			path = Viburnum;
@@ -205,6 +207,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
+				28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */,
+				28B2DF04222A97ED00F2DAA6 /* ThemesViewController.m in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
@@ -213,9 +217,7 @@
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
-				28B2DEFF222A90F300F2DAA6 /* Themes.m in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
-				28B2DEFD222A8E6900F2DAA6 /* ThemesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
