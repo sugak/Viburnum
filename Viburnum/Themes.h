@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@implementation Themes: NSObject
+@interface Themes : NSObject
 
-@property (strong,nonatomic) UIColor* theme1;
-@property (strong,nonatomic) UIColor* theme2;
-@property (strong,nonatomic) UIColor* theme3;
+@property (nonatomic, readonly, strong) UIColor* theme1;
+@property (nonatomic, readonly, strong) UIColor* theme2;
+@property (nonatomic, readonly, strong) UIColor* theme3;
 
 @end
+
+
 
 
 

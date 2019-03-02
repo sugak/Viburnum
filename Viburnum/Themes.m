@@ -6,13 +6,22 @@
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-// #import
+#import "Themes.h"
 
-@implementation Themes: NSObject
+@implementation Themes : NSObject
 
-UIColor * theme1;
-UIColor * theme2;
-UIColor * theme3;
+// Don't need setters - properties are read only
+// Getters for theme properties:
+- (UIColor *) theme1 {
+  return [UIColor blueColor];
+}
+
+- (UIColor *) theme2 {
+  return [UIColor brownColor];
+}
+
+- (UIColor *) theme3 {
+  return [UIColor magentaColor];
+}
 
 @end
