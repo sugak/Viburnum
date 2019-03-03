@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ConversationListViewController: UITableViewController {
-
+class ConversationListViewController: UITableViewController, ThemesViewControllerDelegate {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
@@ -18,6 +18,7 @@ class ConversationListViewController: UITableViewController {
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0.3333333333, green: 0.6196078431, blue: 0.3333333333, alpha: 1)
+    
   }
   
   
@@ -67,5 +68,21 @@ class ConversationListViewController: UITableViewController {
         destinationController.navigationItem.title = cell.name
       }
     }
+    if segue.identifier == "themeMenu" {
+      if let destinationContoller = segue.destination as? ThemesViewController {
+        destinationContoller.delegate = self
+      }
+    }
   }
+  
+  
+  // Themes change delegate:
+  func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
+    logThemeChanging(selectedTheme: selectedTheme)
+  }
+  
+  func logThemeChanging(selectedTheme: UIColor) {
+    print(selectedTheme)
+  }
+  
 }

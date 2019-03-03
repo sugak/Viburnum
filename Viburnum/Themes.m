@@ -12,16 +12,17 @@
 
 // Don't need setters - properties are read only
 // Getters for theme properties:
+
 - (UIColor *) theme1 {
-  return [UIColor blueColor];
+  return [UIColor colorWithRed:0.09 green:0.63 blue:0.52 alpha:1.0];
 }
 
 - (UIColor *) theme2 {
-  return [UIColor brownColor];
+  return [UIColor colorWithRed:0.16 green:0.50 blue:0.73 alpha:1.0];
 }
 
 - (UIColor *) theme3 {
-  return [UIColor magentaColor];
+  return [UIColor colorWithRed:0.99 green:0.80 blue:0.43 alpha:1.0];
 }
 
 @end

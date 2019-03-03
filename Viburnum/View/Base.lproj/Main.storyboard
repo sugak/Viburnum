@@ -107,6 +107,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="bNr-bO-iiX">
+                        <barButtonItem key="leftBarButtonItem" title="Themes" id="552-ad-AFp">
+                            <connections>
+                                <segue destination="Du1-iP-bPf" kind="presentation" identifier="themeMenu" id="zuO-WB-msf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="3855595-32" id="XQD-my-I0n">
                             <inset key="imageInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <connections>
@@ -239,21 +244,21 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="vsv-8T-WFb">
                                 <rect key="frame" x="129.5" y="199" width="61" height="170"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xus-z4-NWK">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xus-z4-NWK">
                                         <rect key="frame" x="0.0" y="0.0" width="61" height="30"/>
                                         <state key="normal" title="Theme 1"/>
                                         <connections>
                                             <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="MRP-ep-dOc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxx-ZL-4RD">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxx-ZL-4RD">
                                         <rect key="frame" x="0.0" y="70" width="61" height="30"/>
-                                        <state key="normal" title="Them 2"/>
+                                        <state key="normal" title="Theme 2"/>
                                         <connections>
                                             <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="X7K-1x-eu7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-Yq-SOv">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJo-Yq-SOv">
                                         <rect key="frame" x="0.0" y="140" width="61" height="30"/>
                                         <state key="normal" title="Theme 3"/>
                                         <connections>
@@ -270,6 +275,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ByC-dd-xEe"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="Q2n-6H-zvd"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outletCollection property="themeChooseButtons" destination="xus-z4-NWK" id="YaM-nG-aUT"/>
                         <outletCollection property="themeChooseButtons" destination="Zxx-ZL-4RD" id="v7g-3g-kfm"/>
@@ -278,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oeh-Ge-2Ju" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-219" y="-746"/>
+            <point key="canvasLocation" x="-219" y="811"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -376,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="664" y="-745"/>
+            <point key="canvasLocation" x="664" y="811"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jHa-V0-Ebb">

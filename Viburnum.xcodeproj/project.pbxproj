@@ -86,10 +86,10 @@
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
 				28B2DF05222A9C5F00F2DAA6 /* Themes.h */,
 				28B2DEFE222A90F300F2DAA6 /* Themes.m */,
+				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
 				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
 				28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */,
 				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
-				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
 			);
 			path = Viburnum;
 			sourceTree = "<group>";

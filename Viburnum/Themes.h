@@ -11,9 +11,9 @@
 
 @interface Themes : NSObject
 
-@property (nonatomic, readonly, strong) UIColor* theme1;
-@property (nonatomic, readonly, strong) UIColor* theme2;
-@property (nonatomic, readonly, strong) UIColor* theme3;
+@property (nonatomic, readonly) UIColor* theme1;
+@property (nonatomic, readonly) UIColor* theme2;
+@property (nonatomic, readonly) UIColor* theme3;
 
 @end
 
