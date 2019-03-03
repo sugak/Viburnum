@@ -16,13 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ThemesViewController : UIViewController
 
 @property (retain, nonatomic) id<ThemesViewControllerDelegate> delegate;
-@property (retain, readonly) Themes* model;
+@property (retain, nonatomic) Themes* model;
 
 
 - (void)applyChosenTheme:(UIColor*) withColor;
-
-// Outlet collection of buttons:
-@property (retain, nonatomic) IBOutletCollection(UIButton) NSArray *themeChooseButtons;
 
 // Action for tapped buttons:
 - (IBAction)themeChooseButtonTappted:(UIButton*)sender;

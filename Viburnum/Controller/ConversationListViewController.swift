@@ -17,8 +17,7 @@ class ConversationListViewController: UITableViewController, ThemesViewControlle
     // Remove separator + large navbar title:
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
-    self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0.3333333333, green: 0.6196078431, blue: 0.3333333333, alpha: 1)
-    
+    self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
   }
   
   

@@ -12,12 +12,12 @@
 
 @implementation ThemesViewController
 
-@synthesize model = _model;
 @synthesize delegate = _delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  _model = [[Themes alloc] init];
+ self.model = [[Themes alloc] init];
+  // _model = [[Themes alloc] init];
 }
 
 //Getters:
@@ -47,14 +47,29 @@
       [self applyChosenTheme: _model.theme3];
       break;
     default:
-      [self applyChosenTheme: UIColor.cyanColor];
+      [self applyChosenTheme: UIColor.whiteColor];
       break;
   }
 }
 
+-(IBAction)backButtonTapped:(UIBarButtonItem *)sender {
+   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)applyChosenTheme:(UIColor *)withColor {
   self.view.backgroundColor = withColor;
-   [_delegate themesViewController:self didSelectTheme: withColor];
+  UINavigationBar.appearance.backgroundColor = withColor;
+  UINavigationBar.appearance.barTintColor = withColor;
+
+  NSArray *windows = [UIApplication sharedApplication].windows;
+  for (UIWindow *window in windows) {
+    for (UIView *view in window.subviews) {
+      [view removeFromSuperview];
+      [window addSubview:view];
+    }
+  }
+  
+  [_delegate themesViewController:self didSelectTheme: withColor];
   
 }
 
