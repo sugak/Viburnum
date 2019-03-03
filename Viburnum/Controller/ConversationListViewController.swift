@@ -18,6 +18,8 @@ class ConversationListViewController: UITableViewController, ThemesViewControlle
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    
   }
   
   

@@ -16,8 +16,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- self.model = [[Themes alloc] init];
-  // _model = [[Themes alloc] init];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  self.model = [[Themes alloc] init];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self.model release];
+}
+
+- (void)dealloc {
+
+  [super dealloc];
 }
 
 //Getters:
@@ -60,7 +73,8 @@
   self.view.backgroundColor = withColor;
   UINavigationBar.appearance.backgroundColor = withColor;
   UINavigationBar.appearance.barTintColor = withColor;
-
+  
+  
   NSArray *windows = [UIApplication sharedApplication].windows;
   for (UIWindow *window in windows) {
     for (UIView *view in window.subviews) {
@@ -68,9 +82,8 @@
       [window addSubview:view];
     }
   }
-  
+
   [_delegate themesViewController:self didSelectTheme: withColor];
-  
 }
 
 @end
