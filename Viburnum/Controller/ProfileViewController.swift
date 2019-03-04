@@ -10,6 +10,10 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     

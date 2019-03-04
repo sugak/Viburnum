@@ -71,7 +71,6 @@
 
 -(void)applyChosenTheme:(UIColor *)withColor {
   self.view.backgroundColor = withColor;
-  UINavigationBar.appearance.backgroundColor = withColor;
   UINavigationBar.appearance.barTintColor = withColor;
   
   
