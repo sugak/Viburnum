@@ -327,6 +327,9 @@
                     <navigationItem key="navigationItem" title="Выбор темы" largeTitleDisplayMode="always" id="VNA-7U-w2j">
                         <barButtonItem key="leftBarButtonItem" title="Назад" id="osP-Df-PEi">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="backButton:" destination="Du1-iP-bPf" id="3xi-bu-1h8"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

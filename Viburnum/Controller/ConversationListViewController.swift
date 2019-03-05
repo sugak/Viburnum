@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationListViewController: UITableViewController{//}, ThemesViewControllerDelegate {
+class ConversationListViewController: UITableViewController {
 
   /*
    
@@ -21,7 +21,10 @@ class ConversationListViewController: UITableViewController{//}, ThemesViewContr
     // Remove separator + large navbar title:
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
-    self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+   self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+//    let model = Themes()
+    
     
     
   }
@@ -77,17 +80,20 @@ class ConversationListViewController: UITableViewController{//}, ThemesViewContr
       let navController = segue.destination as! UINavigationController
       let destination = navController.topViewController as! ThemesViewController
         destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
-       self?.logThemeChanging(selectedTheme: selectedTheme) }
+        self?.logThemeChanging(selectedTheme: selectedTheme) }
      //destination.delegate = self
     }
-  }
-  
-  func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
-    logThemeChanging(selectedTheme: selectedTheme)
   }
   
   func logThemeChanging(selectedTheme: UIColor) {
     print(selectedTheme)
   }
-  
+
 }
+
+//extension ConversationListViewController: ThemesViewControllerDelegate {
+//  func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
+//    logThemeChanging(selectedTheme: selectedTheme)
+//  }
+//
+//}

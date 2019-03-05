@@ -20,6 +20,7 @@ class ThemesViewController: UIViewController {
   func applyTheme(with color: UIColor) {
     self.view.backgroundColor = color
     UINavigationBar.appearance().barTintColor = color
+    UserDefaults.standard.set(color, forKey: "currentTheme")
     
     let windows = UIApplication.shared.windows
     for window in windows {
@@ -28,12 +29,14 @@ class ThemesViewController: UIViewController {
         window.addSubview(view)
       }
     }
-    
     themeProtocol?(color)
   }
   
   
-
+  @IBAction func backButton(_ sender: UIBarButtonItem) {
+    dismiss(animated: true, completion: nil)
+  }
+  
   @IBAction func themeButtonTap(_ sender: Any) {
     if let button = sender as? UIButton {
       switch button.tag {

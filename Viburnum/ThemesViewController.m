@@ -35,6 +35,10 @@
   return _model;
 }
 
+- (IBAction)backButton:(UIBarButtonItem *)sender {
+[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)setModel:(Themes *)NewModel {
   [NewModel retain];
   [_model release];
@@ -70,9 +74,6 @@
   }
 }
 
-- (IBAction)closeButtonTap:(UIBarButtonItem *)sender {
-   [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (void)applyChosenTheme:(UIColor *)withColor {
   self.view.backgroundColor = withColor;
