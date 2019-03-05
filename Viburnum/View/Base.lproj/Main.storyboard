@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tinkoff Chat-->
+        <!--Viburnum-->
         <scene sceneID="I3P-9e-OzP">
             <objects>
                 <tableViewController id="KQx-5l-1wo" customClass="ConversationListViewController" customModule="Viburnum" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,7 +106,7 @@
                             <outlet property="delegate" destination="KQx-5l-1wo" id="qZf-Xw-MPj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="bNr-bO-iiX">
+                    <navigationItem key="navigationItem" title="Viburnum" id="bNr-bO-iiX">
                         <barButtonItem key="leftBarButtonItem" image="settings" id="552-ad-AFp">
                             <connections>
                                 <segue destination="2jv-eH-4JQ" kind="presentation" identifier="themeMenu" id="zuO-WB-msf"/>
@@ -236,7 +236,7 @@
         <!--Выбор темы-->
         <scene sceneID="qAd-gA-yyj">
             <objects>
-                <viewController id="Du1-iP-bPf" customClass="ThemesViewController" customModule="Viburnum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Du1-iP-bPf" customClass="ThemesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWQ-jt-goo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,7 +246,7 @@
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xus-z4-NWK">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="44"/>
-                                        <color key="backgroundColor" red="0.086274509803921567" green="0.62745098039215685" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17254901960784313" green="0.70568258125167871" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="NdB-X2-7rK"/>
                                             <constraint firstAttribute="height" constant="44" id="cco-rz-VCr"/>
@@ -307,7 +307,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите цветовую схему приложения:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="TDn-ws-He2">
-                                <rect key="frame" x="16" y="150" width="288" height="18"/>
+                                <rect key="frame" x="16" y="140" width="288" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -316,7 +316,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vdy-bi-QBl" firstAttribute="centerY" secondItem="CWQ-jt-goo" secondAttribute="centerY" id="3n2-RI-6pn"/>
-                            <constraint firstItem="vdy-bi-QBl" firstAttribute="top" secondItem="TDn-ws-He2" secondAttribute="bottom" constant="20" id="JDb-uv-VIU"/>
+                            <constraint firstItem="vdy-bi-QBl" firstAttribute="top" secondItem="TDn-ws-He2" secondAttribute="bottom" constant="30" id="JDb-uv-VIU"/>
                             <constraint firstItem="ByC-dd-xEe" firstAttribute="trailing" secondItem="TDn-ws-He2" secondAttribute="trailing" constant="16" id="VcF-1X-hwC"/>
                             <constraint firstItem="vdy-bi-QBl" firstAttribute="centerX" secondItem="CWQ-jt-goo" secondAttribute="centerX" id="gKC-Fv-4qr"/>
                             <constraint firstItem="TDn-ws-He2" firstAttribute="leading" secondItem="ByC-dd-xEe" secondAttribute="leading" constant="16" id="slk-M7-dXh"/>
