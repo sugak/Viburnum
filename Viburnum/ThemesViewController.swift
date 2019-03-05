@@ -15,12 +15,16 @@ class ThemesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      // Setting current theme color to the view background:
+      guard let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") else {return}
+      self.view.backgroundColor = currentTheme
     }
   
   func applyTheme(with color: UIColor) {
     self.view.backgroundColor = color
     UINavigationBar.appearance().barTintColor = color
-    UserDefaults.standard.set(color, forKey: "currentTheme")
+    UserDefaults.standard.setColor(value: color, forKey: "currentTheme")
     
     let windows = UIApplication.shared.windows
     for window in windows {
@@ -31,7 +35,6 @@ class ThemesViewController: UIViewController {
     }
     themeProtocol?(color)
   }
-  
   
   @IBAction func backButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
@@ -59,4 +62,19 @@ class ThemesViewController: UIViewController {
     dismiss(animated: true, completion: nil)
   }
   
+}
+
+extension UserDefaults {
+  func setColor(value: UIColor?, forKey: String) {
+    guard let value = value else {
+      set(nil, forKey:  forKey)
+      return
+    }
+    set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: forKey)
+  }
+  func colorForKey(key:String) -> UIColor? {
+    guard let data = data(forKey: key), let color = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
+      else { return nil }
+    return color
+  }
 }

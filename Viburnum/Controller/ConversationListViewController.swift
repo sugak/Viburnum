@@ -21,12 +21,10 @@ class ConversationListViewController: UITableViewController {
     // Remove separator + large navbar title:
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
-   self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-//    let model = Themes()
-    
-    
-    
+    updateForCurrentTheme()
+
   }
   
   
@@ -87,6 +85,23 @@ class ConversationListViewController: UITableViewController {
   
   func logThemeChanging(selectedTheme: UIColor) {
     print(selectedTheme)
+  }
+  
+  func updateForCurrentTheme () {
+    if let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") {
+       UINavigationBar.appearance().barTintColor = currentTheme
+    } else {
+      UserDefaults.standard.setColor(value: UIColor.white, forKey: "currentTheme")
+      updateForCurrentTheme()
+    }
+   
+    let windows = UIApplication.shared.windows
+    for window in windows {
+      for view in window.subviews {
+        view.removeFromSuperview()
+        window.addSubview(view)
+      }
+    }
   }
 
 }
