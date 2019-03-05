@@ -12,43 +12,49 @@
 
 @implementation ThemesViewController
 
-@synthesize delegate = _delegate;
+-(instancetype) initWithCoder: (NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    _model = [Themes new];
+  }
+  return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  self.model = [[Themes alloc] init];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  [super viewWillDisappear:animated];
-  [self.model release];
-}
-
 - (void)dealloc {
-
+  [_model release];
+  printf("dealloc");
   [super dealloc];
 }
 
-//Getters:
+//model property accessors:
 - (Themes*) model {
   return _model;
 }
 
+- (void)setModel:(Themes *)NewModel {
+  [NewModel retain];
+  [_model release];
+  _model = NewModel;
+}
+
+// delegate accessors:
 - (id<ThemesViewControllerDelegate>)delegate {
   return _delegate;
 }
 
-// Setters:
 - (void)setDelegate:(id<ThemesViewControllerDelegate>)delegate {
-  if (_delegate != delegate)
+  if (_delegate != delegate) {
     _delegate = delegate;
+  }
 }
 
--(IBAction)themeChooseButtonTappted:(UIButton *)sender {
+// Actions:
+- (IBAction)themeChooseButtonTappted:(UIButton *)sender {
   switch ([sender tag]) {
     case 1:
       [self applyChosenTheme: _model.theme1];
@@ -65,15 +71,16 @@
   }
 }
 
--(IBAction)backButtonTapped:(UIBarButtonItem *)sender {
+- (IBAction)backButtonTapped:(UIBarButtonItem *)sender {
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)applyChosenTheme:(UIColor *)withColor {
+
+- (void)applyChosenTheme:(UIColor *)withColor {
   self.view.backgroundColor = withColor;
   UINavigationBar.appearance.barTintColor = withColor;
   
-  
+  // Cook receipt from stackoverflow for UI update:
   NSArray *windows = [UIApplication sharedApplication].windows;
   for (UIWindow *window in windows) {
     for (UIView *view in window.subviews) {
@@ -81,7 +88,8 @@
       [window addSubview:view];
     }
   }
-
+  
+  // Delegate method:
   [_delegate themesViewController:self didSelectTheme: withColor];
 }
 

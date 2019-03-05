@@ -10,9 +10,6 @@
 
 @implementation Themes : NSObject
 
-// Don't need setters - properties are read only
-// Getters for theme properties:
-
 - (UIColor *) theme1 {
   return [UIColor colorWithRed:0.09 green:0.63 blue:0.52 alpha:1.0];
 }
@@ -26,3 +23,5 @@
 }
 
 @end
+
+

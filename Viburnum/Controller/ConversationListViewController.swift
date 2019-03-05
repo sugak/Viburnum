@@ -57,7 +57,7 @@ class ConversationListViewController: UITableViewController, ThemesViewControlle
     return cell
   }
   
-  // Segute to chat:
+  // Segue to chat:
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showConversation" {
       if let indexPath = tableView.indexPathForSelectedRow {
@@ -70,12 +70,11 @@ class ConversationListViewController: UITableViewController, ThemesViewControlle
       }
     }
     if segue.identifier == "themeMenu" {
-      if let destinationContoller = segue.destination as? ThemesViewController {
-        destinationContoller.delegate = self
-      }
+      let navController = segue.destination as! UINavigationController
+      let destination = navController.topViewController as! ThemesViewController
+        destination.delegate = self
     }
   }
-  
   
   // Themes change delegate:
   func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
