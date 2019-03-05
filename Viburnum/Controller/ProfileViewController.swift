@@ -68,20 +68,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Function for action buttons to pick uo photo from Gallery or Camera
   func actionForPhotoPickUp (title: String, sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
-    return UIAlertAction(title: title, style: .default, handler: { (action) in
+    return UIAlertAction(title: title, style: .default, handler: { [weak self] (action) in
       if UIImagePickerController.isSourceTypeAvailable(sourceType) {
         let imagePicker  = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
         
-        self.present(imagePicker, animated: Constants.animated, completion: nil)
+        self?.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
       } else {
         // Camera and Gallery error handler:
         let photoFailedAlert = UIAlertController(title: "Ошибка", message: (sourceType == .camera) ? "На вашем смартфоне не работает камера или она не доступна" : "На вашем смартфоне не доступна галерея", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         photoFailedAlert.addAction(okButton)
-        self.present(photoFailedAlert,animated: Constants.animated, completion: nil)
+        self?.present(photoFailedAlert,animated: Constants.animated, completion: nil)
       }
     })
   }
