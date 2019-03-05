@@ -20,7 +20,7 @@
 		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
 		28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFE222A90F300F2DAA6 /* Themes.m */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
-		28E3C59E222F1D7700A09AA5 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
+		28E3C5A0222F2AE000A09AA5 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,14 +84,8 @@
 				2890F1572224687400F42965 /* Model */,
 				28B2DEEA222A7CE000F2DAA6 /* View */,
 				2890F1582224887800F42965 /* Controller */,
+				28E3C5A1222F2B3900A09AA5 /* Themes */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
-				28B2DF05222A9C5F00F2DAA6 /* Themes.h */,
-				28B2DEFE222A90F300F2DAA6 /* Themes.m */,
-				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
-				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
-				28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */,
-				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
-				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
 			);
 			path = Viburnum;
 			sourceTree = "<group>";
@@ -134,6 +128,20 @@
 				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		28E3C5A1222F2B3900A09AA5 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				28B2DF05222A9C5F00F2DAA6 /* Themes.h */,
+				28B2DEFE222A90F300F2DAA6 /* Themes.m */,
+				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
+				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
+				28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */,
+				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
+				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
+			);
+			name = Themes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +218,7 @@
 			files = (
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */,
-				28E3C59E222F1D7700A09AA5 /* ThemesViewController.m in Sources */,
+				28E3C5A0222F2AE000A09AA5 /* ThemesViewController.m in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,

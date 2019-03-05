@@ -93,11 +93,11 @@ class ConversationListViewController: UITableViewController {
       let destination = navController.topViewController as! ThemesViewController
       
       // For Swift class usage:
-      //  destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
-      //  self?.logThemeChanging(selectedTheme: selectedTheme) }
+      //destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
+      //self?.logThemeChanging(selectedTheme: selectedTheme) }
       
       // For Objective-C class usage:
-     destination.delegate = self
+      destination.delegate = self
     }
   }
   
@@ -130,7 +130,6 @@ extension ConversationListViewController: ThemesViewControllerDelegate {
   func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
     logThemeChanging(selectedTheme: selectedTheme)
   }
-
 }
 
 // Extention for passing and reading UIColor in User Defaults:
