@@ -11,7 +11,7 @@
 @implementation Themes : NSObject
 
 - (UIColor *) theme1 {
-  return [UIColor colorWithRed:0.09 green:0.63 blue:0.52 alpha:1.0];
+  return [UIColor colorWithRed:0.09 green:0.53 blue:0.52 alpha:1.0];
 }
 
 - (UIColor *) theme2 {

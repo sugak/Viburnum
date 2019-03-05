@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ConversationListViewController: UITableViewController, ThemesViewControllerDelegate {
+class ConversationListViewController: UITableViewController{//}, ThemesViewControllerDelegate {
+
+  /*
+   
+  */
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,11 +76,12 @@ class ConversationListViewController: UITableViewController, ThemesViewControlle
     if segue.identifier == "themeMenu" {
       let navController = segue.destination as! UINavigationController
       let destination = navController.topViewController as! ThemesViewController
-        destination.delegate = self
+        destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
+       self?.logThemeChanging(selectedTheme: selectedTheme) }
+     //destination.delegate = self
     }
   }
   
-  // Themes change delegate:
   func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
     logThemeChanging(selectedTheme: selectedTheme)
   }

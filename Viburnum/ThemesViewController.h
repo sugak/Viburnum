@@ -23,7 +23,8 @@
 - (void)applyChosenTheme:(UIColor*) withColor;
 
 // Action for tapped buttons:
-- (IBAction)themeChooseButtonTappted:(UIButton*)sender;
+- (IBAction)themeButtonTap:(UIButton*)sender;
+- (IBAction)closeButtonTap:(UIBarButtonItem *)sender;
 
 @end
 

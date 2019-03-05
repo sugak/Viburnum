@@ -14,7 +14,7 @@
 		288DEA7F220C25AD007D5263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA7D220C25AD007D5263 /* Main.storyboard */; };
 		288DEA81220C25AF007D5263 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA80220C25AF007D5263 /* Assets.xcassets */; };
 		288DEA84220C25AF007D5263 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */; };
-		2890AA01222E8AC700FFE199 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
+		2890AA0B222EDA3900FFE199 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA02222E9E9900FFE199 /* ThemesViewController.swift */; };
 		28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A087D72221FE4E002D08D2 /* ConversationViewController.swift */; };
 		28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */; };
 		28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD122208C5A00C190F4 /* Protocols.swift */; };
@@ -34,6 +34,7 @@
 		288DEA80220C25AF007D5263 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		288DEA83220C25AF007D5263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		288DEA85220C25AF007D5263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2890AA02222E9E9900FFE199 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		28A087D72221FE4E002D08D2 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListTableViewCell.swift; sourceTree = "<group>"; };
 		28AB8DD122208C5A00C190F4 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 				28B2DEFA222A8E6800F2DAA6 /* Viburnum-Bridging-Header.h */,
 				28B2DEFB222A8E6900F2DAA6 /* ThemesViewController.h */,
 				28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */,
+				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 				28B2DF00222A946600F2DAA6 /* ThemesViewControllerDelegate.h */,
 			);
 			path = Viburnum;
@@ -208,7 +210,6 @@
 			files = (
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */,
-				2890AA01222E8AC700FFE199 /* ThemesViewController.m in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
@@ -217,6 +218,7 @@
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
+				2890AA0B222EDA3900FFE199 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

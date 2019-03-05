@@ -236,7 +236,7 @@
         <!--Выбор темы-->
         <scene sceneID="qAd-gA-yyj">
             <objects>
-                <viewController id="Du1-iP-bPf" customClass="ThemesViewController" sceneMemberID="viewController">
+                <viewController id="Du1-iP-bPf" customClass="ThemesViewController" customModule="Viburnum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWQ-jt-goo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,7 +261,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="MRP-ep-dOc"/>
+                                            <action selector="themeButtonTap:" destination="Du1-iP-bPf" eventType="touchUpInside" id="ffT-3t-cdT"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5H-ph-a9T">
@@ -281,7 +281,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="mIo-Ms-U9P"/>
+                                            <action selector="themeButtonTap:" destination="Du1-iP-bPf" eventType="touchUpInside" id="iaG-0Y-byc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZu-VN-EaA">
@@ -301,7 +301,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="themeChooseButtonTappted:" destination="Du1-iP-bPf" eventType="touchUpInside" id="RRS-60-BfB"/>
+                                            <action selector="themeButtonTap:" destination="Du1-iP-bPf" eventType="touchUpInside" id="49T-jI-oWv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -327,9 +327,6 @@
                     <navigationItem key="navigationItem" title="Выбор темы" largeTitleDisplayMode="always" id="VNA-7U-w2j">
                         <barButtonItem key="leftBarButtonItem" title="Назад" id="osP-Df-PEi">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="backButtonTapped:" destination="Du1-iP-bPf" id="WlZ-hG-T1T"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

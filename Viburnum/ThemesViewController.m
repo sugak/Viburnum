@@ -20,9 +20,8 @@
   return self;
 }
 
-
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
 }
 
 - (void)dealloc {
@@ -54,7 +53,7 @@
 }
 
 // Actions:
-- (IBAction)themeChooseButtonTappted:(UIButton *)sender {
+- (IBAction)themeButtonTap:(UIButton *)sender {
   switch ([sender tag]) {
     case 1:
       [self applyChosenTheme: _model.theme1];
@@ -71,15 +70,14 @@
   }
 }
 
-- (IBAction)backButtonTapped:(UIBarButtonItem *)sender {
+- (IBAction)closeButtonTap:(UIBarButtonItem *)sender {
    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (void)applyChosenTheme:(UIColor *)withColor {
   self.view.backgroundColor = withColor;
   UINavigationBar.appearance.barTintColor = withColor;
-  
+
   // Cook receipt from stackoverflow for UI update:
   NSArray *windows = [UIApplication sharedApplication].windows;
   for (UIWindow *window in windows) {
