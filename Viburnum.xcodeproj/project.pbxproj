@@ -10,6 +10,7 @@
 		287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C48EC2220636900256F0B /* ConversationListViewController.swift */; };
 		287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40BE2219C61400C87D11 /* PhotoButton.swift */; };
 		287F40C22219D4D300C87D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40C02219CF8C00C87D11 /* Constants.swift */; };
+		28854329222FC66000F5320B /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
 		288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288DEA79220C25AD007D5263 /* AppDelegate.swift */; };
 		288DEA7F220C25AD007D5263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA7D220C25AD007D5263 /* Main.storyboard */; };
 		288DEA81220C25AF007D5263 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA80220C25AF007D5263 /* Assets.xcassets */; };
@@ -20,7 +21,6 @@
 		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
 		28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFE222A90F300F2DAA6 /* Themes.m */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
-		28E3C5A0222F2AE000A09AA5 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B2DEFC222A8E6900F2DAA6 /* ThemesViewController.m */; };
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -218,7 +218,7 @@
 			files = (
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28B2DF03222A97E800F2DAA6 /* Themes.m in Sources */,
-				28E3C5A0222F2AE000A09AA5 /* ThemesViewController.m in Sources */,
+				28854329222FC66000F5320B /* ThemesViewController.m in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
