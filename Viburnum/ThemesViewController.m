@@ -82,9 +82,9 @@
 }
 
 - (void)setDelegate:(id<ThemesViewControllerDelegate>)delegate {
-  [delegate retain];
-  [_delegate release];
-  _delegate = delegate;
+  if (_delegate != delegate) {
+    _delegate = delegate;
+  }
 }
 
 // Actions:
