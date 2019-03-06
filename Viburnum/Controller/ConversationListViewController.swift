@@ -8,8 +8,8 @@
 
 /*
  
-                          === ЧЕКЛИСТ ===
-          для переключения между классами Objective-C & Swift
+                            === ЧЕКЛИСТ ===
+            для переключения между классами Objective-C & Swift
  
  1. Сменить Target Membership
  2. Проверить Custom Class в IB
@@ -18,12 +18,12 @@
  3.1 Для перехода в Swift:
  3.1.1 В segue "themeMenu" раскомментить блок //For Swift class usage:
  3.1.2 Там же закомментить блок // For Objective-C class usage:
- 3.1.3 Закомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода
+ 3.1.3 Закомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода.
  
  3.2 Для перехода в Obj-C:
  3.2.1 В segue "themeMenu" закомментить блок //For Swift class usage:
- 3.2.2 В segue "themeMenu" раскомментить блок // For Objective-C class usage:
- 3.2.3 Раскомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода
+ 3.2.2 Там же раскомментить блок // For Objective-C class usage:
+ 3.2.3 Раскомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода.
  
  */
 
@@ -40,7 +40,7 @@ class ConversationListViewController: UITableViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    // Calling update function for current theme:
+    //MARK: - Themes: calling update function for current theme:
     updateForCurrentTheme()
   }
   
@@ -91,7 +91,7 @@ class ConversationListViewController: UITableViewController {
       }
     }
     
-    // Segue to ThemeViewController:
+    //MARK: - Themes: segue to ThemeViewController:
     if segue.identifier == "themeMenu" {
       guard let navController = segue.destination as? UINavigationController else {return}
       let destination = navController.topViewController as! ThemesViewController
@@ -110,7 +110,7 @@ class ConversationListViewController: UITableViewController {
     print(selectedTheme)
   }
   
-  // Update function for current theme with User Defaults:
+  // MARK: - Themes: update function for current theme with User Defaults:
   func updateForCurrentTheme () {
     if let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") {
        UINavigationBar.appearance().barTintColor = currentTheme
@@ -136,7 +136,7 @@ extension ConversationListViewController: ThemesViewControllerDelegate {
   }
 }
 
-// Extention for passing and reading UIColor in User Defaults:
+//MARK: - Themes: extention for passing and reading UIColor in User Defaults:
 extension UserDefaults {
   func setColor(value: UIColor?, forKey: String) {
     guard let value = value else {

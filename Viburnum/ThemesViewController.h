@@ -19,12 +19,11 @@
 @property (assign, nonatomic) id<ThemesViewControllerDelegate> delegate;
 @property (retain, nonatomic) Themes* model;
 
+// Actions:
+- (IBAction)themeButtonTap:(UIButton*)sender;
 - (IBAction)backButton:(UIBarButtonItem *)sender;
 
 - (void)applyChosenTheme:(UIColor*) withColor;
-
-// Action for tapped buttons:
-- (IBAction)themeButtonTap:(UIButton*)sender;
 
 @end
 
