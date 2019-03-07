@@ -6,27 +6,6 @@
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
 
-/*
- 
-                            === ЧЕКЛИСТ ===
-            для переключения между классами Objective-C & Swift
- 
- 1. Сменить Target Membership
- 2. Проверить Custom Class в IB
- 3. В ConversationListViewController:
- 
- 3.1 Для перехода в Swift:
- 3.1.1 В segue "themeMenu" раскомментить блок //For Swift class usage:
- 3.1.2 Там же закомментить блок // For Objective-C class usage:
- 3.1.3 Закомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода.
- 
- 3.2 Для перехода в Obj-C:
- 3.2.1 В segue "themeMenu" закомментить блок //For Swift class usage:
- 3.2.2 Там же раскомментить блок // For Objective-C class usage:
- 3.2.3 Раскомментить extension ConversationListViewController: ThemesViewControllerDelegate в конце кода.
- 
- */
-
 import UIKit
 
 class ConversationListViewController: UITableViewController {
@@ -96,12 +75,10 @@ class ConversationListViewController: UITableViewController {
       guard let navController = segue.destination as? UINavigationController else {return}
       let destination = navController.topViewController as! ThemesViewController
       
-      // For Swift class usage:
-      //destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
-      //self?.logThemeChanging(selectedTheme: selectedTheme) }
+      // Themes class protocol:
+      destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
+      self?.logThemeChanging(selectedTheme: selectedTheme) }
       
-      // For Objective-C class usage:
-      destination.delegate = self
     }
   }
   
@@ -127,12 +104,6 @@ class ConversationListViewController: UITableViewController {
         window.addSubview(view)
       }
     }
-  }
-}
-
-extension ConversationListViewController: ThemesViewControllerDelegate {
-  func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
-    logThemeChanging(selectedTheme: selectedTheme)
   }
 }
 
