@@ -18,17 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Viburnum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PC-SV-R7v">
-                                <rect key="frame" x="57" y="294.5" width="261.5" height="78"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Viburnum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1PC-SV-R7v">
+                                <rect key="frame" x="57" y="245.5" width="261" height="78"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="60"/>
-                                <color key="textColor" red="0.33333333329999998" green="0.61960784310000006" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="textColor" red="0.16862745098039217" green="0.44313725490196076" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpic" translatesAutoresizingMaskIntoConstraints="NO" id="8nH-54-QY7">
+                                <rect key="frame" x="90" y="313.5" width="195" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="r2B-h0-ShR"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="1PC-SV-R7v" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9sn-YR-V3t"/>
-                            <constraint firstItem="1PC-SV-R7v" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="f0p-j1-Fdn"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="90" id="4Ld-zt-hbU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8nH-54-QY7" secondAttribute="trailing" constant="90" id="7gk-Tj-4PT"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="top" secondItem="1PC-SV-R7v" secondAttribute="bottom" constant="-10" id="QgV-dh-Gbz"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="bam-BH-Mq6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1PC-SV-R7v" secondAttribute="trailing" constant="57" id="cjZ-cA-HJx"/>
+                            <constraint firstItem="1PC-SV-R7v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="iGY-VC-V1u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,4 +48,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mainpic" width="1455" height="320"/>
+    </resources>
 </document>
