@@ -358,7 +358,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNP-UP-MIR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNP-UP-MIR" customClass="UIProfileButton" customModule="Viburnum" customModuleProvider="target">
                                 <rect key="frame" x="16" y="464" width="288" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2L0-UK-ZCN"/>
