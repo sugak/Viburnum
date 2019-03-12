@@ -24,6 +24,7 @@ class PhotoButton: UIButton {
     self.imageEdgeInsets = UIEdgeInsets(top: Constants.imageInset, left: Constants.imageInset, bottom: Constants.imageInset, right: Constants.imageInset) // reduсing camera image inside the button
     self.layer.cornerRadius = Constants.cornerRadius // Setting the radius
     self.clipsToBounds = true
+    self.isHidden = true
   }
   
   // Photo button animation

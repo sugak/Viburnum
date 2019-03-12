@@ -12,9 +12,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // TEMPO Model:
-    nameTextField.text = "Maksim Sugak"
-    descriptionTextView.text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit "
+    
+    // Keyboard notifications:
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = -300
+    }
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = 0.0
+    }
+    
+    activityIndicator.isHidden = true
+    
+    
   }
   
   override func viewWillLayoutSubviews() {
@@ -37,9 +46,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBOutlet var editButtonOutlet: UIProfileButton!
   @IBOutlet var gcdButton: UIProfileButton!
   @IBOutlet var operationButton: UIProfileButton!
+  @IBOutlet var photoButton: PhotoButton!
+  @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var nameTextField: UITextField! {
     didSet {
-     // nameTextField.becomeFirstResponder()
       nameTextField.delegate = self
     }
   }
@@ -58,18 +68,32 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     choosePhoto() // Opening ActionSheet menu
   }
   
+  // Редактировать:
   @IBAction func pushEditButton(_ sender: PhotoButton) {
     editButtonOutlet.isHidden = true
+    editButtonOutlet.becomeFirstResponder()
     gcdButton.isHidden = false
     operationButton.isHidden = false
     
     nameTextField.isEnabled = true
     descriptionTextView.isEditable = true
+    
+    photoButton.isHidden = false
+    
+    
+    
   }
   @IBAction func pushGCDButton(_sender: UIProfileButton) {
     // TODO: GCD action
+    self.view.frame.origin.y = 0.0
+    activityIndicator.isHidden = false
+    activityIndicator.startAnimating()
+    sleep(2)
     UserDefaults.standard.set(nameTextField.text, forKey: "profileName")
     UserDefaults.standard.set(descriptionTextView.text, forKey: "profileDescription")
+    activityIndicator.stopAnimating()
+    activityIndicator.isHidden = true
+   
   }
   @IBAction func pushOperationButton(_ sender: PhotoButton) {
     // TODO: Operation action
@@ -145,12 +169,30 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     return true
   }
   
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if string == "\n"
+    {
+      textField.resignFirstResponder()
+      return true
+    }
+    return true
+  }
+  
+  
+  
+  
+  
+  
+  
+  
   
 
   
   
 //  Пофиксить:
 //  клавиатура налетает на текст
+//  Может запретить селект у филдов?
+//  По идее надо фото баттон тоже делать недоступным
 
 
 }

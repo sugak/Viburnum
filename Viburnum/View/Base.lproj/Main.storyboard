@@ -364,7 +364,7 @@
                                     <action selector="pushEditButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nao-7I-03u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-iy-XmU" customClass="PhotoButton" customModule="Viburnum" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-iy-XmU" customClass="PhotoButton" customModule="Viburnum" customModuleProvider="target">
                                 <rect key="frame" x="279" y="337" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="gbe-5l-9fH"/>
@@ -407,37 +407,46 @@
                                     <constraint firstItem="dLf-2i-THp" firstAttribute="width" secondItem="cYJ-cW-IoY" secondAttribute="width" id="ofh-KT-Gs4"/>
                                 </constraints>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="BXh-NO-KB4">
-                                <rect key="frame" x="16" y="433" width="343" height="34"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uoe-Ls-7Zy">
-                                <rect key="frame" x="16" y="477" width="343" height="78"/>
+                                <rect key="frame" x="16" y="473" width="343" height="82"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Люблю программировать
+Люблю помогать другим</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="done" smartInsertDeleteType="no"/>
                             </textView>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Максим Сугак" minimumFontSize="22" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EAp-Dq-2Rf">
+                                <rect key="frame" x="16" y="431" width="343" height="34"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="no" textContentType="name"/>
+                            </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BcO-ga-GLW">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eNP-UP-MIR" secondAttribute="bottom" constant="16" id="0CP-Rq-f0t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eNP-UP-MIR" secondAttribute="trailing" constant="16" id="0Ua-on-RD8"/>
-                            <constraint firstItem="Uoe-Ls-7Zy" firstAttribute="top" secondItem="BXh-NO-KB4" secondAttribute="bottom" constant="10" id="1XE-ix-v8c"/>
+                            <constraint firstItem="EAp-Dq-2Rf" firstAttribute="top" secondItem="UZ4-Ma-90O" secondAttribute="bottom" constant="14" id="0p8-bI-AkC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lYd-iy-XmU" secondAttribute="trailing" constant="16" id="AhF-Ms-LCJ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BXh-NO-KB4" secondAttribute="trailing" constant="16" id="Ec6-L1-TvM"/>
-                            <constraint firstItem="BXh-NO-KB4" firstAttribute="top" secondItem="lYd-iy-XmU" secondAttribute="bottom" constant="16" id="JFl-cL-lnF"/>
+                            <constraint firstItem="Uoe-Ls-7Zy" firstAttribute="top" secondItem="EAp-Dq-2Rf" secondAttribute="bottom" constant="8" id="Haf-RI-zDR"/>
+                            <constraint firstItem="BcO-ga-GLW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="J01-6m-Af0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Uoe-Ls-7Zy" secondAttribute="trailing" constant="16" id="M6p-Gv-Fqe"/>
-                            <constraint firstItem="BXh-NO-KB4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ma1-E6-gPe"/>
                             <constraint firstItem="C1H-5k-Hhf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="QGb-5b-Y9u"/>
+                            <constraint firstItem="EAp-Dq-2Rf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Rcy-8t-Q2I"/>
                             <constraint firstItem="Uoe-Ls-7Zy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TaA-zK-Gk5"/>
+                            <constraint firstItem="BcO-ga-GLW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V4M-Kr-CoE"/>
+                            <constraint firstItem="EAp-Dq-2Rf" firstAttribute="top" secondItem="lYd-iy-XmU" secondAttribute="bottom" constant="14" id="XDI-Fp-LJe"/>
                             <constraint firstItem="eNP-UP-MIR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XQh-mL-ozb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UZ4-Ma-90O" secondAttribute="trailing" constant="16" id="Yex-rv-djN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EAp-Dq-2Rf" secondAttribute="trailing" constant="16" id="ZgS-Gy-pUm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C1H-5k-Hhf" secondAttribute="bottom" constant="16" id="iPS-B7-pa7"/>
                             <constraint firstItem="UZ4-Ma-90O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iX2-uV-Qcv"/>
                             <constraint firstItem="eNP-UP-MIR" firstAttribute="top" secondItem="Uoe-Ls-7Zy" secondAttribute="bottom" constant="8" id="rMM-UQ-FPd"/>
-                            <constraint firstItem="BXh-NO-KB4" firstAttribute="top" secondItem="UZ4-Ma-90O" secondAttribute="bottom" constant="16" id="tuC-oW-ePi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C1H-5k-Hhf" secondAttribute="trailing" constant="16" id="ufO-Hz-BgI"/>
                             <constraint firstItem="UZ4-Ma-90O" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="wTF-C0-KpX"/>
                         </constraints>
@@ -454,11 +463,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="BcO-ga-GLW" id="r1M-QI-T8o"/>
                         <outlet property="descriptionTextView" destination="Uoe-Ls-7Zy" id="7ts-AH-a7y"/>
                         <outlet property="editButtonOutlet" destination="eNP-UP-MIR" id="ssW-x8-fF5"/>
                         <outlet property="gcdButton" destination="dLf-2i-THp" id="T1d-vU-qcj"/>
-                        <outlet property="nameTextField" destination="BXh-NO-KB4" id="HVt-LG-tBh"/>
+                        <outlet property="nameTextField" destination="EAp-Dq-2Rf" id="38c-a7-BdD"/>
                         <outlet property="operationButton" destination="cYJ-cW-IoY" id="O2O-yY-V40"/>
+                        <outlet property="photoButton" destination="lYd-iy-XmU" id="S6n-eE-g7x"/>
                         <outlet property="photoImageView" destination="UZ4-Ma-90O" id="tBx-ta-NfZ"/>
                     </connections>
                 </viewController>
