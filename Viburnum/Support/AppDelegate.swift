@@ -32,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       showLog(from: "Not running", to: "Foreground Inactive")
-      UserDefaults.standard.removeObject(forKey: "profileName")
-      UserDefaults.standard.removeObject(forKey: "profileDescription")
       return true
     }
 

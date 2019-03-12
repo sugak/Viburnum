@@ -10,19 +10,32 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate{
   
+  var fileName: String = ""
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Keyboard notifications:
     NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-      self.view.frame.origin.y = -300
+      self.view.frame.origin.y = -200
     }
     NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
       self.view.frame.origin.y = 0.0
     }
     
-    activityIndicator.isHidden = true
+    if UserDefaults.standard.string(forKey: "profileName") != nil  {
+      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
+    } else {
+      nameTextField.text = "Имя Рек"
+    }
+    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
+      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
+    } else {
+      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
+    }
     
+    //     let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fileName)
+    //    photoImageView.image = UIImage(contentsOfFile: filePath.path) ?? UIImage(named: "placeholder-user")
     
   }
   
@@ -32,13 +45,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Layout for UI elements
     photoImageViewStyle(for: photoImageView)
     
-    nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
-    descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
-    
-    if UserDefaults.standard.string(forKey: "profileName") == nil {
-    nameTextField.placeholder = "Введите сюда свое имя"
-    descriptionTextView.text = "Напишите кратко о себе"
-    }
   }
   
   // Outlets:
@@ -70,12 +76,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Редактировать:
   @IBAction func pushEditButton(_ sender: PhotoButton) {
+    // TODO: EDIT Button
     editButtonOutlet.isHidden = true
-    editButtonOutlet.becomeFirstResponder()
     gcdButton.isHidden = false
     operationButton.isHidden = false
     
-    nameTextField.isEnabled = true
+    nameTextField.isUserInteractionEnabled = true
+    nameTextField.becomeFirstResponder()
     descriptionTextView.isEditable = true
     
     photoButton.isHidden = false
@@ -85,14 +92,24 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   @IBAction func pushGCDButton(_sender: UIProfileButton) {
     // TODO: GCD action
-    self.view.frame.origin.y = 0.0
-    activityIndicator.isHidden = false
-    activityIndicator.startAnimating()
-    sleep(2)
+   // self.view.frame.origin.y = 0.0
     UserDefaults.standard.set(nameTextField.text, forKey: "profileName")
     UserDefaults.standard.set(descriptionTextView.text, forKey: "profileDescription")
-    activityIndicator.stopAnimating()
-    activityIndicator.isHidden = true
+    
+    
+    
+    
+//  let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fileName)
+//    if let imageFromFile = UIImage(contentsOfFile: filePath.path) {
+//      if (photoImageView.image != imageFromFile) {
+//        let userPhotoData = photoImageView.image?.pngData()
+//        try! userPhotoData?.write(to: filePath)
+//      }
+//    } else {
+//      let userPhotoData = photoImageView.image?.pngData()
+//      try! userPhotoData?.write(to: filePath)
+//    }
+    
    
   }
   @IBAction func pushOperationButton(_ sender: PhotoButton) {
@@ -160,39 +177,30 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
 
   // Hide keyboard on textView Return tap:
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    if text == "\n"
-    {
-      textView.resignFirstResponder()
-      return true
-    }
-    return true
-  }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     if string == "\n"
     {
       textField.resignFirstResponder()
+      descriptionTextView.becomeFirstResponder()
       return true
     }
     return true
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if text == "\n"
+    {
+      textView.resignFirstResponder()
+      gcdButton.becomeFirstResponder()
+      return true
+    }
+    return true
+  }
   
 //  Пофиксить:
 //  клавиатура налетает на текст
 //  Может запретить селект у филдов?
 //  По идее надо фото баттон тоже делать недоступным
-
 
 }
