@@ -38,7 +38,7 @@ let TalkerName = [
 
 //Last messages:
 let lastMessage = [
-  ["Почему ты захардкодил меня первым в списке сообщений?",
+  ["Привет! Это первое сообщение.",
    "Если в мире все бессмысленно, что мешает выдумать какой-нибудь смысл?",
    nil,
    "Кто-то гордится каждой написанной книгой, я – любою прочтённой",
@@ -67,7 +67,7 @@ let ifOnline = [
 ]
 
 let ifMessageUnread = [
-  [false, true, false, true, true, false, false, true, false, false],
+  [false, false, false, true, true, false, false, true, false, false],
   [false, false, true, false, true, false, true, false, false, true]
 ]
 

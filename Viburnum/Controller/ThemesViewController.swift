@@ -11,6 +11,7 @@ import UIKit
 class ThemesViewController: UIViewController {
   
   let model = Themes()
+  let themesQueue = DispatchQueue(label: "com.MaksimSugak", qos: .background)
   var themeProtocol: ((UIColor) -> ())?
 
     override func viewDidLoad() {
@@ -25,7 +26,11 @@ class ThemesViewController: UIViewController {
   func applyTheme(with color: UIColor) {
     self.view.backgroundColor = color
     UINavigationBar.appearance().barTintColor = color
-    UserDefaults.standard.setColor(value: color, forKey: "currentTheme")
+    
+    themesQueue.async {
+      UserDefaults.standard.setColor(value: color, forKey: "currentTheme")
+    }
+    
     
     // All views update:
     let windows = UIApplication.shared.windows

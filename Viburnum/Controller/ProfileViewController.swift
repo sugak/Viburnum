@@ -10,33 +10,12 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate{
   
-  var fileName: String = ""
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Keyboard notifications:
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-      self.view.frame.origin.y = -200
-    }
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-      self.view.frame.origin.y = 0.0
-    }
-    
-    if UserDefaults.standard.string(forKey: "profileName") != nil  {
-      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
-    } else {
-      nameTextField.text = "Имя Рек"
-    }
-    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
-      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
-    } else {
-      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
-    }
-    
-    //     let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fileName)
-    //    photoImageView.image = UIImage(contentsOfFile: filePath.path) ?? UIImage(named: "placeholder-user")
-    
+    // Setting up keyboard and initial UI:
+    keyBoardSettings()
+    initialUISettings()
   }
   
   override func viewWillLayoutSubviews() {
@@ -44,9 +23,46 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Layout for UI elements
     photoImageViewStyle(for: photoImageView)
-    
   }
   
+  // Variables and constants:
+  var appliedDataManager: dataManagementProtocol!
+  let gcdDataManager = GCDDataManager()
+  var operationDataManager = OperationDataManager()
+  var userProfile: UserProfile!
+  // If in save progress flag:
+  var dataSavingInProgress: Bool = false
+  // If edit mode in progress:
+  var editMode: Bool = false {
+    
+    // UI settings for edit nor edit mode:
+    didSet {
+      editButtonOutlet.isHidden = !editButtonOutlet.isHidden
+      gcdButton.isHidden = !gcdButton.isHidden
+      operationButton.isHidden = !operationButton.isHidden
+      nameTextField.isUserInteractionEnabled = true
+      nameTextField.becomeFirstResponder()  // Setting first responder for TextField
+      descriptionTextView.isEditable = true
+      
+      if editMode {
+        // Setting up save buttons in edit mode:
+        gcdButton.isEnabled = false
+        gcdButton.setTitleColor(UIColor.gray, for: .normal)
+        operationButton.isEnabled = false
+        gcdButton.setTitleColor(UIColor.gray, for: .normal)
+        
+        photoButton.isHidden = false  // Photo button showing in edit mode
+        
+        nameTextField.text = userProfile.name
+        descriptionTextView.text = userProfile.description
+      } else {
+        updateProfileInfo()
+        nameTextField.isUserInteractionEnabled = false
+        descriptionTextView.isEditable = false
+      }
+    }
+  }
+
   // Outlets:
   @IBOutlet var photoImageView: UIImageView!
   @IBOutlet var editButtonOutlet: UIProfileButton!
@@ -54,18 +70,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBOutlet var operationButton: UIProfileButton!
   @IBOutlet var photoButton: PhotoButton!
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
-  @IBOutlet var nameTextField: UITextField! {
-    didSet {
-      nameTextField.delegate = self
-    }
+  @IBOutlet var nameTextField: UITextField!
+  @IBOutlet var descriptionTextView: UITextView!
+  
+  // Special functions to check text changing of TextField and TextView:
+  @IBAction func nameFieldDidChange(_ sender: Any) {
+    saveButtonsControl()
   }
-  @IBOutlet var descriptionTextView: UITextView! {
-    didSet {
-      descriptionTextView.delegate = self
-    }
+  func textViewDidChange(_ textView: UITextView) {
+    saveButtonsControl()
   }
   
-  // Actions:
+   // Actions:
   @IBAction func dismissButton(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
@@ -74,48 +90,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     choosePhoto() // Opening ActionSheet menu
   }
   
-  // Редактировать:
   @IBAction func pushEditButton(_ sender: PhotoButton) {
-    // TODO: EDIT Button
-    editButtonOutlet.isHidden = true
-    gcdButton.isHidden = false
-    operationButton.isHidden = false
-    
-    nameTextField.isUserInteractionEnabled = true
-    nameTextField.becomeFirstResponder()
-    descriptionTextView.isEditable = true
-    
-    photoButton.isHidden = false
-    
-    
-    
-  }
-  @IBAction func pushGCDButton(_sender: UIProfileButton) {
-    // TODO: GCD action
-   // self.view.frame.origin.y = 0.0
-    UserDefaults.standard.set(nameTextField.text, forKey: "profileName")
-    UserDefaults.standard.set(descriptionTextView.text, forKey: "profileDescription")
-    
-    
-    
-    
-//  let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fileName)
-//    if let imageFromFile = UIImage(contentsOfFile: filePath.path) {
-//      if (photoImageView.image != imageFromFile) {
-//        let userPhotoData = photoImageView.image?.pngData()
-//        try! userPhotoData?.write(to: filePath)
-//      }
-//    } else {
-//      let userPhotoData = photoImageView.image?.pngData()
-//      try! userPhotoData?.write(to: filePath)
-//    }
-    
-   
-  }
-  @IBAction func pushOperationButton(_ sender: PhotoButton) {
-    // TODO: Operation action
+    editMode = !editMode
   }
   
+  @IBAction func pushGCDButton(_sender: UIProfileButton) {
+    //GCD action
+    appliedDataManager = gcdDataManager
+    saveUserProfile()
+    
+  }
+  @IBAction func pushOperationButton(_ sender: PhotoButton) {
+    //Operation action
+    appliedDataManager = operationDataManager
+    saveUserProfile()
+  }
   
   
   // Styling photo image view:
@@ -164,20 +153,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage // Loading photo into ImageView
-      photoImageView.contentMode = .scaleAspectFill //Saving ratio
+      photoImageView.contentMode = .scaleToFill //Saving ratio
     }
     dismiss(animated: Constants.animated, completion: nil)
   }
   
-  // Changing text
+  // Finished with text entering:
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
   
-
   // Hide keyboard on textView Return tap:
-  
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     if string == "\n"
     {
@@ -198,9 +185,119 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     return true
   }
   
-//  Пофиксить:
-//  клавиатура налетает на текст
-//  Может запретить селект у филдов?
-//  По идее надо фото баттон тоже делать недоступным
-
+  // Main save function for save options:
+  private func saveUserProfile() {
+    // UI settings:
+      dataSavingInProgress = true
+      gcdButton.isEnabled = false
+      operationButton.isEnabled = false
+      activityIndicator.isHidden = false
+      activityIndicator.startAnimating()
+    
+    let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextView.text!, profileImage: photoImageView.image!)
+    
+    appliedDataManager.saveProfile(new: newProfile, old: userProfile) { (error) in
+      if error == nil {
+        self.userProfile = newProfile
+        let alert = UIAlertController(title: "Профиль успешно сохранен", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .default) { action in
+          if self.editMode {
+            self.editMode = false
+          } else {
+            self.updateProfileInfo()
+          }
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+      } else {
+        // Possible error handling:
+        let alert = UIAlertController(title: "Что-то пошло не так", message: "Не удалось сохранить профиль", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .default, handler: nil)
+        let repeatAction = UIAlertAction(title: "Еще раз", style: .default) { action in
+          self.saveUserProfile()
+        }
+        alert.addAction(okAction)
+        alert.addAction(repeatAction)
+        self.present(alert, animated: true, completion: nil)
+      }
+      self.activityIndicator.stopAnimating()
+      self.activityIndicator.isHidden = true
+      self.gcdButton.isEnabled = true
+      self.operationButton.isEnabled = true
+      self.dataSavingInProgress = false
+    }
+  }
+  
+  // Func to update profile:
+  private func updateProfileInfo() {
+    nameTextField.text = userProfile.name
+    descriptionTextView.text = userProfile.description
+    photoImageView.image = userProfile.profileImage
+  }
+  
+  // Func to load saved profile:
+  private func loadUserProfile() {
+    appliedDataManager = operationDataManager
+    activityIndicator.startAnimating()
+    gcdDataManager.getProfile { (profile) in
+      self.userProfile = profile
+      self.activityIndicator.stopAnimating()
+      self.activityIndicator.isHidden = true
+      self.updateProfileInfo()
+    }
+  }
+  
+  // Func to check if text has been changed and apply to buttons state:
+  private func saveButtonsControl() {
+    if (!dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage)))) {
+      
+      // Change button UI:
+      gcdButton.isEnabled = true
+      gcdButton.setTitleColor(UIColor.black, for: .normal)
+      operationButton.isEnabled = true
+      operationButton.setTitleColor(UIColor.black, for: .normal)
+    } else {
+      // Change button UI:
+      gcdButton.isEnabled = false
+      gcdButton.setTitleColor(UIColor.gray, for: .normal)
+      operationButton.isEnabled = false
+      operationButton.setTitleColor(UIColor.gray, for: .normal)
+    }
+  }
+  
+  // Func to move view up if keyboard is applied:
+  func keyBoardSettings() {
+    // Keyboard notifications:
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = -250
+    }
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = 0.0
+    }
+  }
+  
+  // Backup func for the very initial settings:
+  func initialUISettings() {
+    if UserDefaults.standard.string(forKey: "profileName") != nil  {
+      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
+    } else {
+      nameTextField.text = "Имя Рек"
+    }
+    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
+      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
+    } else {
+      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
+    }
+    
+    // Profile updating:
+    loadUserProfile()
+    
+    // Delegates:
+    nameTextField.delegate = self
+    descriptionTextView.delegate = self
+    
+    // Hiding spinner:
+    activityIndicator.isHidden = true
+  }
 }
+

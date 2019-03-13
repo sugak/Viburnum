@@ -23,6 +23,9 @@
 		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
+		28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* dataManagement.swift */; };
+		28FF0CCB2238D90100ECF643 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */; };
+		28FF0CCD2238D91300ECF643 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		28AB8DD32221344F00C190F4 /* TempoModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoModelData.swift; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
+		28FF0CC82238D8D400ECF643 /* dataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataManagement.swift; sourceTree = "<group>"; };
+		28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 			children = (
 				288DEA80220C25AF007D5263 /* Assets.xcassets */,
 				288DEA85220C25AF007D5263 /* Info.plist */,
+				28FF0CC72238D8A500ECF643 /* DataManagement */,
 				2890F1572224687400F42965 /* Model */,
 				28B2DEEA222A7CE000F2DAA6 /* View */,
 				2890F1582224887800F42965 /* Controller */,
@@ -98,11 +105,11 @@
 		2890F1582224887800F42965 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28D181372215721200E56148 /* ProfileViewController.swift */,
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
 				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
 				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
 				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
-				28D181372215721200E56148 /* ProfileViewController.swift */,
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 			);
 			path = Controller;
@@ -127,6 +134,16 @@
 				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		28FF0CC72238D8A500ECF643 /* DataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				28FF0CC82238D8D400ECF643 /* dataManagement.swift */,
+				28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */,
+				28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */,
+			);
+			path = DataManagement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +220,7 @@
 			files = (
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
+				28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
 				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,
@@ -211,7 +229,9 @@
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				289C404722310B4900CEF579 /* Themes.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
+				28FF0CCD2238D91300ECF643 /* OperationDataManager.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
+				28FF0CCB2238D90100ECF643 /* GCDDataManager.swift in Sources */,
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 			);
