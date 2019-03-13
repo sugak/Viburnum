@@ -26,7 +26,6 @@ class ThemesViewController: UIViewController {
   func applyTheme(with color: UIColor) {
     self.view.backgroundColor = color
     UINavigationBar.appearance().barTintColor = color
-    
     themesQueue.async {
       UserDefaults.standard.setColor(value: color, forKey: "currentTheme")
     }
