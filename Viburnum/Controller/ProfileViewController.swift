@@ -154,7 +154,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage // Loading photo into ImageView
-      photoImageView.contentMode = .scaleToFill //Saving ratio
+      photoImageView.contentMode = .scaleAspectFill //Saving ratio
+      saveButtonsControl()
     }
     dismiss(animated: Constants.animated, completion: nil)
   }
