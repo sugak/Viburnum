@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         gcdButton.isEnabled = false
         gcdButton.setTitleColor(UIColor.gray, for: .normal)
         operationButton.isEnabled = false
-        gcdButton.setTitleColor(UIColor.gray, for: .normal)
+        operationButton.setTitleColor(UIColor.gray, for: .normal)
         
         photoButton.isHidden = false  // Photo button showing in edit mode
         
@@ -59,6 +59,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         updateProfileInfo()
         nameTextField.isUserInteractionEnabled = false
         descriptionTextView.isEditable = false
+        photoButton.isHidden = true
       }
     }
   }
