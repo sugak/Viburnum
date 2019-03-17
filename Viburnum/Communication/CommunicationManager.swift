@@ -40,7 +40,13 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didLostUser(userID: String) {
-    print(#function)
+    if let userConversation = conversationDictionary[userID] {
+      userConversation.online = false
+      conversationDictionary.removeValue(forKey: userID)
+    }
+    DispatchQueue.main.async {
+      self.delegate.globalUpdate()
+    }
   }
   
   func failedToStartBrowsingForUsers(error: Error) {

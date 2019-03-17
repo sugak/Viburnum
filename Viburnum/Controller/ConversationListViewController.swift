@@ -42,13 +42,11 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
-      // As in array:
-      return sections.count
+      return 1 //sections.count
     }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    // As in array:
-    return sections[section]
+    return "Online"  //sections[section]
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

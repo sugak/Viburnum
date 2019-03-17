@@ -17,7 +17,7 @@ class MultiPeerCommunicator: NSObject, Communicator {
   var online: Bool = false
   
   var myPeer: MCPeerID!
-  var displayName = UIDevice.current.name //UserDefaults.standard.string(forKey: "profileName") ?? "User name"
+  var displayName = UserDefaults.standard.string(forKey: "profileName") ?? "User name"
   var serviceBrowser: MCNearbyServiceBrowser!
   var advertiser: MCNearbyServiceAdvertiser!
   weak var delegate: CommunicatorDelegate?

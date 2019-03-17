@@ -34,7 +34,8 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
     
   }
   func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-    print(#function)
+    activeSessions.removeValue(forKey: peerID.displayName)
+    delegate?.didLostUser(userID: peerID.displayName)
   }
   
   // Session:
