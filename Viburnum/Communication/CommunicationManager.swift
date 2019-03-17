@@ -10,8 +10,29 @@ import Foundation
 import MultipeerConnectivity
 
 class CommunicationManager: CommunicatorDelegate {
+  
+  static let shared = CommunicationManager() // Making singleton
+  var multiPeerCommunicator: MultiPeerCommunicator!
+  
+  private init() {
+    self.multiPeerCommunicator = MultiPeerCommunicator()  //Setting up the instance of MultiPeerCommunicator
+    self.multiPeerCommunicator.delegate = self  // Setting up the delegate
+  }
+  
+  var conversationDictionary: [String : Blabber] = [:]
+  
   func didFoundUser(userID: String, userName: String?) {
-    print(#function)
+    if let userConversation = conversationDictionary[userId] {
+      userConversation.online = true
+    } else {
+      let userConversation = User(userID: userId, name: userName)
+      userConversation.online = true
+      conversationDictionary[userId] = userConversation
+    }
+    guard let delegate = delegate else { return }
+    DispatchQueue.main.async {
+      delegate.updateUserData()
+    }
   }
   
   func didLostUser(userID: String) {

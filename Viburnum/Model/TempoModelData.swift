@@ -8,6 +8,37 @@
 
 import Foundation
 
+// Data storage for Communication Homework:
+class Blabber: NSObject{
+  var id: String
+  var name: String?
+  var lastMessage: String?
+  var lastMessageType: MessageType?
+  var lastMessageDate: Date?
+  var allMessages: [String:MessageType] = [:]
+  
+  init(id: String, name: String?) {
+    self.id = id
+    self.name = name
+    
+  }
+  
+}
+
+enum MessageType {
+  case income
+  case outcome
+}
+
+
+
+
+
+
+
+
+
+
 // Sections:
 let sections = ["Online","History"]
 

@@ -9,6 +9,8 @@
 import UIKit
 
 class ConversationListViewController: UITableViewController {
+  
+  var blabberChat: [Blabber] = [] // Creating array of possible blabbers (users)
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +23,12 @@ class ConversationListViewController: UITableViewController {
     
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super .viewWillAppear(Constants.animated)
+    
+   
   }
   
   // Tableview functions:
@@ -41,18 +49,18 @@ class ConversationListViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
       
-    cell.name = TalkerName[indexPath.section][indexPath.row]
-    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
-    cell.message = lastMessage[indexPath.section][indexPath.row]
-    cell.online = ifOnline[indexPath.section][indexPath.row]
-    cell.avatarSymbols = TalkerName[indexPath.section][indexPath.row]
+//    cell.name = TalkerName[indexPath.section][indexPath.row]
+//    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
+//    cell.message = lastMessage[indexPath.section][indexPath.row]
+//    cell.online = ifOnline[indexPath.section][indexPath.row]
+//    cell.avatarSymbols = TalkerName[indexPath.section][indexPath.row]
     
     // Decoding date from String source:
-    let formatter  = DateFormatter()
-    formatter.dateFormat = "dd.MM.yyyy HH:mm"
-    let messageDateFromString: Date?
-    messageDateFromString = formatter.date(from: stringDate[indexPath.section][indexPath.row] ?? "nil")
-    cell.date = messageDateFromString
+//    let formatter  = DateFormatter()
+//    formatter.dateFormat = "dd.MM.yyyy HH:mm"
+//    let messageDateFromString: Date?
+//    messageDateFromString = formatter.date(from: stringDate[indexPath.section][indexPath.row] ?? "nil")
+//    cell.date = messageDateFromString
     
     return cell
   }

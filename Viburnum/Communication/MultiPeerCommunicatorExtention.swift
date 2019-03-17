@@ -14,11 +14,23 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   // Invitation from peer:
   func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
     print(#function)
+    NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
+    // TODO: Make this method if someone send me invite
   }
   
   // Found and lost peer:
   func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-    print(#function)
+    guard let recievedInfo = info else { return } // Safely getting recieved info
+    guard let blabberName = recievedInfo["userName"] else { return }  // Safely getting blabber name from dictionary
+    
+    let session = MCSession(peer: peerID) // Creating session instance
+    session.delegate = self
+    activeSessions[peerID.displayName] = session
+    serviceBrowser.invitePeer(peerID, to: session, withContext: nil, timeout: 30)
+    // TODO: Здесь нужно реализовать didFoundUser(userID: String, userName: String?) используя blabberName
+    delegate?.didFoundUser(userID: peerID.displayName, userName: blabberName)
+    
+
   }
   func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
     print(#function)
@@ -40,7 +52,8 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
     print(#function)
   }
   
-  // Stream and sourse:
+  
+  // UNUSEFUL. Stream and sourse:
   func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
     print(#function)
   }
