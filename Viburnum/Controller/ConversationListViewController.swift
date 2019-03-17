@@ -8,10 +8,17 @@
 
 import UIKit
 
-class ConversationListViewController: UITableViewController {
+class ConversationListViewController: UITableViewController, ManagerDelegate {
   
   var blabberChat: [Blabber] = [] // Creating array of possible blabbers (users)
-
+  
+  func globalUpdate() {
+    blabberChat = Array(CommunicationManager.shared.conversationDictionary.values)
+    //sortUserConversations()
+    tableView.reloadData()
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
@@ -23,12 +30,14 @@ class ConversationListViewController: UITableViewController {
     
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super .viewWillAppear(Constants.animated)
     
-   
+    // Initilize Communication manager:
+    CommunicationManager.shared.delegate = self
   }
   
   // Tableview functions:
@@ -43,12 +52,15 @@ class ConversationListViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return TalkerName[section].count
+    return blabberChat.count //TalkerName[section].count
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
-      
+    
+    let blabber = blabberChat[indexPath.row]
+    cell.name = blabber.name
+    
 //    cell.name = TalkerName[indexPath.section][indexPath.row]
 //    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
 //    cell.message = lastMessage[indexPath.section][indexPath.row]

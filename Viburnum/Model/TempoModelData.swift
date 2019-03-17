@@ -12,6 +12,7 @@ import Foundation
 class Blabber: NSObject{
   var id: String
   var name: String?
+  var online: Bool
   var lastMessage: String?
   var lastMessageType: MessageType?
   var lastMessageDate: Date?
@@ -20,6 +21,7 @@ class Blabber: NSObject{
   init(id: String, name: String?) {
     self.id = id
     self.name = name
+    self.online = false
     
   }
   

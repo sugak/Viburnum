@@ -13,6 +13,7 @@ class CommunicationManager: CommunicatorDelegate {
   
   static let shared = CommunicationManager() // Making singleton
   var multiPeerCommunicator: MultiPeerCommunicator!
+  var delegate: ManagerDelegate! // Delegate to talk to ViewController
   
   private init() {
     self.multiPeerCommunicator = MultiPeerCommunicator()  //Setting up the instance of MultiPeerCommunicator
@@ -21,17 +22,20 @@ class CommunicationManager: CommunicatorDelegate {
   
   var conversationDictionary: [String : Blabber] = [:]
   
+//  func initilize() {
+//    print(#function)
+//  }
+  
   func didFoundUser(userID: String, userName: String?) {
-    if let userConversation = conversationDictionary[userId] {
+    if let userConversation = conversationDictionary[userID] {
       userConversation.online = true
     } else {
-      let userConversation = User(userID: userId, name: userName)
+      let userConversation = Blabber(id: userID, name: userName)
       userConversation.online = true
-      conversationDictionary[userId] = userConversation
+      conversationDictionary[userID] = userConversation
     }
-    guard let delegate = delegate else { return }
     DispatchQueue.main.async {
-      delegate.updateUserData()
+      self.delegate.globalUpdate()
     }
   }
   

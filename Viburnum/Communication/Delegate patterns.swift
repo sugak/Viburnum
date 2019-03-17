@@ -1,5 +1,5 @@
 //
-//  CommunicatorDelegate.swift
+//  Communicator.swift
 //  Viburnum
 //
 //  Created by Maksim Sugak on 17/03/2019.
@@ -7,6 +7,12 @@
 //
 
 import Foundation
+
+protocol Communicator {
+  func sendMessage(string: String, to UserID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
+  var delegate: CommunicatorDelegate? {get set}
+  var online: Bool {get set}
+}
 
 protocol CommunicatorDelegate: class  {
   // Discovering:
@@ -20,3 +26,12 @@ protocol CommunicatorDelegate: class  {
   // Messages:
   func didReceiveMessage(text: String, fromUser: String, toUser: String)
 }
+
+protocol ManagerDelegate {
+  // Manager delegation functions
+  func globalUpdate()
+}
+
+
+
+

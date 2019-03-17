@@ -17,27 +17,40 @@ class MultiPeerCommunicator: NSObject, Communicator {
   var online: Bool = false
   
   var myPeer: MCPeerID!
-  var displayName = UserDefaults.standard.string(forKey: "profileName") ?? "User name"
+  var displayName = UIDevice.current.name //UserDefaults.standard.string(forKey: "profileName") ?? "User name"
   var serviceBrowser: MCNearbyServiceBrowser!
   var advertiser: MCNearbyServiceAdvertiser!
   weak var delegate: CommunicatorDelegate?
   var activeSessions: [String: MCSession] = [:] // Dictionary of active sessions
   
   override init() {
-    super.init()
     // Setting up my peer ID:
     myPeer = MCPeerID(displayName: displayName)
-    // Setting up browser:
-    serviceBrowser = MCNearbyServiceBrowser(peer: myPeer, serviceType: "tinkoff-chat")
     // Setting up advertiser:
     advertiser = MCNearbyServiceAdvertiser(peer: myPeer, discoveryInfo: ["userName": displayName], serviceType: "tinkoff-chat")
+    // Setting up browser:
+    serviceBrowser = MCNearbyServiceBrowser(peer: myPeer, serviceType: "tinkoff-chat")
+    super.init()
     // Settin up delegates:
     serviceBrowser.delegate = self
     advertiser.delegate = self
     // Let the magic begin:
-    serviceBrowser.startBrowsingForPeers()
     advertiser.startAdvertisingPeer()
+    serviceBrowser.startBrowsingForPeers()
+    
+    print("Прошла инициализация соединения...")
   }
+
+  
+  func getSession(with peerID: MCPeerID) -> MCSession {
+    guard activeSessions[peerID.displayName] == nil else { return activeSessions[peerID.displayName]! }
+    let session = MCSession(peer: myPeer, securityIdentity: nil, encryptionPreference: .none)
+    
+    session.delegate = self
+    activeSessions[peerID.displayName] = session
+    return activeSessions[peerID.displayName]!
+  }
+  
   
   // Required function for message ID:
   func generateMessageId() -> String {
