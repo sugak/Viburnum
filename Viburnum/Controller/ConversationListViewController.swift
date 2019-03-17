@@ -58,6 +58,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     let blabber = blabberChat[indexPath.row]
     cell.name = blabber.name
+   // cell.message = blabber.
     
 //    cell.name = TalkerName[indexPath.section][indexPath.row]
 //    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]

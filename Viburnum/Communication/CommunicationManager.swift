@@ -22,10 +22,6 @@ class CommunicationManager: CommunicatorDelegate {
   
   var conversationDictionary: [String : Blabber] = [:]
   
-//  func initilize() {
-//    print(#function)
-//  }
-  
   func didFoundUser(userID: String, userName: String?) {
     if let userConversation = conversationDictionary[userID] {
       userConversation.online = true

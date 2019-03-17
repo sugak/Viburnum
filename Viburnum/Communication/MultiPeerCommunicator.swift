@@ -10,10 +10,6 @@ import Foundation
 import MultipeerConnectivity
 
 class MultiPeerCommunicator: NSObject, Communicator {
-  func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> ())?) {
-    print(#function)
-  }
-  
   var online: Bool = false
   
   var myPeer: MCPeerID!
@@ -49,6 +45,23 @@ class MultiPeerCommunicator: NSObject, Communicator {
     session.delegate = self
     activeSessions[peerID.displayName] = session
     return activeSessions[peerID.displayName]!
+  }
+  
+  func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> ())?) {
+    guard let session = activeSessions[UserID] else {return}
+    let preparedMessageToSend = ["eventType" : "TextMessage", "messageId" : generateMessageId(), "text" : string]
+    guard let data = try? JSONSerialization.data(withJSONObject: preparedMessageToSend, options: .prettyPrinted) else { return }
+    do {
+      try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+      delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: UserID)
+      if let completion = completionHandler {
+        completion(true, nil)
+      }
+    } catch let error {
+      if let completion = completionHandler {
+        completion(false, error)
+      }
+    }
   }
   
   

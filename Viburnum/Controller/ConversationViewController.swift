@@ -8,11 +8,18 @@
 
 import UIKit
 
-class ConversationViewController: UITableViewController {
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+  
+  @IBOutlet var tableView: UITableView!
+  @IBOutlet var messageInputField: UITextField!
+  @IBAction func sendMessageButton(_ sender: UIButton) {
+  }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
+    self.tableView.delegate = self
     
     // Remove separator:
     self.tableView.separatorStyle = .none
@@ -25,14 +32,14 @@ class ConversationViewController: UITableViewController {
     tableView.estimatedRowHeight = 44
     
   }
-
+  
   // Tableview functions:
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // Rows number as in array:
     return sampleMessages.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // Choosing between cell prototype:
     let cellID = sampleMessages[indexPath.row].incomingMessage ? "incomeCell" : "outcomeCell"
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
@@ -40,5 +47,6 @@ class ConversationViewController: UITableViewController {
     return cell
   }
 }
+
 
 
