@@ -19,7 +19,7 @@ class ConversationListViewController: UITableViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    //MARK: - Themes: calling update function for current theme:
+    //Themes: calling update function for current theme:
     updateForCurrentTheme()
   }
   
@@ -70,7 +70,7 @@ class ConversationListViewController: UITableViewController {
       }
     }
     
-    //MARK: - Themes: segue to ThemeViewController:
+    //Themes: segue to ThemeViewController:
     if segue.identifier == "themeMenu" {
       guard let navController = segue.destination as? UINavigationController else {return}
       let destination = navController.topViewController as! ThemesViewController
@@ -87,7 +87,7 @@ class ConversationListViewController: UITableViewController {
     print(selectedTheme)
   }
   
-  // MARK: - Themes: update function for current theme with User Defaults:
+  //Themes: update function for current theme with User Defaults:
   func updateForCurrentTheme () {
     if let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") {
        UINavigationBar.appearance().barTintColor = currentTheme

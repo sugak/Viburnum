@@ -14,6 +14,11 @@
 		288DEA7F220C25AD007D5263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA7D220C25AD007D5263 /* Main.storyboard */; };
 		288DEA81220C25AF007D5263 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA80220C25AF007D5263 /* Assets.xcassets */; };
 		288DEA84220C25AF007D5263 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */; };
+		2898852B223E609A00200873 /* MultiPeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898852A223E609A00200873 /* MultiPeerCommunicator.swift */; };
+		2898852D223E60B500200873 /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898852C223E60B500200873 /* Communicator.swift */; };
+		2898852F223E60FF00200873 /* CommunicatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898852E223E60FF00200873 /* CommunicatorDelegate.swift */; };
+		28988531223E874400200873 /* MultiPeerCommunicatorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28988530223E874400200873 /* MultiPeerCommunicatorExtention.swift */; };
+		28988533223E884700200873 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28988532223E884700200873 /* CommunicationManager.swift */; };
 		2898B8E422364BDB00EAF4A2 /* UIProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2898B8E322364BDB00EAF4A2 /* UIProfileButton.swift */; };
 		289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2890AA02222E9E9900FFE199 /* ThemesViewController.swift */; };
 		289C404722310B4900CEF579 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289C404622310B4900CEF579 /* Themes.swift */; };
@@ -39,6 +44,11 @@
 		288DEA83220C25AF007D5263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		288DEA85220C25AF007D5263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2890AA02222E9E9900FFE199 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		2898852A223E609A00200873 /* MultiPeerCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerCommunicator.swift; sourceTree = "<group>"; };
+		2898852C223E60B500200873 /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
+		2898852E223E60FF00200873 /* CommunicatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicatorDelegate.swift; sourceTree = "<group>"; };
+		28988530223E874400200873 /* MultiPeerCommunicatorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerCommunicatorExtention.swift; sourceTree = "<group>"; };
+		28988532223E884700200873 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		2898B8E322364BDB00EAF4A2 /* UIProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProfileButton.swift; sourceTree = "<group>"; };
 		289C404622310B4900CEF579 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		28A087D72221FE4E002D08D2 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +97,7 @@
 				28FF0CC72238D8A500ECF643 /* DataManagement */,
 				2890F1572224687400F42965 /* Model */,
 				28B2DEEA222A7CE000F2DAA6 /* View */,
+				28988529223E5E9C00200873 /* Communication */,
 				2890F1582224887800F42965 /* Controller */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
 			);
@@ -113,6 +124,18 @@
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		28988529223E5E9C00200873 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				2898852A223E609A00200873 /* MultiPeerCommunicator.swift */,
+				28988530223E874400200873 /* MultiPeerCommunicatorExtention.swift */,
+				28988532223E884700200873 /* CommunicationManager.swift */,
+				2898852C223E60B500200873 /* Communicator.swift */,
+				2898852E223E60FF00200873 /* CommunicatorDelegate.swift */,
+			);
+			path = Communication;
 			sourceTree = "<group>";
 		};
 		28B2DEEA222A7CE000F2DAA6 /* View */ = {
@@ -218,10 +241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2898852D223E60B500200873 /* Communicator.swift in Sources */,
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
 				28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */,
+				28988533223E884700200873 /* CommunicationManager.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
+				2898852B223E609A00200873 /* MultiPeerCommunicator.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
 				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,
 				288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */,
@@ -229,9 +255,11 @@
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				289C404722310B4900CEF579 /* Themes.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
+				28988531223E874400200873 /* MultiPeerCommunicatorExtention.swift in Sources */,
 				28FF0CCD2238D91300ECF643 /* OperationDataManager.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
 				28FF0CCB2238D90100ECF643 /* GCDDataManager.swift in Sources */,
+				2898852F223E60FF00200873 /* CommunicatorDelegate.swift in Sources */,
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 			);
