@@ -143,6 +143,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="messageInputFieldChanged:" destination="bof-sf-8XC" eventType="editingChanged" id="NUv-Fh-NL2"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fh9-cR-AXZ">
                                                 <rect key="frame" x="277.5" y="0.0" width="22.5" height="30"/>
@@ -280,6 +283,7 @@
                     </view>
                     <connections>
                         <outlet property="messageInputField" destination="9he-97-MkF" id="zdP-al-3Jd"/>
+                        <outlet property="sendButton" destination="fh9-cR-AXZ" id="FOc-4H-VHP"/>
                         <outlet property="tableView" destination="ejR-BA-Hy5" id="VSB-y0-sQt"/>
                     </connections>
                 </viewController>

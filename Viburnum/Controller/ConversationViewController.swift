@@ -10,11 +10,23 @@ import UIKit
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate {
   
-  var blabberChat: Blabber! // user for data transfer
- // var blabberID: String!
+  // User for data transfer:
+  var blabberChat: Blabber!
+  
+  // Outlets:
   @IBOutlet var tableView: UITableView!
+  @IBOutlet var sendButton: UIButton!
   @IBOutlet var messageInputField: UITextField!
   
+  // Actions:
+  
+  @IBAction func messageInputFieldChanged(_ sender: Any) {
+    if messageInputField.text != "" {
+      sendButton.isEnabled = true
+    } else {
+      sendButton.isEnabled = false
+    }
+  }
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
     print(messageToSend ?? "empty")
@@ -53,8 +65,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(Constants.animated)
+    blabberChat.hasUnreadMessages = false
     CommunicationManager.shared.delegate = self
     globalUpdate()
+    
+    sendButton.isEnabled = false
   }
   
   func globalUpdate() {
