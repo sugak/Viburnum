@@ -52,9 +52,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
   }
   
-//  func globalUpdate() {
-//    tableView.reloadData()
-//  }
+  func globalUpdate() {
+    tableView.reloadData()
+  }
   
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

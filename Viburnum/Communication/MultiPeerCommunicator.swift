@@ -52,29 +52,29 @@ class MultiPeerCommunicator: NSObject, Communicator {
 
   
   func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> ())?) {
-//    // Забираем сессию юзера из массива
-//    guard let session = activeSessions[UserID] else {return}
-//
-//    // Готовим сообщение:
-//    let preparedMessageToSend = ["eventType" : "TextMessage", "messageId" : generateMessageId(), "text" : string]
-//
-//    // Формируем JSON сообщения:
-//    guard let data = try? JSONSerialization.data(withJSONObject: preparedMessageToSend, options: .prettyPrinted) else { return }
-//
-//    // Пытаемся отправить или забираем ошибку:
-//    do {
-//      try session.send(data, toPeers: session.connectedPeers, with: .reliable)
-//
-//      // Обрабатываем свое сообщение:
-//      delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: UserID)
-//      if let completion = completionHandler {
-//        completion(true, nil)
-//      }
-//    } catch let error {
-//      if let completion = completionHandler {
-//        completion(false, error)
-//      }
-//    }
+    // Забираем сессию юзера из массива
+    guard let session = activeSessions[UserID] else {return}
+
+    // Готовим сообщение:
+    let preparedMessageToSend = ["eventType" : "TextMessage", "messageId" : generateMessageId(), "text" : string]
+
+    // Формируем JSON сообщения:
+    guard let data = try? JSONSerialization.data(withJSONObject: preparedMessageToSend, options: .prettyPrinted) else { return }
+
+    // Пытаемся отправить или забираем ошибку:
+    do {
+      try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+
+      // Обрабатываем свое сообщение:
+      delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: UserID)
+      if let completion = completionHandler {
+        completion(true, nil)
+      }
+    } catch let error {
+      if let completion = completionHandler {
+        completion(false, error)
+      }
+    }
   }
   
   

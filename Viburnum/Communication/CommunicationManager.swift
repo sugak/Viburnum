@@ -56,27 +56,27 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-//
-//    if (listOfBlabbers[fromUser] != nil) {
-//      listOfBlabbers[fromUser]?.message.append(text)
-//      listOfBlabbers[fromUser]?.messageType.append(.income)
-//
-//   //   conversation.messageType.append(.income)
-//   //   conversation.messageDate.append(Date())
-//   //   conversation.hasUnreadMessages = true
-//    } else if (listOfBlabbers[toUser] != nil) {
-//        listOfBlabbers[toUser]?.message.append(text)
-//        listOfBlabbers[toUser]?.messageType.append(.outcome)
-////      conversation.message.append(text)
-////      conversation.messageType.append(.outcome)
-////      conversation.messageDate.append(Date())
-//    }
-//
-//    DispatchQueue.main.async {
-//      self.delegate.globalUpdate()
-//    }
-//
-//
+
+    if (listOfBlabbers[fromUser] != nil) {
+      listOfBlabbers[fromUser]?.message.append(text)
+      listOfBlabbers[fromUser]?.messageType.append(.income)
+
+   //   conversation.messageType.append(.income)
+   //   conversation.messageDate.append(Date())
+   //   conversation.hasUnreadMessages = true
+    } else if (listOfBlabbers[toUser] != nil) {
+        listOfBlabbers[toUser]?.message.append(text)
+        listOfBlabbers[toUser]?.messageType.append(.outcome)
+//      conversation.message.append(text)
+//      conversation.messageType.append(.outcome)
+//      conversation.messageDate.append(Date())
+    }
+
+    DispatchQueue.main.async {
+      self.delegate.globalUpdate()
+    }
+
+
   }
   
   

@@ -53,9 +53,9 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   
   func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
     print(#function)
-//    let json = JSONDecoder()
-//    guard let info = try? json.decode([String:String].self, from: data), info["eventType"] == "TextMessage" else { return }
-//    delegate?.didReceiveMessage(text: info["text"]!, fromUser: peerID.displayName, toUser: myPeer.displayName)
+    let json = JSONDecoder()
+    guard let info = try? json.decode([String:String].self, from: data), info["eventType"] == "TextMessage" else { return }
+    delegate?.didReceiveMessage(text: info["text"]!, fromUser: peerID.displayName, toUser: myPeer.displayName)
   }
   
   
