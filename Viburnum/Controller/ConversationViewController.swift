@@ -7,12 +7,31 @@
 //
 
 import UIKit
-
+// , ManagerDelegate
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
+  var blabberChat: Blabber! // user for data transfer
+ // var blabberID: String!
   @IBOutlet var tableView: UITableView!
   @IBOutlet var messageInputField: UITextField!
+  
   @IBAction func sendMessageButton(_ sender: UIButton) {
+    let messageToSend = messageInputField.text
+    print(messageToSend ?? "empty")
+    
+    CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: blabberChat.id) { success, error in
+      if success {
+        self.messageInputField.text = ""
+      }
+      if let error = error {
+        print(error.localizedDescription)
+        self.view.endEditing(true)
+        let alert = UIAlertController(title: "Ошибка при отправке сообщения", message: nil, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+      }
+    }
   }
   
   
@@ -33,17 +52,26 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
   }
   
+//  func globalUpdate() {
+//    tableView.reloadData()
+//  }
+  
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // Rows number as in array:
-    return sampleMessages.count
+    return blabberChat.message.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // Choosing between cell prototype:
-    let cellID = sampleMessages[indexPath.row].incomingMessage ? "incomeCell" : "outcomeCell"
+    var cellID = ""
+    if blabberChat.messageType[indexPath.row] == .income {
+      cellID = "incomeCell"
+    } else {
+      cellID = "outcomeCell"
+    }
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
-    cell.textMess = sampleMessages[indexPath.row].text
+    cell.textMess = blabberChat.message[indexPath.row]
     return cell
   }
 }

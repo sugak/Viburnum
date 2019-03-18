@@ -10,14 +10,13 @@ import UIKit
 
 class ConversationListViewController: UITableViewController, ManagerDelegate {
   
-  var blabberChat: [Blabber] = [] // Creating array of possible blabbers (users)
-  
+  var blabbers: [Blabber] = [] // Creating empty array of existing blabbers (users)
+
   func globalUpdate() {
-    blabberChat = Array(CommunicationManager.shared.conversationDictionary.values)
-    //sortUserConversations()
+    // Заполняем местный массив, чтобы не писать длинную хуйню:
+    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values) // Fill in blabbers array
     tableView.reloadData()
   }
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,7 +29,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
-    
+
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +37,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
+    globalUpdate()
   }
   
   // Tableview functions:
@@ -50,15 +50,29 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return blabberChat.count //TalkerName[section].count
+    return blabbers.count //TalkerName[section].count
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
     
-    let blabber = blabberChat[indexPath.row]
-    cell.name = blabber.name
-   // cell.message = blabber.
+    let conversation = blabbers[indexPath.row]
+    cell.name = conversation.name
+    cell.message = conversation.message.last
+    
+    
+    
+    
+//    let blabber = blabbers[indexPath.row]
+//    print(blabber.name ?? "Empty")
+//    print(blabber.id ?? "Empty")
+    
+//    cell.name = blabber.name
+//    cell.message = blabber.message[indexPath.row]
+    
+    
+    
+   // cell.hasUnreadMessages = blabber.hasUnreadMessages
     
 //    cell.name = TalkerName[indexPath.section][indexPath.row]
 //    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
@@ -86,6 +100,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
         // Transfer name into navbar:
         let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
         destinationController.navigationItem.title = cell.name
+        
+        // Tranfer blabber info:
+        let blabberChat = blabbers[indexPath.row]
+        destinationController.blabberChat = blabberChat
       }
     }
     

@@ -15,7 +15,7 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
     print(#function)
     
-    let session = getSession(with: peerID)
+    let session = manageSession(with: peerID)
     if session.connectedPeers.contains(peerID) {
       invitationHandler(false, nil)
     } else {
@@ -28,11 +28,12 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
     guard let recievedInfo = info else { return } // Safely getting recieved info
     guard let blabberName = recievedInfo["userName"] else { return }  // Safely getting blabber name from dictionary
     
-    let session: MCSession = getSession(with: peerID)
+    let session: MCSession = manageSession(with: peerID)
     browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
     delegate?.didFoundUser(userID: peerID.displayName, userName: blabberName)
     
   }
+  
   func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
     activeSessions.removeValue(forKey: peerID.displayName)
     delegate?.didLostUser(userID: peerID.displayName)
@@ -52,6 +53,9 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   
   func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
     print(#function)
+//    let json = JSONDecoder()
+//    guard let info = try? json.decode([String:String].self, from: data), info["eventType"] == "TextMessage" else { return }
+//    delegate?.didReceiveMessage(text: info["text"]!, fromUser: peerID.displayName, toUser: myPeer.displayName)
   }
   
   

@@ -20,15 +20,17 @@ class CommunicationManager: CommunicatorDelegate {
     self.multiPeerCommunicator.delegate = self  // Setting up the delegate
   }
   
-  var conversationDictionary: [String : Blabber] = [:]
+  var listOfBlabbers: [String : Blabber] = [:]
   
   func didFoundUser(userID: String, userName: String?) {
-    if let userConversation = conversationDictionary[userID] {
-      userConversation.online = true
+    // If Blabber already exsists, just making him online:
+    if let newBlabber = listOfBlabbers[userID] {
+      newBlabber.online = true
     } else {
-      let userConversation = Blabber(id: userID, name: userName)
-      userConversation.online = true
-      conversationDictionary[userID] = userConversation
+      // If not adding him to the list:
+      let newBlabber = Blabber(id: userID, name: userName)
+      newBlabber.online = true
+      listOfBlabbers[userID] = newBlabber
     }
     DispatchQueue.main.async {
       self.delegate.globalUpdate()
@@ -36,9 +38,9 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didLostUser(userID: String) {
-    if let userConversation = conversationDictionary[userID] {
+    if let userConversation = listOfBlabbers[userID] {
       userConversation.online = false
-      conversationDictionary.removeValue(forKey: userID)
+      listOfBlabbers.removeValue(forKey: userID)
     }
     DispatchQueue.main.async {
       self.delegate.globalUpdate()
@@ -54,7 +56,27 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-    print(#function)
+//
+//    if (listOfBlabbers[fromUser] != nil) {
+//      listOfBlabbers[fromUser]?.message.append(text)
+//      listOfBlabbers[fromUser]?.messageType.append(.income)
+//
+//   //   conversation.messageType.append(.income)
+//   //   conversation.messageDate.append(Date())
+//   //   conversation.hasUnreadMessages = true
+//    } else if (listOfBlabbers[toUser] != nil) {
+//        listOfBlabbers[toUser]?.message.append(text)
+//        listOfBlabbers[toUser]?.messageType.append(.outcome)
+////      conversation.message.append(text)
+////      conversation.messageType.append(.outcome)
+////      conversation.messageDate.append(Date())
+//    }
+//
+//    DispatchQueue.main.async {
+//      self.delegate.globalUpdate()
+//    }
+//
+//
   }
   
   
