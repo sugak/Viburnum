@@ -38,8 +38,8 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didLostUser(userID: String) {
-    if let userConversation = listOfBlabbers[userID] {
-      userConversation.online = false
+    if let newBlabber = listOfBlabbers[userID] {
+      newBlabber.online = false
       listOfBlabbers.removeValue(forKey: userID)
     }
     DispatchQueue.main.async {

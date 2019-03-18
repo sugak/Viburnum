@@ -143,7 +143,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="send"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <connections>
                                                     <action selector="messageInputFieldChanged:" destination="bof-sf-8XC" eventType="editingChanged" id="NUv-Fh-NL2"/>
                                                 </connections>
@@ -476,13 +476,13 @@
                                 <rect key="frame" x="16" y="418" width="288" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="22" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EAp-Dq-2Rf">
                                 <rect key="frame" x="16" y="376" width="288" height="34"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="no" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                 <connections>
                                     <action selector="nameFieldDidChange:" destination="BYZ-38-t0r" eventType="editingChanged" id="bWi-S0-2rw"/>
                                 </connections>

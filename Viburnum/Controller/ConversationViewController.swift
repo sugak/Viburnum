@@ -97,6 +97,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   
   // Delegate funcntion:
   func globalUpdate() {
+    if !blabberChat.online {
+      sendButton.isEnabled = false
+    }
+    blabberChat.hasUnreadMessages = false
     tableView.reloadData()
   }
   
