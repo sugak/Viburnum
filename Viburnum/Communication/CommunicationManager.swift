@@ -60,16 +60,13 @@ class CommunicationManager: CommunicatorDelegate {
     if (listOfBlabbers[fromUser] != nil) {
       listOfBlabbers[fromUser]?.message.append(text)
       listOfBlabbers[fromUser]?.messageType.append(.income)
+      listOfBlabbers[fromUser]?.messageDate.append(Date())
+      listOfBlabbers[fromUser]?.hasUnreadMessages = true
 
-   //   conversation.messageType.append(.income)
-   //   conversation.messageDate.append(Date())
-   //   conversation.hasUnreadMessages = true
     } else if (listOfBlabbers[toUser] != nil) {
         listOfBlabbers[toUser]?.message.append(text)
         listOfBlabbers[toUser]?.messageType.append(.outcome)
-//      conversation.message.append(text)
-//      conversation.messageType.append(.outcome)
-//      conversation.messageDate.append(Date())
+        listOfBlabbers[toUser]?.messageDate.append(Date())
     }
 
     DispatchQueue.main.async {

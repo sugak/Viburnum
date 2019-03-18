@@ -7,8 +7,8 @@
 //
 
 import UIKit
-// , ManagerDelegate
-class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate {
   
   var blabberChat: Blabber! // user for data transfer
  // var blabberID: String!
@@ -49,7 +49,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Tuning row height:
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
-    
   }
   
   func globalUpdate() {
@@ -59,7 +58,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // Rows number as in array:
-    return blabberChat.message.count
+    return blabberChat?.message.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

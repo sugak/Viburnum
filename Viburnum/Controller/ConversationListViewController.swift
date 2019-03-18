@@ -58,9 +58,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     let conversation = blabbers[indexPath.row]
     cell.name = conversation.name
+    cell.avatarSymbols = conversation.name ?? "XX"
     cell.message = conversation.message.last
-    
-    
+    cell.date = conversation.messageDate.last as? Date
+    cell.hasUnreadMessages = conversation.hasUnreadMessages
     
     
 //    let blabber = blabbers[indexPath.row]
