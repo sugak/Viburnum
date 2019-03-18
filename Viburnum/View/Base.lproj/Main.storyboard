@@ -133,26 +133,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGs-Yw-S0f">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="508" width="320" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kns-h9-Gr4">
-                                        <rect key="frame" x="10" y="10" width="300" height="30"/>
+                                        <rect key="frame" x="10" y="10" width="300" height="40"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9he-97-MkF">
-                                                <rect key="frame" x="0.0" y="0.0" width="267.5" height="30"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Сообщение..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9he-97-MkF">
+                                                <rect key="frame" x="0.0" y="0.0" width="247.5" height="40"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="send"/>
                                                 <connections>
                                                     <action selector="messageInputFieldChanged:" destination="bof-sf-8XC" eventType="editingChanged" id="NUv-Fh-NL2"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fh9-cR-AXZ">
-                                                <rect key="frame" x="277.5" y="0.0" width="22.5" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fh9-cR-AXZ">
+                                                <rect key="frame" x="257.5" y="0.0" width="42.5" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="fh9-cR-AXZ" secondAttribute="height" multiplier="3:4" id="6ch-SM-oXE"/>
+                                                    <constraint firstAttribute="width" secondItem="fh9-cR-AXZ" secondAttribute="height" multiplier="16:15" id="W3c-DH-xwJ"/>
                                                 </constraints>
-                                                <state key="normal" title="S"/>
+                                                <state key="normal" image="sendIcon"/>
                                                 <connections>
                                                     <action selector="sendMessageButton:" destination="bof-sf-8XC" eventType="touchUpInside" id="8ep-Md-puQ"/>
                                                 </connections>
@@ -160,18 +161,18 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.85315542384452625" green="0.85315542384452625" blue="0.85315542384452625" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.82535181225162668" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Kns-h9-Gr4" firstAttribute="top" secondItem="LGs-Yw-S0f" secondAttribute="top" constant="10" id="3lO-0b-LAQ"/>
                                     <constraint firstItem="Kns-h9-Gr4" firstAttribute="leading" secondItem="LGs-Yw-S0f" secondAttribute="leading" constant="10" id="Mj0-f9-ErV"/>
                                     <constraint firstAttribute="bottom" secondItem="Kns-h9-Gr4" secondAttribute="bottom" constant="10" id="Yph-At-x5C"/>
                                     <constraint firstAttribute="trailing" secondItem="Kns-h9-Gr4" secondAttribute="trailing" constant="10" id="ahc-bi-TXZ"/>
-                                    <constraint firstAttribute="height" constant="50" id="bFx-kB-x6l"/>
+                                    <constraint firstAttribute="height" constant="60" id="bFx-kB-x6l"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejR-BA-Hy5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="508"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeCell" rowHeight="80" id="YGE-Yz-qd3" customClass="messageViewCell" customModule="Viburnum" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
@@ -204,7 +205,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="xCX-6i-h4w" firstAttribute="leading" secondItem="zrW-yl-TNF" secondAttribute="leading" constant="15" id="INK-tW-6AB"/>
                                                 <constraint firstItem="xCX-6i-h4w" firstAttribute="top" secondItem="zrW-yl-TNF" secondAttribute="top" constant="15" id="IPE-ui-E55"/>
@@ -212,6 +213,8 @@
                                                 <constraint firstAttribute="bottom" secondItem="xCX-6i-h4w" secondAttribute="bottom" constant="5" id="nFV-z8-jhj"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageText" destination="Pnb-Tp-xTo" id="jte-sG-s3n"/>
                                             <outlet property="messageView" destination="xCX-6i-h4w" id="c4b-sc-Rqr"/>
@@ -257,6 +260,8 @@
                                                 <constraint firstItem="DuN-SN-ZpB" firstAttribute="top" secondItem="U0V-i9-YEd" secondAttribute="top" constant="15" id="zN6-qE-Leg"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="messageText" destination="0cx-AM-ufp" id="6L2-gv-NLz"/>
                                             <outlet property="messageView" destination="DuN-SN-ZpB" id="xsv-aV-bk4"/>
@@ -282,6 +287,8 @@
                         <viewLayoutGuide key="safeArea" id="Jpv-Y0-bGb"/>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="Yph-At-x5C" id="qHR-jH-oxf"/>
+                        <outlet property="customView" destination="LGs-Yw-S0f" id="NdA-73-4fF"/>
                         <outlet property="messageInputField" destination="9he-97-MkF" id="zdP-al-3Jd"/>
                         <outlet property="sendButton" destination="fh9-cR-AXZ" id="FOc-4H-VHP"/>
                         <outlet property="tableView" destination="ejR-BA-Hy5" id="VSB-y0-sQt"/>
@@ -601,6 +608,7 @@
     <resources>
         <image name="3855595-32" width="32" height="32"/>
         <image name="placeholder-user" width="600" height="600"/>
+        <image name="sendIcon" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>
     </resources>
 </document>

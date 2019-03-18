@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate {
+class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, UITextFieldDelegate {
   
   // User for data transfer:
   var blabberChat: Blabber!
@@ -17,6 +17,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   @IBOutlet var tableView: UITableView!
   @IBOutlet var sendButton: UIButton!
   @IBOutlet var messageInputField: UITextField!
+  @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var customView: UIView!
   
   // Actions:
   
@@ -29,7 +31,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   }
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
-    print(messageToSend ?? "empty")
+    messageInputField.resignFirstResponder()
     
     CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: blabberChat.id) { success, error in
       if success {
@@ -61,6 +63,26 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Tuning row height:
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
+    
+    // Tuning message input field:
+   // messageInputField.layer.cornerRadius = 10.0
+    messageInputField.clipsToBounds = true
+    
+    // Tuning keyboard:
+    keyBoardSettings()
+    
+    //TextField delegate:
+    messageInputField.delegate = self
+    
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    self.customView.superview?.setNeedsLayout()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -69,9 +91,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     CommunicationManager.shared.delegate = self
     globalUpdate()
     
+    // Initial sendButton state:
     sendButton.isEnabled = false
   }
   
+  // Delegate funcntion:
   func globalUpdate() {
     tableView.reloadData()
   }
@@ -93,6 +117,27 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
     cell.textMess = blabberChat.message[indexPath.row]
     return cell
+  }
+  
+  func keyBoardSettings() {
+    // Keyboard notifications:
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = -270
+    }
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+      self.view.frame.origin.y = 0.0
+    }
+  }
+  
+  // Hide keyboard on textView Return tap:
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if string == "\n"
+    {
+      sendMessageButton(sendButton)
+      messageInputField.resignFirstResponder()
+      return true
+    }
+    return true
   }
 }
 
