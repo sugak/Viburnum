@@ -68,12 +68,11 @@ class CommunicationManager: CommunicatorDelegate {
         listOfBlabbers[toUser]?.messageType.append(.outcome)
         listOfBlabbers[toUser]?.messageDate.append(Date())
     }
-
+  
+    guard let delegate = delegate else { return }
     DispatchQueue.main.async {
-      self.delegate.globalUpdate()
+      delegate.globalUpdate()
     }
-
-
   }
   
   

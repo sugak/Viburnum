@@ -22,6 +22,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: blabberChat.id) { success, error in
       if success {
         self.messageInputField.text = ""
+        self.tableView.reloadData()
       }
       if let error = error {
         print(error.localizedDescription)
@@ -33,7 +34,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       }
     }
   }
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,6 +49,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Tuning row height:
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(Constants.animated)
+    CommunicationManager.shared.delegate = self
+    globalUpdate()
   }
   
   func globalUpdate() {
