@@ -48,21 +48,23 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func failedToStartBrowsingForUsers(error: Error) {
-    print(#function)
+    print(error.localizedDescription)
   }
   
   func failedToStartAdvertisingForUsers(error: Error) {
-    print(#function)
+    print(error.localizedDescription)
   }
   
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
 
+    // Если сообщение входящее (userID отправителя есть в списке собеседников):
     if (listOfBlabbers[fromUser] != nil) {
       listOfBlabbers[fromUser]?.message.append(text)
       listOfBlabbers[fromUser]?.messageType.append(.income)
       listOfBlabbers[fromUser]?.messageDate.append(Date())
       listOfBlabbers[fromUser]?.hasUnreadMessages = true
-
+      
+      // Если сообщение исходящее (UserID получателя есть в списке собеседников):
     } else if (listOfBlabbers[toUser] != nil) {
         listOfBlabbers[toUser]?.message.append(text)
         listOfBlabbers[toUser]?.messageType.append(.outcome)

@@ -39,12 +39,11 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.reloadData()
       }
       if let error = error {
-        print(error.localizedDescription)
         self.view.endEditing(true)
-        let alert = UIAlertController(title: "Ошибка при отправке сообщения", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка при отправке сообщения: \(error.localizedDescription)", message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
         alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: Constants.animated, completion: nil)
       }
     }
   }

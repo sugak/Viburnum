@@ -51,11 +51,20 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
     }
   }
   
+  // Received message:
   func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
     print(#function)
     let json = JSONDecoder()
     guard let info = try? json.decode([String:String].self, from: data), info["eventType"] == "TextMessage" else { return }
     delegate?.didReceiveMessage(text: info["text"]!, fromUser: peerID.displayName, toUser: myPeer.displayName)
+  }
+  
+  // Fails functions:
+  func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+    delegate?.failedToStartBrowsingForUsers(error: error)
+  }
+  func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+    delegate?.failedToStartAdvertisingForUsers(error: error)
   }
   
   
