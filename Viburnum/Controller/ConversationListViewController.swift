@@ -9,12 +9,43 @@
 import UIKit
 
 class ConversationListViewController: UITableViewController, ManagerDelegate {
+  // Creating empty array of existing blabbers (users)
+  var blabbers: [Blabber] = []
   
-  var blabbers: [Blabber] = [] // Creating empty array of existing blabbers (users)
+  // Sort function:
+  func sortBlabbers() {
+  blabbers.sort(by: sortFunc(first:second:))
+  }
+  
+  func sortFunc(first: Blabber, second: Blabber) -> Bool {
+    if let firstDate = first.messageDate.last, let firstName = first.name {
+      if let secondDate = second.messageDate.last, let secondName = second.name {
+        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
+          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
+        }
+        return firstName > secondName
+      }
+      return true
+    } else  {
+      return false
+    }
+  }
 
+// ----------- Другая сортировка, которая не работает ---------
+
+//  func sortFunc (first: Blabber, second: Blabber) -> Bool {
+//      if first.messageDate.last != second.messageDate.last {
+//        return first.messageDate.last!.timeIntervalSinceNow > second.messageDate.last!.timeIntervalSinceNow
+//      } else {
+//        return first.name! > second.name!
+//      }
+//  }
+  
+  
   func globalUpdate() {
-    // Заполняем местный массив, чтобы не писать длинную хуйню:
-    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values) // Fill in blabbers array
+    // Заполняем местный массив:
+    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
+    sortBlabbers()
     tableView.reloadData()
   }
   
@@ -60,34 +91,8 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     cell.name = conversation.name
     cell.avatarSymbols = conversation.name ?? "XX"
     cell.message = conversation.message.last
-    cell.date = conversation.messageDate.last as? Date
+    cell.date = conversation.messageDate.last
     cell.hasUnreadMessages = conversation.hasUnreadMessages
-    
-    
-//    let blabber = blabbers[indexPath.row]
-//    print(blabber.name ?? "Empty")
-//    print(blabber.id ?? "Empty")
-    
-//    cell.name = blabber.name
-//    cell.message = blabber.message[indexPath.row]
-    
-    
-    
-   // cell.hasUnreadMessages = blabber.hasUnreadMessages
-    
-//    cell.name = TalkerName[indexPath.section][indexPath.row]
-//    cell.hasUnreadMessages = ifMessageUnread[indexPath.section][indexPath.row]
-//    cell.message = lastMessage[indexPath.section][indexPath.row]
-//    cell.online = ifOnline[indexPath.section][indexPath.row]
-//    cell.avatarSymbols = TalkerName[indexPath.section][indexPath.row]
-    
-    // Decoding date from String source:
-//    let formatter  = DateFormatter()
-//    formatter.dateFormat = "dd.MM.yyyy HH:mm"
-//    let messageDateFromString: Date?
-//    messageDateFromString = formatter.date(from: stringDate[indexPath.section][indexPath.row] ?? "nil")
-//    cell.date = messageDateFromString
-    
     return cell
   }
   

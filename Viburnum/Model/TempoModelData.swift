@@ -14,7 +14,7 @@ class Blabber: NSObject{
   var name: String?
   var online: Bool
   var message: [String]
-  var messageDate: [Date?]
+  var messageDate: [Date]
   var messageType: [MessageType]
   var hasUnreadMessages: Bool
   

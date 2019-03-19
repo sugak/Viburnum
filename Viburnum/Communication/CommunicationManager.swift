@@ -27,7 +27,7 @@ class CommunicationManager: CommunicatorDelegate {
     if let newBlabber = listOfBlabbers[userID] {
       newBlabber.online = true
     } else {
-      // If not adding him to the list:
+      // If Blabber do not exist adding him to the list:
       let newBlabber = Blabber(id: userID, name: userName)
       newBlabber.online = true
       listOfBlabbers[userID] = newBlabber
@@ -76,6 +76,4 @@ class CommunicationManager: CommunicatorDelegate {
       delegate.globalUpdate()
     }
   }
-  
-  
 }

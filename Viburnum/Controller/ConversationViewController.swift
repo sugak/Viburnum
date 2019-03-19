@@ -72,7 +72,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     //TextField delegate:
     messageInputField.delegate = self
-    
+
   }
   
   override func viewWillDisappear(_ animated: Bool) {
