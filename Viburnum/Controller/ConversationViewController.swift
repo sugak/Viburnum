@@ -101,6 +101,12 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
+    
+    // Sctoll down to the last message:
+    if blabberChat.message.count != 0 {
+      let indexPath = IndexPath(row: blabberChat.message.count - 1, section: 0)
+      tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
   }
   
   // Tableview functions:
