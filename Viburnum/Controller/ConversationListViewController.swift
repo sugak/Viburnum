@@ -12,43 +12,6 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
   
-  // Sort function:
-  func sortBlabbers() {
-  blabbers.sort(by: sortFunc(first:second:))
-  }
-  
-  func sortFunc(first: Blabber, second: Blabber) -> Bool {
-    if let firstDate = first.messageDate.last, let firstName = first.name {
-      if let secondDate = second.messageDate.last, let secondName = second.name {
-        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
-          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
-        }
-        return firstName > secondName
-      }
-      return true
-    } else  {
-      return false
-    }
-  }
-
-// ----------- Другая сортировка, которая не работает ---------
-
-//  func sortFunc (first: Blabber, second: Blabber) -> Bool {
-//      if first.messageDate.last != second.messageDate.last {
-//        return first.messageDate.last!.timeIntervalSinceNow > second.messageDate.last!.timeIntervalSinceNow
-//      } else {
-//        return first.name! > second.name!
-//      }
-//  }
-  
-  
-  func globalUpdate() {
-    // Заполняем местный массив:
-    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
-    sortBlabbers()
-    tableView.reloadData()
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
@@ -70,6 +33,43 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     CommunicationManager.shared.delegate = self
     globalUpdate()
   }
+  
+  func globalUpdate() {
+    // Data transfer from Manager:
+    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
+    sortBlabbers()
+    tableView.reloadData()
+  }
+  
+  // Sort function:
+  func sortBlabbers() {
+    blabbers.sort(by: sortFunc(first:second:))
+  }
+  
+  func sortFunc(first: Blabber, second: Blabber) -> Bool {
+    if let firstDate = first.messageDate.last, let firstName = first.name {
+      if let secondDate = second.messageDate.last, let secondName = second.name {
+        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
+          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
+        }
+        return firstName > secondName
+      }
+      return true
+    } else  {
+      return false
+    }
+  }
+  
+  // ----------- Другая сортировка, которая не работает ---------
+  
+  //  func sortFunc (first: Blabber, second: Blabber) -> Bool {
+  //      if first.messageDate.last != second.messageDate.last {
+  //        return first.messageDate.last!.timeIntervalSinceNow > second.messageDate.last!.timeIntervalSinceNow
+  //      } else {
+  //        return first.name! > second.name!
+  //      }
+  //  }
+  
   
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {

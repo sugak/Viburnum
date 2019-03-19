@@ -12,12 +12,14 @@ import MultipeerConnectivity
 class MultiPeerCommunicator: NSObject, Communicator {
   var online: Bool = false
   
+  // Initial creation of MultipeerConnectivity stuff:
   var myPeer: MCPeerID!
   var displayName = UserDefaults.standard.string(forKey: "profileName") ?? "Default name"
   var serviceBrowser: MCNearbyServiceBrowser!
   var advertiser: MCNearbyServiceAdvertiser!
   weak var delegate: CommunicatorDelegate?
-  var activeSessions: [String: MCSession] = [:] // Dictionary of active sessions
+  // Dictionary to save active sessions:
+  var activeSessions: [String: MCSession] = [:]
   
   override init() {
     // Setting up my peer ID:
@@ -33,39 +35,35 @@ class MultiPeerCommunicator: NSObject, Communicator {
     // Let the magic begin:
     advertiser.startAdvertisingPeer()
     serviceBrowser.startBrowsingForPeers()
-    
-    print("Прошла инициализация соединения...")
   }
 
-  
   func manageSession(with peerID: MCPeerID) -> MCSession {
-    // Проверяем, есть ли этот юзер в словаре сессий, если нет - добавляем:
+    // Checking if user is already on the list:
     guard activeSessions[peerID.displayName] == nil else { return activeSessions[peerID.displayName]! }
+    // Create session for user:
     let session = MCSession(peer: myPeer, securityIdentity: nil, encryptionPreference: .none)
-    
     session.delegate = self
     
-    // Закидываем сессию на юзера:
+    // Associate user with session:
     activeSessions[peerID.displayName] = session
     return activeSessions[peerID.displayName]!
   }
 
-  
   func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> ())?) {
-    // Забираем сессию юзера из массива
+    // Get user from array:
     guard let session = activeSessions[UserID] else {return}
 
-    // Готовим сообщение:
+    // Prepare the message:
     let preparedMessageToSend = ["eventType" : "TextMessage", "messageId" : generateMessageId(), "text" : string]
 
-    // Формируем JSON сообщения:
+    // Prepare JSON:
     guard let data = try? JSONSerialization.data(withJSONObject: preparedMessageToSend, options: .prettyPrinted) else { return }
 
-    // Пытаемся отправить или забираем ошибку:
+    // Try to send message or get error:
     do {
       try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 
-      // Обрабатываем свое сообщение:
+      // Work with sent message:
       delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: UserID)
       if let completion = completionHandler {
         completion(true, nil)
@@ -76,7 +74,6 @@ class MultiPeerCommunicator: NSObject, Communicator {
       }
     }
   }
-  
   
   // Required function for message ID:
   func generateMessageId() -> String {

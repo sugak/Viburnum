@@ -11,15 +11,20 @@ import MultipeerConnectivity
 
 class CommunicationManager: CommunicatorDelegate {
   
-  static let shared = CommunicationManager() // Making singleton
+  // Making singleton:
+  static let shared = CommunicationManager()
   var multiPeerCommunicator: MultiPeerCommunicator!
-  var delegate: ManagerDelegate! // Delegate to talk to ViewController
+  // Delegate to talk to ViewController:
+  var delegate: ManagerDelegate!
   
   private init() {
-    self.multiPeerCommunicator = MultiPeerCommunicator()  //Setting up the instance of MultiPeerCommunicator
-    self.multiPeerCommunicator.delegate = self  // Setting up the delegate
+    //Setting up the instance of MultiPeerCommunicator
+    self.multiPeerCommunicator = MultiPeerCommunicator()
+    // Setting up the delegate
+    self.multiPeerCommunicator.delegate = self
   }
   
+  // List of conversations associated with their UserIDs:
   var listOfBlabbers: [String : Blabber] = [:]
   
   func didFoundUser(userID: String, userName: String?) {
@@ -56,21 +61,19 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-
-    // Если сообщение входящее (userID отправителя есть в списке собеседников):
+    // If income message (sener on the list):
     if (listOfBlabbers[fromUser] != nil) {
       listOfBlabbers[fromUser]?.message.append(text)
       listOfBlabbers[fromUser]?.messageType.append(.income)
       listOfBlabbers[fromUser]?.messageDate.append(Date())
       listOfBlabbers[fromUser]?.hasUnreadMessages = true
       
-      // Если сообщение исходящее (UserID получателя есть в списке собеседников):
+      // If outcome message (receipt on the list):
     } else if (listOfBlabbers[toUser] != nil) {
         listOfBlabbers[toUser]?.message.append(text)
         listOfBlabbers[toUser]?.messageType.append(.outcome)
         listOfBlabbers[toUser]?.messageDate.append(Date())
     }
-  
     guard let delegate = delegate else { return }
     DispatchQueue.main.async {
       delegate.globalUpdate()

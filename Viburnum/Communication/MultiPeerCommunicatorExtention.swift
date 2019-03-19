@@ -31,7 +31,6 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
     let session: MCSession = manageSession(with: peerID)
     browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
     delegate?.didFoundUser(userID: peerID.displayName, userName: blabberName)
-    
   }
   
   func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
@@ -43,17 +42,16 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
     switch state {
     case .notConnected:
-      print("State for session with \(peerID.displayName) is not connected")
+      print("\(peerID.displayName) is not connected")
     case .connecting:
-      print("State for session with \(peerID.displayName) is connecting")
+      print("\(peerID.displayName) is connecting")
     case .connected:
-      print("State for session with \(peerID.displayName) is connected")
+      print("\(peerID.displayName) is connected")
     }
   }
   
   // Received message:
   func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-    print(#function)
     let json = JSONDecoder()
     guard let info = try? json.decode([String:String].self, from: data), info["eventType"] == "TextMessage" else { return }
     delegate?.didReceiveMessage(text: info["text"]!, fromUser: peerID.displayName, toUser: myPeer.displayName)
@@ -66,7 +64,6 @@ extension MultiPeerCommunicator: MCNearbyServiceBrowserDelegate, MCNearbyService
   func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
     delegate?.failedToStartAdvertisingForUsers(error: error)
   }
-  
   
   // UNUSEFUL. Stream and sourse:
   func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
