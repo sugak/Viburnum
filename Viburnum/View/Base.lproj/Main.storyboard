@@ -119,8 +119,30 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tablePlaceHolder" destination="qiC-cL-qAa" id="q4o-8x-bIO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pG-l7-Kam" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="qiC-cL-qAa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-Ng-Ckh">
+                            <rect key="frame" x="28" y="120" width="319" height="355"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="0ef-Ng-Ckh" secondAttribute="height" multiplier="80:89" id="oLg-ye-6n5"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0ef-Ng-Ckh" firstAttribute="leading" secondItem="twf-wV-KnE" secondAttribute="leading" constant="28" id="2up-24-N2T"/>
+                        <constraint firstAttribute="trailing" secondItem="0ef-Ng-Ckh" secondAttribute="trailing" constant="28" id="A8n-Bn-jzc"/>
+                        <constraint firstItem="0ef-Ng-Ckh" firstAttribute="top" secondItem="twf-wV-KnE" secondAttribute="top" constant="100" id="Kz7-XW-Ofa"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="twf-wV-KnE"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-219.375" y="21.12676056338028"/>
         </scene>
@@ -607,6 +629,7 @@
     </scenes>
     <resources>
         <image name="3855595-32" width="32" height="32"/>
+        <image name="empty" width="310" height="372"/>
         <image name="placeholder-user" width="600" height="600"/>
         <image name="sendIcon" width="32" height="32"/>
         <image name="settings" width="32" height="32"/>

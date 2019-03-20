@@ -12,6 +12,9 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
   
+  // Outlet for funny placeholder when on chat users:
+  @IBOutlet var tablePlaceHolder: UIView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
@@ -23,7 +26,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
-
+    
+    //Prepare for tableview placeholder:
+    tableView.backgroundView = tablePlaceHolder
+    tableView.backgroundView?.isHidden = true
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +87,11 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if blabbers.count > 0 {
+      tableView.backgroundView?.isHidden = true
+    } else {
+      tableView.backgroundView?.isHidden = false
+    }
     return blabbers.count //TalkerName[section].count
   }
 
