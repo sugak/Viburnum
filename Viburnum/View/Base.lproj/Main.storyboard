@@ -129,8 +129,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="0ef-Ng-Ckh">
-                            <rect key="frame" x="28" y="120" width="319" height="355"/>
+                            <rect key="frame" x="28" y="200" width="319" height="355"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="319" id="Wba-3W-gBt"/>
                                 <constraint firstAttribute="width" secondItem="0ef-Ng-Ckh" secondAttribute="height" multiplier="80:89" id="oLg-ye-6n5"/>
                             </constraints>
                         </imageView>
@@ -139,7 +140,7 @@
                     <constraints>
                         <constraint firstItem="0ef-Ng-Ckh" firstAttribute="leading" secondItem="twf-wV-KnE" secondAttribute="leading" constant="28" id="2up-24-N2T"/>
                         <constraint firstAttribute="trailing" secondItem="0ef-Ng-Ckh" secondAttribute="trailing" constant="28" id="A8n-Bn-jzc"/>
-                        <constraint firstItem="0ef-Ng-Ckh" firstAttribute="top" secondItem="twf-wV-KnE" secondAttribute="top" constant="100" id="Kz7-XW-Ofa"/>
+                        <constraint firstItem="0ef-Ng-Ckh" firstAttribute="top" secondItem="twf-wV-KnE" secondAttribute="top" constant="180" id="Kz7-XW-Ofa"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="twf-wV-KnE"/>
                 </view>
