@@ -245,6 +245,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="messageDate" destination="C7b-Oo-euS" id="BTm-gK-tHh"/>
                                             <outlet property="messageText" destination="Pnb-Tp-xTo" id="jte-sG-s3n"/>
                                             <outlet property="messageView" destination="xCX-6i-h4w" id="c4b-sc-Rqr"/>
                                         </connections>
@@ -257,7 +258,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuN-SN-ZpB">
-                                                    <rect key="frame" x="239" y="10" width="66" height="64.5"/>
+                                                    <rect key="frame" x="201" y="10" width="104" height="64.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cx-AM-ufp">
                                                             <rect key="frame" x="12" y="12" width="42" height="40.5"/>
@@ -271,13 +272,22 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="16:24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCS-jI-RzA">
+                                                            <rect key="frame" x="62" y="39" width="32" height="13.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.33333333333333331" green="0.61960784313725492" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstItem="0cx-AM-ufp" firstAttribute="top" secondItem="DuN-SN-ZpB" secondAttribute="top" constant="12" id="BNK-5G-uvU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="eCS-jI-RzA" secondAttribute="bottom" constant="12" id="Ddq-TF-jfu"/>
                                                         <constraint firstAttribute="bottom" secondItem="0cx-AM-ufp" secondAttribute="bottom" constant="12" id="Otd-2g-Ocd"/>
                                                         <constraint firstItem="0cx-AM-ufp" firstAttribute="leading" secondItem="DuN-SN-ZpB" secondAttribute="leading" constant="12" id="dqx-jW-mWV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="0cx-AM-ufp" secondAttribute="trailing" constant="12" id="fF2-qT-zqT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="0cx-AM-ufp" secondAttribute="trailing" constant="50" id="fF2-qT-zqT"/>
+                                                        <constraint firstItem="eCS-jI-RzA" firstAttribute="leading" secondItem="0cx-AM-ufp" secondAttribute="trailing" constant="8" id="fLq-Xs-vxQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="eCS-jI-RzA" secondAttribute="trailing" constant="10" id="iaA-cw-UdA"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -292,6 +302,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="messageDate" destination="eCS-jI-RzA" id="A50-Qn-jNh"/>
                                             <outlet property="messageText" destination="0cx-AM-ufp" id="6L2-gv-NLz"/>
                                             <outlet property="messageView" destination="DuN-SN-ZpB" id="xsv-aV-bk4"/>
                                         </connections>

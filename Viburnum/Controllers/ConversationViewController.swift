@@ -102,12 +102,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
     
-    // Sctoll down to the last message:
+    // Scroll down to the last message:
+    scrollChatDown()
+  }
+  
+  // Scroll down to the last message:
+  func scrollChatDown() {
     if blabberChat.message.count != 0 {
       let indexPath = IndexPath(row: blabberChat.message.count - 1, section: 0)
       tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
   }
+  
   
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,6 +131,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
     cell.textMess = blabberChat.message[indexPath.row]
+    cell.textDate = blabberChat.messageDate[indexPath.row]
     return cell
   }
   
@@ -132,9 +139,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Keyboard notifications:
     NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
       self.view.frame.origin.y = -270
+      // Scroll down to the last message:
+      self.scrollChatDown()
     }
     NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
       self.view.frame.origin.y = 0.0
+      // Scroll down to the last message:
+      self.scrollChatDown()
     }
   }
   
@@ -144,6 +155,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     {
       sendMessageButton(sendButton)
       messageInputField.resignFirstResponder()
+      // Scroll down to the last message:
+      scrollChatDown()
       return true
     }
     return true

@@ -18,6 +18,7 @@ protocol ConversationCellConfiguration : AnyObject {
 
 protocol messageCellConfiguration: AnyObject {
   var textMess: String? {get set}
+  var textDate: Date? {get set}
 }
 
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class messageViewCell: UITableViewCell, messageCellConfiguration {
-  
+
   override func layoutSubviews() {
     super .layoutSubviews()
     
@@ -26,7 +26,25 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
     }
   }
   
+  var textDate: Date? {
+    didSet {
+      // Checking date and time for date format:
+      if textDate != nil {
+        let dateFormatter = DateFormatter()
+        if Calendar.current.isDateInToday(textDate!) {
+          dateFormatter.dateFormat = "HH:mm"
+        } else {
+          dateFormatter.dateFormat = "dd MMM"
+        }
+        messageDate.text = dateFormatter.string(from: textDate!)
+      } else {
+        messageDate.text = ""
+      }
+    }
+  }
+  
   // Outlets:
   @IBOutlet var messageView: UIView! // View for bubble background
   @IBOutlet var messageText: UILabel!
+  @IBOutlet var messageDate: UILabel! // Message date field
 }
