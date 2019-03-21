@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       // Устанавливаем стандартное значение, если ничего не задано или девайс запустился впервые:
       if UserDefaults.standard.string(forKey: "profileName") == nil {
-        let name = "Имя пользователя"
+        let name = "Пользователь \(UIDevice.current.name)"
         UserDefaults.standard.set(name, forKey: "profileName")
       }
       

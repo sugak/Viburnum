@@ -13,9 +13,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Setting up keyboard and initial UI:
-    keyBoardSettings()
+    // Initial UI:
     initialUISettings()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    // Adding keyboard observers
+    setUpObservers()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    // Removing keyboard observers
+    removeObservers()
   }
   
   override func viewWillLayoutSubviews() {
@@ -171,7 +182,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     if string == "\n"
     {
       textField.resignFirstResponder()
-      descriptionTextView.becomeFirstResponder()
+      self.descriptionTextView.becomeFirstResponder()
       return true
     }
     return true
@@ -181,7 +192,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     if text == "\n"
     {
       textView.resignFirstResponder()
-      gcdButton.becomeFirstResponder()
+      pushGCDButton(_sender: gcdButton)
       return true
     }
     return true
@@ -216,6 +227,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let alert = UIAlertController(title: "Что-то пошло не так", message: "Не удалось сохранить профиль", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ОК", style: .default, handler: nil)
         let repeatAction = UIAlertAction(title: "Еще раз", style: .default) { action in
+          print(action)
           self.saveUserProfile()
         }
         alert.addAction(okAction)
@@ -267,23 +279,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
   }
   
-  // Func to move view up if keyboard is applied:
-  func keyBoardSettings() {
-    // Keyboard notifications:
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-      self.view.frame.origin.y = -250
-    }
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-      self.view.frame.origin.y = 0.0
-    }
-  }
-  
   // Backup func for the very initial settings:
   func initialUISettings() {
     if UserDefaults.standard.string(forKey: "profileName") != nil  {
       nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
     } else {
-      nameTextField.text = "Имя Рек"
+      nameTextField.text = "Пользователь \(UIDevice.current.name)"
     }
     if UserDefaults.standard.string(forKey: "profileDescription") != nil {
       descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
@@ -300,6 +301,41 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Hiding spinner:
     activityIndicator.isHidden = true
+  }
+  
+  // Keyboard handling stuff:
+  private func setUpObservers() {
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(keyboardWillShow(notification:)),
+                                           name: UIResponder.keyboardWillShowNotification,
+                                           object: nil)
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(keyboardWillHide(notification:)),
+                                           name: UIResponder.keyboardWillHideNotification,
+                                           object: nil)
+  }
+  
+  private func removeObservers() {
+    NotificationCenter.default.removeObserver(self,
+                                              name: UIResponder.keyboardWillShowNotification,
+                                              object: nil)
+    NotificationCenter.default.removeObserver(self,
+                                              name: UIResponder.keyboardWillHideNotification,
+                                              object: nil)
+  }
+  
+  @objc func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y -= keyboardSize.height
+      }
+    }
+  }
+  
+  @objc func keyboardWillHide(notification: NSNotification) {
+    if self.view.frame.origin.y != 0 {
+      self.view.frame.origin.y = 0
+    }
   }
 }
 

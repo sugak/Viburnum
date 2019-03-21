@@ -18,18 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpic" translatesAutoresizingMaskIntoConstraints="NO" id="8nH-54-QY7">
-                                <rect key="frame" x="90" y="313.5" width="195" height="40"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainpic" translatesAutoresizingMaskIntoConstraints="NO" id="8nH-54-QY7">
+                                <rect key="frame" x="40" y="301" width="295" height="65"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="r2B-h0-ShR"/>
+                                    <constraint firstAttribute="width" secondItem="8nH-54-QY7" secondAttribute="height" multiplier="727:160" id="MSS-li-QlK"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8nH-54-QY7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="90" id="4Ld-zt-hbU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8nH-54-QY7" secondAttribute="trailing" constant="90" id="7gk-Tj-4PT"/>
-                            <constraint firstItem="8nH-54-QY7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="bam-BH-Mq6"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="A1D-oQ-vpB"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="SEM-sM-Im3"/>
+                            <constraint firstItem="8nH-54-QY7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="uz4-Yw-eTt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8nH-54-QY7" secondAttribute="trailing" constant="40" id="yxl-Bt-n3r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
