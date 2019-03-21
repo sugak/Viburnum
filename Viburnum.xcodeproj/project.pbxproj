@@ -92,11 +92,11 @@
 			children = (
 				288DEA80220C25AF007D5263 /* Assets.xcassets */,
 				288DEA85220C25AF007D5263 /* Info.plist */,
-				28FF0CC72238D8A500ECF643 /* DataManagement */,
 				2890F1572224687400F42965 /* Model */,
 				28B2DEEA222A7CE000F2DAA6 /* View */,
-				28988529223E5E9C00200873 /* Communication */,
-				2890F1582224887800F42965 /* Controller */,
+				2890F1582224887800F42965 /* Controllers */,
+				28988529223E5E9C00200873 /* Multipeer Communication */,
+				28FF0CC72238D8A500ECF643 /* DataManagement */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
 			);
 			path = Viburnum;
@@ -111,7 +111,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2890F1582224887800F42965 /* Controller */ = {
+		2890F1582224887800F42965 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
@@ -121,10 +121,10 @@
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		28988529223E5E9C00200873 /* Communication */ = {
+		28988529223E5E9C00200873 /* Multipeer Communication */ = {
 			isa = PBXGroup;
 			children = (
 				2898852A223E609A00200873 /* MultiPeerCommunicator.swift */,
@@ -132,7 +132,7 @@
 				28988532223E884700200873 /* CommunicationManager.swift */,
 				2898852C223E60B500200873 /* Delegate patterns.swift */,
 			);
-			path = Communication;
+			path = "Multipeer Communication";
 			sourceTree = "<group>";
 		};
 		28B2DEEA222A7CE000F2DAA6 /* View */ = {
