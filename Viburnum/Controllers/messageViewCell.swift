@@ -15,7 +15,7 @@ class messageViewCell: UITableViewCell, messageCellConfiguration {
     
     //Styling chat bubbles:
     self.selectionStyle = .none 
-    messageView.layer.cornerRadius = 12.0
+    messageView.layer.cornerRadius = 14.0
     messageView.clipsToBounds = true
   }
   

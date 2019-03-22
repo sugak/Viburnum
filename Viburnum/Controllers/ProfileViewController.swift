@@ -49,28 +49,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // UI settings for edit nor edit mode:
     didSet {
       editButtonOutlet.isHidden = !editButtonOutlet.isHidden
-      gcdButton.isHidden = !gcdButton.isHidden
-      operationButton.isHidden = !operationButton.isHidden
-      nameTextField.isUserInteractionEnabled = true
-      nameTextField.becomeFirstResponder()  // Setting first responder for TextField
-      descriptionTextView.isEditable = true
+      saveButton.isHidden = !saveButton.isHidden
+      cancelButton.isHidden = !cancelButton.isHidden
+      nameTextField.isUserInteractionEnabled = !nameTextField.isUserInteractionEnabled
+      descriptionTextView.isEditable = !descriptionTextView.isEditable
+     
+      
       
       if editMode {
         // Setting up save buttons in edit mode:
-        gcdButton.isEnabled = false
-        gcdButton.setTitleColor(UIColor.gray, for: .normal)
-        operationButton.isEnabled = false
-        operationButton.setTitleColor(UIColor.gray, for: .normal)
+        saveButton.isEnabled = false
+        saveButton.setTitleColor(UIColor.gray, for: .normal)
+       // cancelButton.isEnabled = false
+       // cancelButton.setTitleColor(UIColor.gray, for: .normal)
         
         photoButton.isHidden = false  // Photo button showing in edit mode
         
         nameTextField.text = userProfile.name
         descriptionTextView.text = userProfile.description
+        nameTextField.becomeFirstResponder()  // Setting first responder for TextField
       } else {
         updateProfileInfo()
         nameTextField.isUserInteractionEnabled = false
         descriptionTextView.isEditable = false
         photoButton.isHidden = true
+        nameTextField.resignFirstResponder()
       }
     }
   }
@@ -78,8 +81,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   // Outlets:
   @IBOutlet var photoImageView: UIImageView!
   @IBOutlet var editButtonOutlet: UIProfileButton!
-  @IBOutlet var gcdButton: UIProfileButton!
-  @IBOutlet var operationButton: UIProfileButton!
+  @IBOutlet var saveButton: UIProfileButton!
+  @IBOutlet var cancelButton: UIProfileButton!
   @IBOutlet var photoButton: PhotoButton!
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var nameTextField: UITextField!
@@ -106,16 +109,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     editMode = !editMode
   }
   
-  @IBAction func pushGCDButton(_sender: UIProfileButton) {
-    //GCD action
-    appliedDataManager = gcdDataManager
-    saveUserProfile()
-    
+  @IBAction func pushSaveButton(_sender: UIProfileButton) {
+    // TODO: Save action
   }
-  @IBAction func pushOperationButton(_ sender: PhotoButton) {
-    //Operation action
-    appliedDataManager = operationDataManager
-    saveUserProfile()
+  @IBAction func pushCancelButton(_ sender: PhotoButton) {
+     editMode = !editMode
   }
   
   
@@ -192,7 +190,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     if text == "\n"
     {
       textView.resignFirstResponder()
-      pushGCDButton(_sender: gcdButton)
+      pushSaveButton(_sender: saveButton)
       return true
     }
     return true
@@ -202,8 +200,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   private func saveUserProfile() {
     // UI settings:
       dataSavingInProgress = true
-      gcdButton.isEnabled = false
-      operationButton.isEnabled = false
+      saveButton.isEnabled = false
+      cancelButton.isEnabled = false
       activityIndicator.isHidden = false
       activityIndicator.startAnimating()
     
@@ -236,8 +234,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       }
       self.activityIndicator.stopAnimating()
       self.activityIndicator.isHidden = true
-      self.gcdButton.isEnabled = true
-      self.operationButton.isEnabled = true
+      self.saveButton.isEnabled = true
+      self.cancelButton.isEnabled = true
       self.dataSavingInProgress = false
     }
   }
@@ -266,16 +264,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     if (!dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage)))) {
       
       // Change button UI:
-      gcdButton.isEnabled = true
-      gcdButton.setTitleColor(UIColor.black, for: .normal)
-      operationButton.isEnabled = true
-      operationButton.setTitleColor(UIColor.black, for: .normal)
+      saveButton.isEnabled = true
+      saveButton.setTitleColor(UIColor.black, for: .normal)
+//      cancelButton.isEnabled = true
+//      cancelButton.setTitleColor(UIColor.black, for: .normal)
     } else {
       // Change button UI:
-      gcdButton.isEnabled = false
-      gcdButton.setTitleColor(UIColor.gray, for: .normal)
-      operationButton.isEnabled = false
-      operationButton.setTitleColor(UIColor.gray, for: .normal)
+      saveButton.isEnabled = false
+      saveButton.setTitleColor(UIColor.gray, for: .normal)
+//      cancelButton.isEnabled = false
+//      cancelButton.setTitleColor(UIColor.gray, for: .normal)
     }
   }
   

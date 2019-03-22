@@ -223,7 +223,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.83967192130645518" green="0.83967192130645518" blue="0.83967192130645518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.90919127409833334" green="0.90919127409833334" blue="0.90919127409833334" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstItem="Pnb-Tp-xTo" firstAttribute="leading" secondItem="xCX-6i-h4w" secondAttribute="leading" constant="12" id="3NX-Cy-kpx"/>
                                                         <constraint firstItem="C7b-Oo-euS" firstAttribute="leading" secondItem="Pnb-Tp-xTo" secondAttribute="trailing" constant="8" id="8FT-sg-n3b"/>
@@ -488,7 +488,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="AH7-9o-jUs"/>
                                         </constraints>
-                                        <state key="normal" title="GCD">
+                                        <state key="normal" title="Сохранить">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -500,11 +500,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="h5G-V4-yl5"/>
                                         </constraints>
-                                        <state key="normal" title="Operation">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Отмена">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="pushOperationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6UJ-wp-pWR"/>
+                                            <action selector="pushCancelButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6UJ-wp-pWR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -570,13 +570,13 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="BcO-ga-GLW" id="r1M-QI-T8o"/>
+                        <outlet property="cancelButton" destination="cYJ-cW-IoY" id="O2O-yY-V40"/>
                         <outlet property="descriptionTextView" destination="Uoe-Ls-7Zy" id="7ts-AH-a7y"/>
                         <outlet property="editButtonOutlet" destination="eNP-UP-MIR" id="ssW-x8-fF5"/>
-                        <outlet property="gcdButton" destination="dLf-2i-THp" id="T1d-vU-qcj"/>
                         <outlet property="nameTextField" destination="EAp-Dq-2Rf" id="38c-a7-BdD"/>
-                        <outlet property="operationButton" destination="cYJ-cW-IoY" id="O2O-yY-V40"/>
                         <outlet property="photoButton" destination="lYd-iy-XmU" id="S6n-eE-g7x"/>
                         <outlet property="photoImageView" destination="UZ4-Ma-90O" id="tBx-ta-NfZ"/>
+                        <outlet property="saveButton" destination="dLf-2i-THp" id="T1d-vU-qcj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
