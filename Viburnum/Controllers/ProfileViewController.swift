@@ -206,7 +206,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     storageManager.saveProfile(profile: newProfile) { (error) in
       if error == nil {
         self.userProfile = newProfile
-        let alert = UIAlertController(title: "Профиль успешно сохранен", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Профиль сохранен", message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ОК", style: .default) { action in
           if self.editMode {
             self.editMode = false
