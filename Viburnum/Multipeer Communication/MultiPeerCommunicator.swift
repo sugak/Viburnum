@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 class MultiPeerCommunicator: NSObject, Communicator {
   var online: Bool = false
+ // var storageManager = StorageManager()
+  
   
   // Initial creation of MultipeerConnectivity stuff:
   var myPeer: MCPeerID!

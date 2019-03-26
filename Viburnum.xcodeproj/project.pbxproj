@@ -31,7 +31,7 @@
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
 		28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */; };
 		28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */; };
-		28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* dataManagement.swift */; };
+		28FF0CC92238D8D400ECF643 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* UserProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +61,7 @@
 		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
 		28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Viburnum.xcdatamodel; sourceTree = "<group>"; };
 		28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		28FF0CC82238D8D400ECF643 /* dataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataManagement.swift; sourceTree = "<group>"; };
+		28FF0CC82238D8D400ECF643 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,7 @@
 				28E5EC72224A1AAA00B0F271 /* StorageManager.swift */,
 				28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */,
 				28C59829224A2F6800CA37D3 /* AppUser.swift */,
-				28FF0CC82238D8D400ECF643 /* dataManagement.swift */,
+				28FF0CC82238D8D400ECF643 /* UserProfile.swift */,
 				28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */,
 			);
 			path = "CoreData Management";
@@ -247,7 +247,7 @@
 				2898852D223E60B500200873 /* Delegate patterns.swift in Sources */,
 				28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */,
 				28D181382215721200E56148 /* ProfileViewController.swift in Sources */,
-				28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */,
+				28FF0CC92238D8D400ECF643 /* UserProfile.swift in Sources */,
 				28988533223E884700200873 /* CommunicationManager.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
 				28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */,

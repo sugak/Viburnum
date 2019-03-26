@@ -32,13 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       showLog(from: "Not running", to: "Foreground Inactive")
-      
-      // Устанавливаем стандартное значение, если ничего не задано или девайс запустился впервые:
-      if UserDefaults.standard.string(forKey: "profileName") == nil {
-        let name = "Пользователь \(UIDevice.current.name)"
-        UserDefaults.standard.set(name, forKey: "profileName")
-      }
-      
       return true
     }
 

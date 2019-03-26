@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 class CoreDataStack: NSObject {
+  // Init let:
   static let shared = CoreDataStack()
-  
   
   // URL:
   var storeURL: URL {
@@ -84,8 +84,4 @@ class CoreDataStack: NSObject {
       completion?(nil)
     }
   }
-
-  
-  
-  
 }

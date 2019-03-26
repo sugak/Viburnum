@@ -37,6 +37,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       if success {
         self.messageInputField.text = ""
         self.tableView.reloadData()
+        self.sendButton.isEnabled = false
       }
       if let error = error {
         self.view.endEditing(true)
@@ -64,7 +65,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     tableView.estimatedRowHeight = 44
     
     // Tuning message input field:
-   // messageInputField.layer.cornerRadius = 10.0
     messageInputField.clipsToBounds = true
     
     // Tuning keyboard:

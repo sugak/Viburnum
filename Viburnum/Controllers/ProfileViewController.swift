@@ -37,7 +37,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   
   // Variables and constants:
-  var appliedDataManager: dataManagementProtocol!
   var userProfile: UserProfile!
   var storageManager = StorageManager()
   
@@ -58,11 +57,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Setting up save buttons in edit mode:
         saveButton.isEnabled = false
         saveButton.setTitleColor(UIColor.gray, for: .normal)
-       // cancelButton.isEnabled = false
-       // cancelButton.setTitleColor(UIColor.gray, for: .normal)
-        
         photoButton.isHidden = false  // Photo button showing in edit mode
-        
         nameTextField.text = userProfile.name
         descriptionTextView.text = userProfile.description
         nameTextField.becomeFirstResponder()  // Setting first responder for TextField
@@ -90,6 +85,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBAction func nameFieldDidChange(_ sender: Any) {
     saveButtonsControl()
   }
+  
   func textViewDidChange(_ textView: UITextView) {
     saveButtonsControl()
   }
@@ -98,6 +94,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBAction func dismissButton(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
+  
   @IBAction func pushPhotoButton(_ sender: PhotoButton) {
     sender.buttonAnimation() // Making short button animation
     choosePhoto() // Opening ActionSheet menu
@@ -108,14 +105,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   
   @IBAction func pushSaveButton(_sender: UIButton) {
-    // TODO: Save action
     saveUserProfile()
-    
   }
+  
   @IBAction func pushCancelButton(_ sender: UIButton) {
      editMode = !editMode
   }
-  
   
   // Styling photo image view:
   func photoImageViewStyle (for image: UIImageView) {
@@ -266,29 +261,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       // Change button UI:
       saveButton.isEnabled = true
       saveButton.setTitleColor(UIColor.black, for: .normal)
-//      cancelButton.isEnabled = true
-//      cancelButton.setTitleColor(UIColor.black, for: .normal)
     } else {
       // Change button UI:
       saveButton.isEnabled = false
       saveButton.setTitleColor(UIColor.gray, for: .normal)
-//      cancelButton.isEnabled = false
-//      cancelButton.setTitleColor(UIColor.gray, for: .normal)
     }
   }
   
   // Backup func for the very initial settings:
   func initialUISettings() {
-//    if UserDefaults.standard.string(forKey: "profileName") != nil  {
-//      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
-//    } else {
-//      nameTextField.text = "Пользователь \(UIDevice.current.name)"
-//    }
-//    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
-//      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
-//    } else {
-//      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
-//    }
     
     // Profile updating:
     loadUserProfile()
