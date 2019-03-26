@@ -83,7 +83,11 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Online"  //sections[section]
+    if blabbers.count > 0 {
+     return "Online"
+    } else {
+      return " "
+    }
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -16,7 +16,7 @@ typealias LoadHandler = (UserProfile) -> Void
 // Protocol for save structs:
 protocol dataManagementProtocol {
   func getProfile(completion: @escaping LoadHandler)
-  func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping SaveHandler)
+  func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping LoadHandler)
 }
 
 enum ImageError: Error {

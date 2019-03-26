@@ -25,11 +25,13 @@
 		28AB8DD0222080D500C190F4 /* ConversationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */; };
 		28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD122208C5A00C190F4 /* Protocols.swift */; };
 		28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB8DD32221344F00C190F4 /* TempoModelData.swift */; };
+		28C5982A224A2F6800CA37D3 /* AppUserExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C59829224A2F6800CA37D3 /* AppUserExtention.swift */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
+		28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5EC72224A1AAA00B0F271 /* StorageManager.swift */; };
 		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
+		28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */; };
+		28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */; };
 		28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* dataManagement.swift */; };
-		28FF0CCB2238D90100ECF643 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */; };
-		28FF0CCD2238D91300ECF643 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +55,13 @@
 		28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListTableViewCell.swift; sourceTree = "<group>"; };
 		28AB8DD122208C5A00C190F4 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		28AB8DD32221344F00C190F4 /* TempoModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoModelData.swift; sourceTree = "<group>"; };
+		28C59829224A2F6800CA37D3 /* AppUserExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserExtention.swift; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		28E5EC72224A1AAA00B0F271 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
+		28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Viburnum.xcdatamodel; sourceTree = "<group>"; };
+		28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		28FF0CC82238D8D400ECF643 /* dataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataManagement.swift; sourceTree = "<group>"; };
-		28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
-		28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +100,7 @@
 				28B2DEEA222A7CE000F2DAA6 /* View */,
 				2890F1582224887800F42965 /* Controllers */,
 				28988529223E5E9C00200873 /* Multipeer Communication */,
-				28FF0CC72238D8A500ECF643 /* DataManagement */,
+				28FF0CC72238D8A500ECF643 /* CoreData Management */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
 			);
 			path = Viburnum;
@@ -156,14 +160,16 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
-		28FF0CC72238D8A500ECF643 /* DataManagement */ = {
+		28FF0CC72238D8A500ECF643 /* CoreData Management */ = {
 			isa = PBXGroup;
 			children = (
+				28E5EC72224A1AAA00B0F271 /* StorageManager.swift */,
+				28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */,
+				28C59829224A2F6800CA37D3 /* AppUserExtention.swift */,
 				28FF0CC82238D8D400ECF643 /* dataManagement.swift */,
-				28FF0CCA2238D90100ECF643 /* GCDDataManager.swift */,
-				28FF0CCC2238D91300ECF643 /* OperationDataManager.swift */,
+				28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */,
 			);
-			path = DataManagement;
+			path = "CoreData Management";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,7 +250,9 @@
 				28FF0CC92238D8D400ECF643 /* dataManagement.swift in Sources */,
 				28988533223E884700200873 /* CommunicationManager.swift in Sources */,
 				28A087D82221FE4E002D08D2 /* ConversationViewController.swift in Sources */,
+				28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */,
 				2898852B223E609A00200873 /* MultiPeerCommunicator.swift in Sources */,
+				28C5982A224A2F6800CA37D3 /* AppUserExtention.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
 				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,
 				288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */,
@@ -253,11 +261,11 @@
 				289C404722310B4900CEF579 /* Themes.swift in Sources */,
 				287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */,
 				28988531223E874400200873 /* MultiPeerCommunicatorExtention.swift in Sources */,
-				28FF0CCD2238D91300ECF643 /* OperationDataManager.swift in Sources */,
+				28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
-				28FF0CCB2238D90100ECF643 /* GCDDataManager.swift in Sources */,
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
+				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +555,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */,
+			);
+			currentVersion = 28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */;
+			path = Viburnum.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 288DEA6E220C25AD007D5263 /* Project object */;
 }

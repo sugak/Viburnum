@@ -38,9 +38,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Variables and constants:
   var appliedDataManager: dataManagementProtocol!
-  let gcdDataManager = GCDDataManager()
-  var operationDataManager = OperationDataManager()
   var userProfile: UserProfile!
+  var storageManager = StorageManager()
+  
   // If in save progress flag:
   var dataSavingInProgress: Bool = false
   // If edit mode in progress:
@@ -53,8 +53,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       cancelButton.isHidden = !cancelButton.isHidden
       nameTextField.isUserInteractionEnabled = !nameTextField.isUserInteractionEnabled
       descriptionTextView.isEditable = !descriptionTextView.isEditable
-     
-      
       
       if editMode {
         // Setting up save buttons in edit mode:
@@ -139,7 +137,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     present(choosePhotoMenu, animated: Constants.animated, completion: nil)
   }
   
-  // Function for action buttons to pick uo photo from Gallery or Camera
+  // Function for action buttons to pick up photo from Gallery or Camera
   func actionForPhotoPickUp (title: String, sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
     return UIAlertAction(title: title, style: .default, handler: { [weak self] (action) in
       if UIImagePickerController.isSourceTypeAvailable(sourceType) {
@@ -207,7 +205,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextView.text!, profileImage: photoImageView.image!)
     
-    appliedDataManager.saveProfile(new: newProfile, old: userProfile) { (error) in
+    storageManager.saveProfile(new: userProfile, old: userProfile) { (error) in
       if error == nil {
         self.userProfile = newProfile
         let alert = UIAlertController(title: "Профиль успешно сохранен", message: nil, preferredStyle: .alert)
@@ -249,9 +247,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Func to load saved profile:
   private func loadUserProfile() {
-    appliedDataManager = operationDataManager
     activityIndicator.startAnimating()
-    gcdDataManager.getProfile { (profile) in
+    storageManager.getProfile { (profile) in
       self.userProfile = profile
       self.activityIndicator.stopAnimating()
       self.activityIndicator.isHidden = true
@@ -279,16 +276,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   
   // Backup func for the very initial settings:
   func initialUISettings() {
-    if UserDefaults.standard.string(forKey: "profileName") != nil  {
-      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
-    } else {
-      nameTextField.text = "Пользователь \(UIDevice.current.name)"
-    }
-    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
-      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
-    } else {
-      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
-    }
+//    if UserDefaults.standard.string(forKey: "profileName") != nil  {
+//      nameTextField.text = UserDefaults.standard.string(forKey: "profileName")
+//    } else {
+//      nameTextField.text = "Пользователь \(UIDevice.current.name)"
+//    }
+//    if UserDefaults.standard.string(forKey: "profileDescription") != nil {
+//      descriptionTextView.text = UserDefaults.standard.string(forKey: "profileDescription")
+//    } else {
+//      descriptionTextView.text = "Люблю программировать \n Люблю помогать другим"
+//    }
     
     // Profile updating:
     loadUserProfile()
