@@ -103,14 +103,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     choosePhoto() // Opening ActionSheet menu
   }
   
-  @IBAction func pushEditButton(_ sender: PhotoButton) {
+  @IBAction func pushEditButton(_ sender: UIButton) {
     editMode = !editMode
   }
   
-  @IBAction func pushSaveButton(_sender: UIProfileButton) {
+  @IBAction func pushSaveButton(_sender: UIButton) {
     // TODO: Save action
+    saveUserProfile()
+    
   }
-  @IBAction func pushCancelButton(_ sender: PhotoButton) {
+  @IBAction func pushCancelButton(_ sender: UIButton) {
      editMode = !editMode
   }
   
@@ -205,7 +207,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextView.text!, profileImage: photoImageView.image!)
     
-    storageManager.saveProfile(new: userProfile, old: userProfile) { (error) in
+    
+    storageManager.saveProfile(profile: newProfile) { (error) in
       if error == nil {
         self.userProfile = newProfile
         let alert = UIAlertController(title: "Профиль успешно сохранен", message: nil, preferredStyle: .alert)
@@ -248,7 +251,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   // Func to load saved profile:
   private func loadUserProfile() {
     activityIndicator.startAnimating()
-    storageManager.getProfile { (profile) in
+    storageManager.readProfile { (profile) in
       self.userProfile = profile
       self.activityIndicator.stopAnimating()
       self.activityIndicator.isHidden = true

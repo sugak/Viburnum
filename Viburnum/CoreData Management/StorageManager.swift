@@ -10,58 +10,42 @@ import Foundation
 import UIKit
 import CoreData
 
-class StorageManager: NSObject, dataManagementProtocol {
+class StorageManager: NSObject {
   
   // Init core data stack:
   private let coreDataStack = CoreDataStack.shared
   
-  func getProfile(completion: @escaping LoadHandler) {
-    
-    AppUser.findAppUser(in: coreDataStack.saveContext) { (appUser) in
-
-      let profile = UserProfile(
+  
+    func saveProfile(profile: UserProfile, completion: @escaping (Error?) -> Void) {
+     let appUser = AppUser.findOrInsertAppUser(in: coreDataStack.saveContext)
+      appUser?.name = profile.name
+      appUser?.info = profile.description
+      appUser?.image = profile.profileImage.jpegData(compressionQuality: 1.0)
       
-      if newProfile.name != oldProfile.name {
-        appUser.currentUser?.name = newProfile.name
-      }
-      if newProfile.description != oldProfile.description {
-        appUser.userDescription = newProfile.description
-      }
-      if newProfile.userImage.jpegData(compressionQuality: 1.0) != oldProfile.userImage.jpegData(compressionQuality: 1.0) {
-        appUser.image = newProfile.userImage.jpegData(compressionQuality: 1.0)
-      }
-      self.coreDataStack.performSave(in: self.coreDataStack.saveContext) { (error) in
+      self.coreDataStack.performSave(context: self.coreDataStack.saveContext) { (error) in
         DispatchQueue.main.async {
           completion(error)
         }
       }
     }
+  
+  func readProfile(completion: @escaping (UserProfile) -> ()) {
+    let appUser = AppUser.findOrInsertAppUser(in: coreDataStack.saveContext)
     
-  }
-  
-  func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping LoadHandler) {
-    AppUser.findAppUser(in: coreDataStack.saveContext) { (appUser) in
-      let profile: UserProfile
-      if let appUser = appUser {
-        let name = appUser.name ?? UIDevice.current.name
-        let descritption = appUser.info ?? ""
-        let image: UIImage
-        if let imageData = appUser.photo {
-          image = UIImage(data: imageData) ?? UIImage(named: "placeholder-user")!
-        } else {
-          image = UIImage(named: "placeholder-user")!
-        }
-        profile = UserProfile(name: name, description: descritption, profileImage: image)
-        DispatchQueue.main.async {
-          completion(profile)
-        }
-      } else {
-        assert(false, "AppUser is nil")
-      }
+    let profile: UserProfile
+    let name = appUser?.name ?? "Пользователь \(UIDevice.current.name)"
+    let description = appUser?.info ?? "Описание из новой функции"
+    let image: UIImage
+    if let imageData = appUser?.image {
+      image = UIImage(data: imageData) ?? UIImage(named: "placeholder-user")!
+    } else {
+      image = UIImage(named: "placeholder-user")!
     }
-
+    
+    profile = UserProfile(name: name, description: description, profileImage: image)
+    DispatchQueue.main.async {
+      completion(profile)
+    }
   }
-  
-  
-  
+
 }

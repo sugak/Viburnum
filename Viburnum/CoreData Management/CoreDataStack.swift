@@ -65,16 +65,17 @@ class CoreDataStack: NSObject {
   }()
   
   // Saving function:
-  func performSave(in context: NSManagedObjectContext, completion: SaveHandler?) {
+  public func performSave(context: NSManagedObjectContext, completion: ((Error?)->())?) {
     if context.hasChanges {
-      context.perform {
+      context.perform { [weak self] in
         do {
           try context.save()
         } catch {
-          completion?(error)
+          print("Context save error: \(error)")
         }
-        if let parentContext = context.parent {
-          self.performSave(in: parentContext, completion: completion)
+        
+        if let parent = context.parent {
+          self?.performSave(context: parent, completion: completion)
         } else {
           completion?(nil)
         }
@@ -83,7 +84,7 @@ class CoreDataStack: NSObject {
       completion?(nil)
     }
   }
-  
+
   
   
   
