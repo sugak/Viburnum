@@ -31,8 +31,7 @@ class StorageManager: NSObject {
         DispatchQueue.main.async {
           completion(error)
         }
-    }
-
+      }
     }
   }
   
@@ -41,7 +40,7 @@ class StorageManager: NSObject {
     let appUser = AppUser.findOrInsertAppUser(in: coreDataStack.mainContext)
     let profile: UserProfile
     let name = appUser?.name ?? "Пользователь \(UIDevice.current.name)"
-    let description = appUser?.info ?? "Описание из новой функции"
+    let description = appUser?.info ?? "Если вы видите этот текст, значит Core Data завелась, а девайс был запущен впервые. Ура! 👻"
     let image: UIImage
     
     //Image handling:

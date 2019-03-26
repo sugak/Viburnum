@@ -52,6 +52,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       cancelButton.isHidden = !cancelButton.isHidden
       nameTextField.isUserInteractionEnabled = !nameTextField.isUserInteractionEnabled
       descriptionTextView.isEditable = !descriptionTextView.isEditable
+      nameTextField.autocorrectionType = .no
+      descriptionTextView.autocorrectionType = .no
       
       if editMode {
         // Setting up save buttons in edit mode:
