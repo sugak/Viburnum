@@ -23,12 +23,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   // Actions:
   
   @IBAction func messageInputFieldChanged(_ sender: Any) {
-    if messageInputField.text != "" {
+    if (messageInputField.text != "") && (blabberChat.online) {
       sendButton.isEnabled = true
     } else {
       sendButton.isEnabled = false
     }
   }
+  
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
     messageInputField.resignFirstResponder()
@@ -36,8 +37,8 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: blabberChat.id) { success, error in
       if success {
         self.messageInputField.text = ""
-        self.tableView.reloadData()
         self.sendButton.isEnabled = false
+        self.tableView.reloadData()
       }
       if let error = error {
         self.view.endEditing(true)
@@ -77,6 +78,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   
   override func viewWillDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self)
+    clearChat()
   }
   
   override func viewDidLayoutSubviews() {
@@ -97,13 +99,22 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   // Delegate funcntion:
   func globalUpdate() {
     if !blabberChat.online {
-      sendButton.isEnabled = false
+      // Cleaning messages:
+      clearChat()
     }
+    
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
     
     // Scroll down to the last message:
     scrollChatDown()
+  }
+  
+  func clearChat () {
+    sendButton.isEnabled = false
+    blabberChat.message.removeAll()
+    blabberChat.messageDate.removeAll()
+    blabberChat.messageType.removeAll()
   }
   
   // Scroll down to the last message:

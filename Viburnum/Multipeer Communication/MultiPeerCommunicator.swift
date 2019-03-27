@@ -15,10 +15,10 @@ class MultiPeerCommunicator: NSObject, Communicator {
   
   
   // Initial creation of MultipeerConnectivity stuff:
-  var myPeer: MCPeerID!
-  var displayName = UserDefaults.standard.string(forKey: "profileName") ?? "Default name"
-  var serviceBrowser: MCNearbyServiceBrowser!
-  var advertiser: MCNearbyServiceAdvertiser!
+  let myPeer: MCPeerID!
+  let displayName = UserDefaults.standard.string(forKey: "profileName") ?? "Default name"
+  let serviceBrowser: MCNearbyServiceBrowser!
+  let advertiser: MCNearbyServiceAdvertiser!
   weak var delegate: CommunicatorDelegate?
   // Dictionary to save active sessions:
   var activeSessions: [String: MCSession] = [:]
