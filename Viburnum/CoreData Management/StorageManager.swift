@@ -13,7 +13,7 @@ import CoreData
 class StorageManager: NSObject {
   
   // Init core data stack:
-  private let coreDataStack = CoreDataStack.shared
+ let coreDataStack = CoreDataStack()
   
   // Save function:
   func saveProfile(profile: UserProfile, completion: @escaping (Error?) -> Void) {
