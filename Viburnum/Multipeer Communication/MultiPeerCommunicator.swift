@@ -51,6 +51,8 @@ class MultiPeerCommunicator: NSObject, Communicator {
     return activeSessions[peerID.displayName]!
   }
 
+  
+  // Send message function:
   func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> ())?) {
     // Get user from array:
     guard let session = activeSessions[UserID] else {return}

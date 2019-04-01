@@ -28,28 +28,50 @@ class CommunicationManager: CommunicatorDelegate {
   var listOfBlabbers: [String : Blabber] = [:]
   
   func didFoundUser(userID: String, userName: String?) {
-    // If Blabber already exsists, just making him online:
-    if let newBlabber = listOfBlabbers[userID] {
-      newBlabber.online = true
-    } else {
-      // If Blabber do not exist adding him to the list:
-      let newBlabber = Blabber(id: userID, name: userName)
-      newBlabber.online = true
-      listOfBlabbers[userID] = newBlabber
+    print("User found")
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      guard let user = User.findOrInsertUser(id: userID, in: saveContext) else { return }
+      let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
+      user.name = userName
+      //user.isOnline = true
+      conversation.isOnline = true
+      conversation.user = user
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
-    DispatchQueue.main.async {
-      self.delegate.globalUpdate()
-    }
+    
+    
+//    // If Blabber already exsists, just making him online:
+//    if let newBlabber = listOfBlabbers[userID] {
+//      newBlabber.online = true
+//    } else {
+//      // If Blabber do not exist adding him to the list:
+//      let newBlabber = Blabber(id: userID, name: userName)
+//      newBlabber.online = true
+//      listOfBlabbers[userID] = newBlabber
+//    }
+//    DispatchQueue.main.async {
+//      self.delegate.globalUpdate()
+//    }
   }
   
   func didLostUser(userID: String) {
-    if let newBlabber = listOfBlabbers[userID] {
-      newBlabber.online = false
-      listOfBlabbers.removeValue(forKey: userID)
+    
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
+      conversation.isOnline = false
+//      conversation.user?.isOnline = false
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
-    DispatchQueue.main.async {
-      self.delegate.globalUpdate()
-    }
+    
+//    if let newBlabber = listOfBlabbers[userID] {
+//      newBlabber.online = false
+//      listOfBlabbers.removeValue(forKey: userID)
+//    }
+//    DispatchQueue.main.async {
+//      self.delegate.globalUpdate()
+//    }
   }
   
   func failedToStartBrowsingForUsers(error: Error) {

@@ -36,7 +36,7 @@ class FetchRequestsManager {
   }
   func fetchConversationWith(id: String) -> NSFetchRequest<Conversation> {
     let request: NSFetchRequest<Conversation> = Conversation.fetchRequest()
-    request.predicate = NSPredicate(format: "convID == %@", id)
+    request.predicate = NSPredicate(format: "conversationId == %@", id)
     return request
   }
 //  func fetchMessagesFrom(conversationID: String) -> NSFetchRequest<Message> {
