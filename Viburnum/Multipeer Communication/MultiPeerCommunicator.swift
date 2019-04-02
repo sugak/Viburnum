@@ -16,7 +16,7 @@ class MultiPeerCommunicator: NSObject, Communicator {
   
   // Initial creation of MultipeerConnectivity stuff:
   let myPeer: MCPeerID!
-  let displayName = UserDefaults.standard.string(forKey: "profileName") ?? UIDevice.current.name
+  let displayName = UserDefaults.standard.string(forKey: "profileName") ?? "Пользователь \(UIDevice.current.name)"
   let serviceBrowser: MCNearbyServiceBrowser!
   let advertiser: MCNearbyServiceAdvertiser!
   weak var delegate: CommunicatorDelegate?

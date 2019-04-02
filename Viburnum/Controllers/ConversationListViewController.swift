@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
+  
+  var fetchResultsController: NSFetchedResultsController<Conversation>!
   
   // Outlet for funny placeholder when on chat users:
   @IBOutlet var tablePlaceHolder: UIView!
@@ -30,6 +33,8 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     //Prepare for tableview placeholder:
     tableView.backgroundView = tablePlaceHolder
     tableView.backgroundView?.isHidden = true
+    
+    fetchConversations()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -65,49 +70,51 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       return false
     }
   }
-  
-  // ----------- Другая сортировка, которая не работает ---------
-  
-  //  func sortFunc (first: Blabber, second: Blabber) -> Bool {
-  //      if first.messageDate.last != second.messageDate.last {
-  //        return first.messageDate.last!.timeIntervalSinceNow > second.messageDate.last!.timeIntervalSinceNow
-  //      } else {
-  //        return first.name! > second.name!
-  //      }
-  //  }
+
+  func fetchConversations() {
+    let request = FetchRequestsManager.shared.fetchConversations()
+    request.fetchBatchSize = 20
+    fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+    fetchResultsController.delegate = self
+    do {
+      try fetchResultsController.performFetch()
+    } catch let error {
+      print("fetchConversations() method:   \(error)")
+    }
+  }
   
   
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
-      return 1 //sections.count
+      return 1
     }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if blabbers.count > 0 {
+//    if blabbers.count > 0 {
      return "Online"
-    } else {
-      return " "
-    }
+//    } else {
+//      return " "
+//    }
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if blabbers.count > 0 {
+    if fetchResultsController.fetchedObjects?.count ?? 0 > 0 {
       tableView.backgroundView?.isHidden = true
     } else {
       tableView.backgroundView?.isHidden = false
     }
-    return blabbers.count //TalkerName[section].count
+    return fetchResultsController.fetchedObjects?.count ?? 0 //blabbers.count
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
     
-    let conversation = blabbers[indexPath.row]
-    cell.name = conversation.name
-    cell.avatarSymbols = conversation.name ?? "XX"
-    cell.message = conversation.message.last
-    cell.date = conversation.messageDate.last
-    cell.hasUnreadMessages = conversation.hasUnreadMessages
+    let conversation = fetchResultsController.object(at: indexPath)
+    cell.name = conversation.user?.name
+    cell.avatarSymbols = conversation.user?.name ?? "XX"
+//    cell.message = conversation.message.last
+//    cell.date = conversation.messageDate.last
+//    cell.hasUnreadMessages = conversation.hasUnreadMessages
     return cell
   }
   
@@ -178,5 +185,44 @@ extension UserDefaults {
     guard let data = data(forKey: key), let color = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
       else { return nil }
     return color
+  }
+}
+
+extension ConversationListViewController: NSFetchedResultsControllerDelegate {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    switch type {
+    case .update:
+      tableView.reloadRows(at: [newIndexPath!], with: .none)
+    case .insert:
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    case .delete:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+    case.move:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    }
+  }
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+  }
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
+  }
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
+    return sectionName
+  }
+  
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    let indexSet = IndexSet(integer: sectionIndex)
+    switch type {
+    case .insert:
+      tableView.insertSections(indexSet, with: .none)
+    case .delete:
+      tableView.deleteSections(indexSet, with: .none)
+    case .update:
+      tableView.reloadSections(indexSet, with: .none)
+    default:
+      return
+    }
   }
 }
