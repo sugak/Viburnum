@@ -125,13 +125,21 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
         let destinationController = segue.destination as!
         ConversationViewController
         
+        let conversation = fetchResultsController.object(at: indexPath)
+        destinationController.blabberChat = conversation
+//        if userConversation.user?.name == "" {
+//          conversationViewController.navigationItem.title = "No name"
+//        } else {
+//          conversationViewController.navigationItem.title = userConversation.user?.name
+//        }
+        
         // Transfer name into navbar:
         let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
         destinationController.navigationItem.title = cell.name
         
-        // Tranfer blabber info:
-        let blabberChat = blabbers[indexPath.row]
-        destinationController.blabberChat = blabberChat
+//        // Tranfer blabber info:
+//        let blabberChat = blabbers[indexPath.row]
+//        destinationController.blabberChat = blabberChat
       }
     }
     
