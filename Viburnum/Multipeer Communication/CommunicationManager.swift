@@ -10,23 +10,23 @@ import Foundation
 import MultipeerConnectivity
 
 class CommunicationManager: CommunicatorDelegate {
-  
+
   // Making singleton:
   static let shared = CommunicationManager()
   var multiPeerCommunicator: MultiPeerCommunicator!
   // Delegate to talk to ViewController:
   var delegate: ManagerDelegate!
-  
+
   private init() {
     //Setting up the instance of MultiPeerCommunicator
     self.multiPeerCommunicator = MultiPeerCommunicator()
     // Setting up the delegate
     self.multiPeerCommunicator.delegate = self
   }
-  
+
   // List of conversations associated with their UserIDs:
-  var listOfBlabbers: [String : Blabber] = [:]
-  
+  var listOfBlabbers: [String: Blabber] = [:]
+
   func didFoundUser(userID: String, userName: String?) {
     print("User found")
     let saveContext = CoreDataStack.shared.saveContext
@@ -39,9 +39,9 @@ class CommunicationManager: CommunicatorDelegate {
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
-  
+
   func didLostUser(userID: String) {
-    
+
     let saveContext = CoreDataStack.shared.saveContext
     saveContext.perform {
       let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
@@ -49,15 +49,15 @@ class CommunicationManager: CommunicatorDelegate {
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
-  
+
   func failedToStartBrowsingForUsers(error: Error) {
     print(error.localizedDescription)
   }
-  
+
   func failedToStartAdvertisingForUsers(error: Error) {
     print(error.localizedDescription)
   }
-  
+
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
     let saveContext = CoreDataStack.shared.saveContext
     saveContext.perform {

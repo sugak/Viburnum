@@ -10,24 +10,24 @@ import Foundation
 import CoreData
 
 class FetchRequestManager {
-  
+
   // Connector let:
   static let shared = FetchRequestManager()
-  
+
   // Online users:
   func fetchOnlineUsers() -> NSFetchRequest<User> {
     let request: NSFetchRequest<User> = User.fetchRequest()
     request.predicate = NSPredicate(format: "isOnline == YES")
     return request
   }
-  
+
   // User with ID:
   func fetchUserWithID(id: String) -> NSFetchRequest<User> {
     let request: NSFetchRequest<User> = User.fetchRequest()
     request.predicate = NSPredicate(format: "userId == %@", id)
     return request
   }
-  
+
   // Conversations:
   func fetchConversations() -> NSFetchRequest<Conversation> {
     let request: NSFetchRequest<Conversation> = Conversation.fetchRequest()
@@ -36,21 +36,21 @@ class FetchRequestManager {
     request.sortDescriptors = [onlineSortDescriptor, dateSortDescriptor]
     return request
   }
-  
+
   // Online conversations:
   func fetchOnlineConversations() -> NSFetchRequest<Conversation> {
     let request: NSFetchRequest<Conversation> = Conversation.fetchRequest()
     request.predicate = NSPredicate(format: "isOnline == YES")
     return request
   }
-  
+
   // Exact conversation:
   func fetchConversationWith(id: String) -> NSFetchRequest<Conversation> {
     let request: NSFetchRequest<Conversation> = Conversation.fetchRequest()
     request.predicate = NSPredicate(format: "conversationId == %@", id)
     return request
   }
-  
+
   // User's messages:
   func fetchMessagesFrom(conversationID: String) -> NSFetchRequest<Message> {
     let request: NSFetchRequest<Message> = Message.fetchRequest()

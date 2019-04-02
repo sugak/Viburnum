@@ -8,43 +8,43 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate{
-  
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     // Initial UI:
     initialUISettings()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     // Adding keyboard observers
     setUpObservers()
   }
-  
+
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     // Removing keyboard observers
     removeObservers()
   }
-  
+
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    
+
     // Layout for UI elements
     photoImageViewStyle(for: photoImageView)
   }
-  
+
   // Variables and constants:
   var userProfile: UserProfile!
   var storageManager = StorageManager()
-  
+
   // If in save progress flag:
   var dataSavingInProgress: Bool = false
   // If edit mode in progress:
   var editMode: Bool = false {
-    
+
     // UI settings for edit nor edit mode:
     didSet {
       editButtonOutlet.isHidden = !editButtonOutlet.isHidden
@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       descriptionTextView.isEditable = !descriptionTextView.isEditable
       nameTextField.autocorrectionType = .no
       descriptionTextView.autocorrectionType = .no
-      
+
       if editMode {
         // Setting up save buttons in edit mode:
         saveButton.isEnabled = false
@@ -82,68 +82,68 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   @IBOutlet var nameTextField: UITextField!
   @IBOutlet var descriptionTextView: UITextView!
-  
+
   // Special functions to check text changing of TextField and TextView:
   @IBAction func nameFieldDidChange(_ sender: Any) {
     saveButtonsControl()
   }
-  
+
   func textViewDidChange(_ textView: UITextView) {
     saveButtonsControl()
   }
-  
+
    // Actions:
   @IBAction func dismissButton(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
-  
+
   @IBAction func pushPhotoButton(_ sender: PhotoButton) {
     sender.buttonAnimation() // Making short button animation
     choosePhoto() // Opening ActionSheet menu
   }
-  
+
   @IBAction func pushEditButton(_ sender: UIButton) {
     editMode = !editMode
   }
-  
+
   @IBAction func pushSaveButton(_sender: UIButton) {
     saveUserProfile()
   }
-  
+
   @IBAction func pushCancelButton(_ sender: UIButton) {
      editMode = !editMode
   }
-  
+
   // Styling photo image view:
   func photoImageViewStyle (for image: UIImageView) {
     image.layer.cornerRadius = Constants.cornerRadius
     image.clipsToBounds = true
   }
-  
+
   // Photo uploading from Gallery or Camera
   func choosePhoto() {
     let choosePhotoMenu  = UIAlertController(title: nil, message: "Откуда взять фото?", preferredStyle: .actionSheet)
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
     let galleryButton = actionForPhotoPickUp(title: "Выбрать из галереи", sourceType: .photoLibrary)
     let cameraButton = actionForPhotoPickUp(title: "Сделать снимок", sourceType: .camera)
-    
+
     // Adding buttons on action sheet:
     choosePhotoMenu.addAction(cancelButton)
     choosePhotoMenu.addAction(galleryButton)
     choosePhotoMenu.addAction(cameraButton)
-    
+
     // Showing action sheet:
     present(choosePhotoMenu, animated: Constants.animated, completion: nil)
   }
-  
+
   // Function for action buttons to pick up photo from Gallery or Camera
   func actionForPhotoPickUp (title: String, sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
-    return UIAlertAction(title: title, style: .default, handler: { [weak self] (action) in
+    return UIAlertAction(title: title, style: .default, handler: { [weak self] (_) in
       if UIImagePickerController.isSourceTypeAvailable(sourceType) {
         let imagePicker  = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
-        
+
         self?.present(imagePicker, animated: Constants.animated, completion: nil)
         imagePicker.delegate = self // Using self delegate
       } else {
@@ -151,13 +151,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let photoFailedAlert = UIAlertController(title: "Ошибка", message: (sourceType == .camera) ? "На вашем смартфоне не работает камера или она не доступна" : "На вашем смартфоне не доступна галерея", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         photoFailedAlert.addAction(okButton)
-        self?.present(photoFailedAlert,animated: Constants.animated, completion: nil)
+        self?.present(photoFailedAlert, animated: Constants.animated, completion: nil)
       }
     })
   }
-  
+
   // imagePickerController delegate:
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     if let selectedImage  = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       photoImageView.image = selectedImage // Loading photo into ImageView
       photoImageView.contentMode = .scaleAspectFill //Saving ratio
@@ -165,34 +165,32 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     dismiss(animated: Constants.animated, completion: nil)
   }
-  
+
   // Finished with text entering:
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
-  
+
   // Hide keyboard on textView Return tap:
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    if string == "\n"
-    {
+    if string == "\n" {
       textField.resignFirstResponder()
       self.descriptionTextView.becomeFirstResponder()
       return true
     }
     return true
   }
-  
+
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    if text == "\n"
-    {
+    if text == "\n" {
       textView.resignFirstResponder()
       pushSaveButton(_sender: saveButton)
       return true
     }
     return true
   }
-  
+
   // Main save function for save options:
   private func saveUserProfile() {
     // UI settings:
@@ -201,15 +199,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       cancelButton.isEnabled = false
       activityIndicator.isHidden = false
       activityIndicator.startAnimating()
-    
+
     let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextView.text!, profileImage: photoImageView.image!)
-    
-    
+
     storageManager.saveProfile(profile: newProfile) { (error) in
       if error == nil {
         self.userProfile = newProfile
         let alert = UIAlertController(title: "Профиль сохранен", message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "ОК", style: .default) { action in
+        let okAction = UIAlertAction(title: "ОК", style: .default) { _ in
           if self.editMode {
             self.editMode = false
           } else {
@@ -237,14 +234,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       self.dataSavingInProgress = false
     }
   }
-  
+
   // Func to update profile:
   private func updateProfileInfo() {
     nameTextField.text = userProfile.name
     descriptionTextView.text = userProfile.description
     photoImageView.image = userProfile.profileImage
   }
-  
+
   // Func to load saved profile:
   private func loadUserProfile() {
     activityIndicator.startAnimating()
@@ -255,11 +252,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       self.updateProfileInfo()
     }
   }
-  
+
   // Func to check if text has been changed and apply to buttons state:
   private func saveButtonsControl() {
     if (!dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage)))) {
-      
+
       // Change button UI:
       saveButton.isEnabled = true
       saveButton.setTitleColor(UIColor.black, for: .normal)
@@ -269,21 +266,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       saveButton.setTitleColor(UIColor.gray, for: .normal)
     }
   }
-  
+
   // Backup func for the very initial settings:
   func initialUISettings() {
-    
+
     // Profile updating:
     loadUserProfile()
-    
+
     // Delegates:
     nameTextField.delegate = self
     descriptionTextView.delegate = self
-    
+
     // Hiding spinner:
     activityIndicator.isHidden = true
   }
-  
+
   // Keyboard handling stuff:
   private func setUpObservers() {
     NotificationCenter.default.addObserver(self,
@@ -295,7 +292,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                            name: UIResponder.keyboardWillHideNotification,
                                            object: nil)
   }
-  
+
   private func removeObservers() {
     NotificationCenter.default.removeObserver(self,
                                               name: UIResponder.keyboardWillShowNotification,
@@ -304,7 +301,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                               name: UIResponder.keyboardWillHideNotification,
                                               object: nil)
   }
-  
+
   @objc func keyboardWillShow(notification: NSNotification) {
     if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
       if self.view.frame.origin.y == 0 {
@@ -312,11 +309,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       }
     }
   }
-  
+
   @objc func keyboardWillHide(notification: NSNotification) {
     if self.view.frame.origin.y != 0 {
       self.view.frame.origin.y = 0
     }
   }
 }
-

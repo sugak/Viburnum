@@ -12,29 +12,29 @@ import CoreData
 class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
-  
+
   //fetchResultsController instance:
   var fetchResultsController: NSFetchedResultsController<Conversation>!
-  
+
   // Outlet for funny placeholder when on chat users:
   @IBOutlet var tablePlaceHolder: UIView!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
-    
+
     // Remove separator + large navbar title:
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
+
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
-    
+
     //Prepare for tableview placeholder:
     tableView.backgroundView = tablePlaceHolder
     tableView.backgroundView?.isHidden = true
-    
+
     // Initial conversations fetch:
     initialConversationFetching()
   }
@@ -43,11 +43,11 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
   }
-  
+
   func globalUpdate() {
     tableView.reloadData()
   }
-  
+
   // Initial dialogs fetching:
   func initialConversationFetching() {
     let request = FetchRequestManager.shared.fetchConversations()
@@ -60,16 +60,16 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       print("fetchConversations() method:   \(error)")
     }
   }
-  
+
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
       return 1
     }
-  
+
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
      return "Диалоги"
   }
-  
+
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if fetchResultsController.fetchedObjects?.count ?? 0 > 0 {
       tableView.backgroundView?.isHidden = true
@@ -81,7 +81,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
-    
+
     let conversation = fetchResultsController.object(at: indexPath)
     cell.name = conversation.user?.name
     cell.avatarSymbols = conversation.user?.name ?? "XX"
@@ -91,39 +91,39 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     cell.hasUnreadMessages = conversation.hasUnreadMessages
     return cell
   }
-  
+
   // Segue to chat:
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showConversation" {
       if let indexPath = tableView.indexPathForSelectedRow {
         let destinationController = segue.destination as!
         ConversationViewController
-        
+
         let conversation = fetchResultsController.object(at: indexPath)
         destinationController.blabberChat = conversation
-        
+
         // Transfer name into navbar:
         let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
         destinationController.navigationItem.title = cell.name
       }
     }
-    
+
     //Themes: segue to ThemeViewController:
     if segue.identifier == "themeMenu" {
       guard let navController = segue.destination as? UINavigationController else {return}
       let destination = navController.topViewController as! ThemesViewController
-      
+
       // Themes class protocol:
       destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
       self?.logThemeChanging(selectedTheme: selectedTheme) }
     }
   }
-  
+
   // Function for ThemesView delegate and closure:
   func logThemeChanging(selectedTheme: UIColor) {
     print(selectedTheme)
   }
-  
+
   //Themes: update function for current theme with User Defaults:
   func updateForCurrentTheme () {
     if let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") {
@@ -132,7 +132,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       UserDefaults.standard.setColor(value: UIColor.white, forKey: "currentTheme")
       updateForCurrentTheme()
     }
-    
+
     // Views updating:
     let windows = UIApplication.shared.windows
     for window in windows {
@@ -148,12 +148,12 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
 extension UserDefaults {
   func setColor(value: UIColor?, forKey: String) {
     guard let value = value else {
-      set(nil, forKey:  forKey)
+      set(nil, forKey: forKey)
       return
     }
     set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: forKey)
   }
-  func colorForKey(key:String) -> UIColor? {
+  func colorForKey(key: String) -> UIColor? {
     guard let data = data(forKey: key), let color = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
       else { return nil }
     return color

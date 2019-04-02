@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension Conversation {
-  
+
   static func insertConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation {
     guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else {
       fatalError("Unable to insert Conversation")
@@ -18,7 +18,7 @@ extension Conversation {
     conversation.conversationId = id
     return conversation
   }
-  
+
   static func findConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation? {
     let fetchConversationWithId = FetchRequestManager.shared.fetchConversationWith(id: id)
     do {
@@ -35,13 +35,13 @@ extension Conversation {
       return nil
     }
   }
-    
+
   // Find or insert Conversation:
   static func findOrInsertConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation {
     guard let conversation = Conversation.findConversationWith(id: id, in: context) else {
-      return Conversation.insertConversationWith(id:id, in: context)
+      return Conversation.insertConversationWith(id: id, in: context)
     }
     return conversation
   }
-  
+
 }

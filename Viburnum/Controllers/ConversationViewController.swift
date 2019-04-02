@@ -10,20 +10,20 @@ import UIKit
 import CoreData
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, UITextFieldDelegate {
-  
+
   // User for data transfer:
   var blabberChat: Conversation!
-  
+
   // FetchResultsController:
   var fetchResultsController: NSFetchedResultsController<Message>!
-  
+
   // Outlets:
   @IBOutlet var tableView: UITableView!
   @IBOutlet var sendButton: UIButton!
   @IBOutlet var messageInputField: UITextField!
   @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var customView: UIView!
-  
+
   // Actions:
   @IBAction func messageInputFieldChanged(_ sender: Any) {
     if (messageInputField.text != "") && (blabberChat.isOnline) {
@@ -32,13 +32,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       sendButton.isEnabled = false
     }
   }
-  
+
   // Send message:
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
     let conversationId = blabberChat.conversationId
     messageInputField.resignFirstResponder()
-    
+
     CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: conversationId!) { success, error in
       if success {
         self.messageInputField.text = ""
@@ -53,37 +53,37 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       }
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
     self.tableView.delegate = self
-    
+
     // Remove separator:
     self.tableView.separatorStyle = .none
-    
+
     // Making large navbar title:
     navigationController?.navigationBar.prefersLargeTitles = true
-    
+
     // Tuning row height:
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
-    
+
     // Tuning message input field:
     messageInputField.clipsToBounds = true
-    
+
     // Tuning keyboard:
     keyBoardSettings()
-    
+
     //TextField delegate:
     messageInputField.delegate = self
-    
+
     CommunicationManager.shared.delegate = self
-    
+
     // Initial messages fetching:
     initialMessagesFetching()
   }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     self.customView.superview?.setNeedsLayout()
@@ -92,15 +92,15 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     super.viewWillAppear(Constants.animated)
     blabberChat.hasUnreadMessages = false
     scrollChatDown()
-    
+
     // Initial sendButton state:
     sendButton.isEnabled = false
   }
-  
+
   override func viewWillDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self)
   }
-  
+
   private func initialMessagesFetching() {
     guard let conversationId = blabberChat.conversationId else { return }
     fetchResultsController = NSFetchedResultsController(fetchRequest: FetchRequestManager.shared.fetchMessagesFrom(conversationID: conversationId), managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -110,16 +110,16 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     } catch {
     }
   }
-  
+
   // Delegate funcntion:
   func globalUpdate() {
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
-    
+
     // Scroll down to the last message:
     scrollChatDown()
   }
-  
+
   // Scroll down to the last message:
   func scrollChatDown() {
     guard let fetchedObjects = fetchResultsController.fetchedObjects else { return }
@@ -128,7 +128,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
   }
-  
+
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let count = fetchResultsController.fetchedObjects?.count {
@@ -137,7 +137,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         return 0
       }
     }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // Choosing between cell prototype:
     let message = fetchResultsController.object(at: indexPath)
@@ -152,26 +152,24 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     cell.textDate = message.date
     return cell
   }
-  
-  
+
   func keyBoardSettings() {
     // Keyboard notifications:
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = -270
       // Scroll down to the last message:
       self.scrollChatDown()
     }
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = 0.0
       // Scroll down to the last message:
       self.scrollChatDown()
     }
   }
-  
+
   // Hide keyboard on textView Return tap:
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    if string == "\n"
-    {
+    if string == "\n" {
       sendMessageButton(sendButton)
       messageInputField.resignFirstResponder()
       // Scroll down to the last message:
@@ -207,7 +205,3 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     }
   }
 }
-
-
-
-

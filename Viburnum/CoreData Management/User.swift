@@ -27,7 +27,7 @@ extension User {
       if !users.isEmpty {
         return users.first!
       } else {
-        return User.insertUserWith(id:id, in: context)
+        return User.insertUserWith(id: id, in: context)
       }
     } catch {
       assertionFailure("Unable to fetch users")

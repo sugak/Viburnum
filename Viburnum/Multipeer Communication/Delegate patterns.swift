@@ -9,20 +9,20 @@
 import Foundation
 
 protocol Communicator {
-  func sendMessage(string: String, to UserID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
+  func sendMessage(string: String, to UserID: String, completionHandler: ((_ success: Bool, _ error: Error?) -> Void)?)
   var delegate: CommunicatorDelegate? {get set}
   var online: Bool {get set}
 }
 
-protocol CommunicatorDelegate: class  {
+protocol CommunicatorDelegate: class {
   // Discovering:
   func didFoundUser(userID: String, userName: String?)
   func didLostUser(userID: String)
-  
+
   // Errors:
   func failedToStartBrowsingForUsers(error: Error)
   func failedToStartAdvertisingForUsers(error: Error)
-  
+
   // Messages:
   func didReceiveMessage(text: String, fromUser: String, toUser: String)
 }
@@ -31,7 +31,3 @@ protocol ManagerDelegate {
   // Manager delegation functions:
   func globalUpdate()
 }
-
-
-
-

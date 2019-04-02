@@ -22,14 +22,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-  
-  //MARK: - ShowLog()
+
+  // MARK: - ShowLog()
     func showLog (from: String, to: String, caller: String = #function) {
         #if SHOWLOGS
         print("\n App moved from \(from) to \(to) with: \(caller)")
         #endif
     }
-  
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       showLog(from: "Not running", to: "Foreground Inactive")
       return true
@@ -56,4 +56,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
