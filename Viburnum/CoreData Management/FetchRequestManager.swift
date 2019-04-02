@@ -11,7 +11,7 @@ import CoreData
 
 class FetchRequestManager {
 
-  // Connector let:
+  // Connector:
   static let shared = FetchRequestManager()
 
   // Online users:
