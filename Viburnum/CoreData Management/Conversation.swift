@@ -13,14 +13,14 @@ extension Conversation {
   
   static func insertConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation {
     guard let conversation = NSEntityDescription.insertNewObject(forEntityName: "Conversation", into: context) as? Conversation else {
-      fatalError("Can't insert Conversation")
+      fatalError("Unable to insert Conversation")
     }
     conversation.conversationId = id
     return conversation
   }
   
   static func findConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation? {
-    let fetchConversationWithId = FetchRequestsManager.shared.fetchConversationWith(id: id)
+    let fetchConversationWithId = FetchRequestManager.shared.fetchConversationWith(id: id)
     do {
       let conversationsWithId = try context.fetch(fetchConversationWithId)
       assert(conversationsWithId.count < 2, "Conversations with id: \(id) more than 1")
@@ -31,18 +31,18 @@ extension Conversation {
         return nil
       }
     } catch {
-      assertionFailure("Can't fetch conversations")
+      assertionFailure("Unable to fetch conversations")
       return nil
     }
   }
   
   static func findOnlineConversations(in context: NSManagedObjectContext) -> [Conversation]? {
-    let fetchRequest = FetchRequestsManager.shared.fetchOnlineConversations()
+    let fetchRequest = FetchRequestManager.shared.fetchOnlineConversations()
     do {
       let conversations = try context.fetch(fetchRequest)
       return conversations
     } catch {
-      assertionFailure("Can't fetch conversations")
+      assertionFailure("Unable to fetch conversations")
       return nil
     }
   }

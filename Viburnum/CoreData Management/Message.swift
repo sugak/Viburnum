@@ -12,17 +12,17 @@ import CoreData
 extension Message {
   static func insertNewMessage(in context: NSManagedObjectContext) -> Message {
     guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else {
-      fatalError("Can't create Message entry")
+      fatalError("Unable to create message entry")
     }
     return message
   }
   static func findMessagesFrom(conversationId: String, in context: NSManagedObjectContext) -> [Message]? {
-    let request = FetchRequestsManager.shared.fetchMessagesFrom(conversationID: conversationId)
+    let request = FetchRequestManager.shared.fetchMessagesFrom(conversationID: conversationId)
     do {
       let messages = try context.fetch(request)
       return messages
     } catch {
-      assertionFailure("Can't fetch messages")
+      assertionFailure("Unable to fetch messages")
       return nil
     }
   }

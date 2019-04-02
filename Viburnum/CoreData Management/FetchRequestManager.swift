@@ -9,8 +9,10 @@
 import Foundation
 import CoreData
 
-class FetchRequestsManager {
-  static let shared = FetchRequestsManager()
+class FetchRequestManager {
+  
+  // Connector let:
+  static let shared = FetchRequestManager()
   
   // Online users:
   func fetchOnlineUsers() -> NSFetchRequest<User> {

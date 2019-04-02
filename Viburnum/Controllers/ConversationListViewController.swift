@@ -13,6 +13,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
   
+  //fetchResultsController instance:
   var fetchResultsController: NSFetchedResultsController<Conversation>!
   
   // Outlet for funny placeholder when on chat users:
@@ -34,45 +35,43 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     tableView.backgroundView = tablePlaceHolder
     tableView.backgroundView?.isHidden = true
     
-    fetchConversations()
+    // Initial conversations fetch:
+    initialConversationFetching()
   }
-  
   override func viewWillAppear(_ animated: Bool) {
     super .viewWillAppear(Constants.animated)
-    
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
- //   globalUpdate()
   }
   
   func globalUpdate() {
     // Data transfer from Manager:
-    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
-    sortBlabbers()
+//    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
+//    sortBlabbers()
     tableView.reloadData()
   }
   
-  // Sort function:
-  func sortBlabbers() {
-    blabbers.sort(by: sortFunc(first:second:))
-  }
-  
-  func sortFunc(first: Blabber, second: Blabber) -> Bool {
-    if let firstDate = first.messageDate.last, let firstName = first.name {
-      if let secondDate = second.messageDate.last, let secondName = second.name {
-        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
-          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
-        }
-        return firstName > secondName
-      }
-      return true
-    } else  {
-      return false
-    }
-  }
+//  // Sort function:
+//  func sortBlabbers() {
+//    blabbers.sort(by: sortFunc(first:second:))
+//  }
+//
+//  func sortFunc(first: Blabber, second: Blabber) -> Bool {
+//    if let firstDate = first.messageDate.last, let firstName = first.name {
+//      if let secondDate = second.messageDate.last, let secondName = second.name {
+//        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
+//          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
+//        }
+//        return firstName > secondName
+//      }
+//      return true
+//    } else  {
+//      return false
+//    }
+//  }
 
-  func fetchConversations() {
-    let request = FetchRequestsManager.shared.fetchConversations()
+  func initialConversationFetching() {
+    let request = FetchRequestManager.shared.fetchConversations()
     request.fetchBatchSize = 20
     fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
     fetchResultsController.delegate = self
@@ -83,18 +82,13 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     }
   }
   
-  
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
       return 1
     }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//    if blabbers.count > 0 {
-     return "Online"
-//    } else {
-//      return " "
-//    }
+     return "Диалоги"
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +97,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     } else {
       tableView.backgroundView?.isHidden = false
     }
-    return fetchResultsController.fetchedObjects?.count ?? 0 //blabbers.count
+    return fetchResultsController.fetchedObjects?.count ?? 0
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -127,19 +121,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
         
         let conversation = fetchResultsController.object(at: indexPath)
         destinationController.blabberChat = conversation
-//        if userConversation.user?.name == "" {
-//          conversationViewController.navigationItem.title = "No name"
-//        } else {
-//          conversationViewController.navigationItem.title = userConversation.user?.name
-//        }
         
         // Transfer name into navbar:
         let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
         destinationController.navigationItem.title = cell.name
-        
-//        // Tranfer blabber info:
-//        let blabberChat = blabbers[indexPath.row]
-//        destinationController.blabberChat = blabberChat
       }
     }
     

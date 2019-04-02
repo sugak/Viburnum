@@ -12,13 +12,13 @@ import CoreData
 extension User {
   static func insertUserWith(id: String, in context: NSManagedObjectContext) -> User {
     guard let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User else {
-      fatalError("Can't insert User")
+      fatalError("Unable to insert User")
     }
     user.userId = id
     return user
   }
   static func findOrInsertUser(id: String, in context: NSManagedObjectContext) -> User? {
-    let request = FetchRequestsManager.shared.fetchUserWithID(id: id)
+    let request = FetchRequestManager.shared.fetchUserWithID(id: id)
     do {
       let users = try context.fetch(request)
       assert(users.count < 2, "Users with id \(id) more than 1")
@@ -28,7 +28,7 @@ extension User {
         return User.insertUserWith(id:id, in: context)
       }
     } catch {
-      assertionFailure("Can't fetch users")
+      assertionFailure("Unable to fetch users")
       return nil
     }
   }
