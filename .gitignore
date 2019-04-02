@@ -28,3 +28,6 @@ xcuserdata/
 
 # CocoaPods
 Pods/
+
+# Mac OS X
+*.DS_Store
