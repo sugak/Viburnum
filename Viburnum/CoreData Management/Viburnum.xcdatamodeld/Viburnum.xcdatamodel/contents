@@ -9,7 +9,15 @@
         <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isOnline" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="messageOwner" inverseEntity="Message" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="conversation" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
+        <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isIncome" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messageOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="conversationId" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +29,8 @@
     <fetchRequest name="AppUser" entity="AppUser"/>
     <elements>
         <element name="AppUser" positionX="-11988.265625" positionY="-13388.4140625" width="128" height="90"/>
+        <element name="Conversation" positionX="-11979" positionY="-13356" width="128" height="120"/>
         <element name="User" positionX="-11988" positionY="-13365" width="128" height="120"/>
-        <element name="Conversation" positionX="-11979" positionY="-13356" width="128" height="105"/>
+        <element name="Message" positionX="-11979" positionY="-13329" width="128" height="120"/>
     </elements>
 </model>
