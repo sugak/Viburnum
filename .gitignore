@@ -26,8 +26,5 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# CocoaPods
-Pods/
-
 # Mac OS X
 *.DS_Store
