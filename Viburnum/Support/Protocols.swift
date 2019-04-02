@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ConversationCellConfiguration : AnyObject {
+protocol ConversationCellConfiguration: AnyObject {
   var name: String? {get set}
   var message: String? {get set}
   var date: Date? {get set}
@@ -20,5 +20,3 @@ protocol messageCellConfiguration: AnyObject {
   var textMess: String? {get set}
   var textDate: Date? {get set}
 }
-
-

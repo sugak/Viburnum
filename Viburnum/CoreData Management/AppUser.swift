@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 extension AppUser {
-  
+
   // Insert function:
   static func insertAppUser(in context: NSManagedObjectContext) -> AppUser? {
     if let appUser = NSEntityDescription.insertNewObject(forEntityName: "AppUser", into: context) as? AppUser {
@@ -19,7 +19,7 @@ extension AppUser {
     }
     return nil
   }
-  
+
   // Fetch request:
   static func fetchRequestAppUser(model: NSManagedObjectModel) -> NSFetchRequest<AppUser>? {
     let templateName = "AppUser"
@@ -29,10 +29,10 @@ extension AppUser {
     }
     return fetchRequest
   }
-  
+
   // Find or insert func:
   static func findOrInsertAppUser(in context: NSManagedObjectContext) -> AppUser? {
-    
+
     guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
       print("Model is not available in context!")
       assert(false)
@@ -42,7 +42,7 @@ extension AppUser {
     guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
       return nil
     }
-    
+
     context.performAndWait {
           do {
             let results = try context.fetch(fetchRequest)
@@ -53,7 +53,7 @@ extension AppUser {
           } catch {
             print("Failed to fetch AppUser: \(error)")
           }
-      
+
           if appUser == nil {
             appUser = AppUser.insertAppUser(in: context)
           }

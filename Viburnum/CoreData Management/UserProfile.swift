@@ -15,8 +15,3 @@ struct UserProfile {
   var description: String
   var profileImage: UIImage
 }
-
-
-
-
-

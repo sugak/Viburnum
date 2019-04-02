@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		286A996B2252BBED000CF970 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996A2252BBED000CF970 /* User.swift */; };
+		286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996C2252BC5C000CF970 /* FetchRequestManager.swift */; };
+		286A996F2252BCCB000CF970 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996E2252BCCB000CF970 /* Conversation.swift */; };
 		287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C48EC2220636900256F0B /* ConversationListViewController.swift */; };
 		287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40BE2219C61400C87D11 /* PhotoButton.swift */; };
 		287F40C22219D4D300C87D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40C02219CF8C00C87D11 /* Constants.swift */; };
+		288446E6225349740095D24D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288446E5225349740095D24D /* Message.swift */; };
 		288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288DEA79220C25AD007D5263 /* AppDelegate.swift */; };
 		288DEA7F220C25AD007D5263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA7D220C25AD007D5263 /* Main.storyboard */; };
 		288DEA81220C25AF007D5263 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA80220C25AF007D5263 /* Assets.xcassets */; };
@@ -28,16 +32,21 @@
 		28C5982A224A2F6800CA37D3 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C59829224A2F6800CA37D3 /* AppUser.swift */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
 		28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5EC72224A1AAA00B0F271 /* StorageManager.swift */; };
-		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
+		28FC00122222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */; };
 		28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */; };
 		28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */; };
 		28FF0CC92238D8D400ECF643 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* UserProfile.swift */; };
+		ADA4CCC99AAFCFEFCA42DD28 /* Pods_Viburnum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A0BAE113041C1852A85D863 /* Pods_Viburnum.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		286A996A2252BBED000CF970 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		286A996C2252BC5C000CF970 /* FetchRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestManager.swift; sourceTree = "<group>"; };
+		286A996E2252BCCB000CF970 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		287C48EC2220636900256F0B /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		287F40BE2219C61400C87D11 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		287F40C02219CF8C00C87D11 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		288446E5225349740095D24D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		288DEA76220C25AD007D5263 /* Viburnum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viburnum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288DEA79220C25AD007D5263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		288DEA7E220C25AD007D5263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,10 +67,14 @@
 		28C59829224A2F6800CA37D3 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28E5EC72224A1AAA00B0F271 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
+		28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.temp_caseinsensitive_rename.swift; sourceTree = "<group>"; };
 		28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Viburnum.xcdatamodel; sourceTree = "<group>"; };
 		28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		28FF0CC82238D8D400ECF643 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		39B5720D259BE3CF0A48F2F0 /* Pods-Viburnum.showlogs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viburnum.showlogs.xcconfig"; path = "Target Support Files/Pods-Viburnum/Pods-Viburnum.showlogs.xcconfig"; sourceTree = "<group>"; };
+		4A0BAE113041C1852A85D863 /* Pods_Viburnum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viburnum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F3862315A27BE71FF4BA33 /* Pods-Viburnum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viburnum.release.xcconfig"; path = "Target Support Files/Pods-Viburnum/Pods-Viburnum.release.xcconfig"; sourceTree = "<group>"; };
+		780C7E9A86A18165A0AAF488 /* Pods-Viburnum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viburnum.debug.xcconfig"; path = "Target Support Files/Pods-Viburnum/Pods-Viburnum.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA4CCC99AAFCFEFCA42DD28 /* Pods_Viburnum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +94,8 @@
 			children = (
 				288DEA78220C25AD007D5263 /* Viburnum */,
 				288DEA77220C25AD007D5263 /* Products */,
+				BF81C5B16558BA94491B9C05 /* Pods */,
+				39CADA6361CC08155C073CD0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,7 +137,7 @@
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
 				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
 				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
-				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
+				28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */,
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 			);
@@ -166,10 +182,32 @@
 				28E5EC72224A1AAA00B0F271 /* StorageManager.swift */,
 				28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */,
 				28C59829224A2F6800CA37D3 /* AppUser.swift */,
+				288446E5225349740095D24D /* Message.swift */,
 				28FF0CC82238D8D400ECF643 /* UserProfile.swift */,
 				28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */,
+				286A996A2252BBED000CF970 /* User.swift */,
+				286A996E2252BCCB000CF970 /* Conversation.swift */,
+				286A996C2252BC5C000CF970 /* FetchRequestManager.swift */,
 			);
 			path = "CoreData Management";
+			sourceTree = "<group>";
+		};
+		39CADA6361CC08155C073CD0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BAE113041C1852A85D863 /* Pods_Viburnum.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF81C5B16558BA94491B9C05 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				780C7E9A86A18165A0AAF488 /* Pods-Viburnum.debug.xcconfig */,
+				39B5720D259BE3CF0A48F2F0 /* Pods-Viburnum.showlogs.xcconfig */,
+				50F3862315A27BE71FF4BA33 /* Pods-Viburnum.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +217,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 288DEA88220C25AF007D5263 /* Build configuration list for PBXNativeTarget "Viburnum" */;
 			buildPhases = (
+				28F3FF2B2253E47F00E9D2A2 /* ShellScript */,
+				7C4CA0D41B8F09D70371A100 /* [CP] Check Pods Manifest.lock */,
 				288DEA72220C25AD007D5263 /* Sources */,
 				288DEA73220C25AD007D5263 /* Frameworks */,
 				288DEA74220C25AD007D5263 /* Resources */,
@@ -239,6 +279,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		28F3FF2B2253E47F00E9D2A2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		7C4CA0D41B8F09D70371A100 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Viburnum-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		288DEA72220C25AD007D5263 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -253,9 +335,12 @@
 				28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */,
 				2898852B223E609A00200873 /* MultiPeerCommunicator.swift in Sources */,
 				28C5982A224A2F6800CA37D3 /* AppUser.swift in Sources */,
+				288446E6225349740095D24D /* Message.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
-				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,
+				286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */,
+				28FC00122222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift in Sources */,
 				288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */,
+				286A996F2252BCCB000CF970 /* Conversation.swift in Sources */,
 				2898B8E422364BDB00EAF4A2 /* UIProfileButton.swift in Sources */,
 				287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */,
 				289C404722310B4900CEF579 /* Themes.swift in Sources */,
@@ -266,6 +351,7 @@
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
+				286A996B2252BBED000CF970 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +496,7 @@
 		};
 		288DEA89220C25AF007D5263 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 780C7E9A86A18165A0AAF488 /* Pods-Viburnum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -431,6 +518,7 @@
 		};
 		288DEA8A220C25AF007D5263 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50F3862315A27BE71FF4BA33 /* Pods-Viburnum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -512,6 +600,7 @@
 		};
 		288DEA90220C69B8007D5263 /* ShowLogs */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39B5720D259BE3CF0A48F2F0 /* Pods-Viburnum.showlogs.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -9,19 +9,19 @@
 import UIKit
 
 class ThemesViewController: UIViewController {
-  
+
   let model = Themes()
   let themesQueue = DispatchQueue(label: "com.MaksimSugak", qos: .background)
-  var themeProtocol: ((UIColor) -> ())?
+  var themeProtocol: ((UIColor) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+
       // Setting current theme color to the view background:
       guard let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") else {return}
       self.view.backgroundColor = currentTheme
     }
-  
+
   // Function for all updates on buttons tap:
   func applyTheme(with color: UIColor) {
     self.view.backgroundColor = color
@@ -29,8 +29,7 @@ class ThemesViewController: UIViewController {
     themesQueue.async {
       UserDefaults.standard.setColor(value: color, forKey: "currentTheme")
     }
-    
-    
+
     // All views update:
     let windows = UIApplication.shared.windows
     for window in windows {
@@ -41,24 +40,21 @@ class ThemesViewController: UIViewController {
     }
     themeProtocol?(color)
   }
-  
+
   // Actions:
   @IBAction func backButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
-  
+
   @IBAction func themeButtonTap(_ sender: Any) {
     if let button = sender as? UIButton {
       switch button.tag {
       case 1:
         applyTheme(with: model.theme1)
-        break
       case 2:
         applyTheme(with: model.theme2)
-        break
       case 3:
         applyTheme(with: model.theme3)
-        break
       default:
         break
       }

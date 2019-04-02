@@ -7,163 +7,187 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, UITextFieldDelegate {
-  
+
   // User for data transfer:
-  var blabberChat: Blabber!
+  var blabberChat: Conversation!
+
+  // FetchResultsController:
+  var fetchResultsController: NSFetchedResultsController<Message>!
   
+  //Keyboard observers:
+  var observerShow: AnyObject?
+  var observerHide: AnyObject?
+
   // Outlets:
   @IBOutlet var tableView: UITableView!
   @IBOutlet var sendButton: UIButton!
   @IBOutlet var messageInputField: UITextField!
   @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var customView: UIView!
-  
+
   // Actions:
-  
   @IBAction func messageInputFieldChanged(_ sender: Any) {
-    if (messageInputField.text != "") && (blabberChat.online) {
+    if (messageInputField.text != "") && (blabberChat.isOnline) {
       sendButton.isEnabled = true
     } else {
       sendButton.isEnabled = false
     }
   }
-  
+
+  // Send message:
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
+    let conversationId = blabberChat.conversationId
     messageInputField.resignFirstResponder()
-    
-    CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: blabberChat.id) { success, error in
+
+    CommunicationManager.shared.multiPeerCommunicator.sendMessage(string: messageToSend!, to: conversationId!) { success, error in
       if success {
         self.messageInputField.text = ""
         self.sendButton.isEnabled = false
-        self.tableView.reloadData()
       }
       if let error = error {
         self.view.endEditing(true)
         let alert = UIAlertController(title: "Ошибка при отправке сообщения: \(error.localizedDescription)", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        let action = UIAlertAction(title: "ОК", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: Constants.animated, completion: nil)
       }
     }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
     self.tableView.delegate = self
-    
+
     // Remove separator:
     self.tableView.separatorStyle = .none
-    
+
     // Making large navbar title:
     navigationController?.navigationBar.prefersLargeTitles = true
-    
+
     // Tuning row height:
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
-    
+
     // Tuning message input field:
     messageInputField.clipsToBounds = true
-    
-    // Tuning keyboard:
-    keyBoardSettings()
-    
+
     //TextField delegate:
     messageInputField.delegate = self
 
+    CommunicationManager.shared.delegate = self
+
+    // Initial messages fetching:
+    initialMessagesFetching()
   }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(self)
-    clearChat()
-  }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     self.customView.superview?.setNeedsLayout()
   }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(Constants.animated)
     blabberChat.hasUnreadMessages = false
-    CommunicationManager.shared.delegate = self
-    globalUpdate()
+    scrollChatDown()
     
+    // Tuning keyboard:
+    keyBoardSettings()
+
     // Initial sendButton state:
     sendButton.isEnabled = false
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    // Removing keyboard observers
+    removeObservers()
+  }
+
+  private func initialMessagesFetching() {
+    guard let conversationId = blabberChat.conversationId else { return }
+    fetchResultsController = NSFetchedResultsController(fetchRequest: FetchRequestManager.shared.fetchMessagesFrom(conversationID: conversationId), managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+    fetchResultsController.delegate = self
+    do {
+      try fetchResultsController.performFetch()
+    } catch {
+    }
+  }
+
   // Delegate funcntion:
   func globalUpdate() {
-    if !blabberChat.online {
-      // Cleaning messages:
-      clearChat()
-    }
-    
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
-    
+
     // Scroll down to the last message:
     scrollChatDown()
   }
-  
-  func clearChat () {
-    sendButton.isEnabled = false
-    blabberChat.message.removeAll()
-    blabberChat.messageDate.removeAll()
-    blabberChat.messageType.removeAll()
-  }
-  
+
   // Scroll down to the last message:
   func scrollChatDown() {
-    if blabberChat.message.count != 0 {
-      let indexPath = IndexPath(row: blabberChat.message.count - 1, section: 0)
-      tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    guard let fetchedObjects = fetchResultsController.fetchedObjects else { return }
+    if !fetchedObjects.isEmpty {
+      let indexPath = IndexPath(row: fetchedObjects.count - 1, section: 0)
+      tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
   }
-  
-  
+
   // Tableview functions:
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // Rows number as in array:
-    return blabberChat?.message.count ?? 0
-  }
-  
+    if let count = fetchResultsController.fetchedObjects?.count {
+      return count
+    } else {
+        return 0
+      }
+    }
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // Choosing between cell prototype:
+    let message = fetchResultsController.object(at: indexPath)
     var cellID = ""
-    if blabberChat.messageType[indexPath.row] == .income {
+    if message.isIncome {
       cellID = "incomeCell"
     } else {
       cellID = "outcomeCell"
     }
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
-    cell.textMess = blabberChat.message[indexPath.row]
-    cell.textDate = blabberChat.messageDate[indexPath.row]
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageViewCell else {
+      return MessageViewCell()
+    }
+    cell.textMess = message.text
+    cell.textDate = message.date
     return cell
   }
   
+  // Keyboard notifications:
   func keyBoardSettings() {
-    // Keyboard notifications:
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+   observerShow = NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = -270
       // Scroll down to the last message:
       self.scrollChatDown()
     }
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+    observerHide = NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = 0.0
       // Scroll down to the last message:
       self.scrollChatDown()
     }
   }
   
+  private func removeObservers() {
+    if let observer = observerShow {
+      NotificationCenter.default.removeObserver(observer)
+    }
+    if let observer = observerHide {
+      NotificationCenter.default.removeObserver(observer)
+    }
+
+  }
+
   // Hide keyboard on textView Return tap:
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    if string == "\n"
-    {
+    if string == "\n" {
       sendMessageButton(sendButton)
       messageInputField.resignFirstResponder()
       // Scroll down to the last message:
@@ -174,5 +198,28 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   }
 }
 
-
-
+// FetchResultController extention:
+extension ConversationViewController: NSFetchedResultsControllerDelegate {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+  }
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
+    scrollChatDown()
+  }
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                  didChange anObject: Any, at indexPath: IndexPath?,
+                  for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    switch type {
+    case .delete:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+    case .update:
+      tableView.reloadRows(at: [indexPath!], with: .none)
+    case .insert:
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    case .move:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    }
+  }
+}

@@ -9,14 +9,14 @@
 import UIKit
 
 class ConversationListTableViewCell: UITableViewCell, ConversationCellConfiguration {
-  
+
   // Conform to protocol. Setting name:
   var name: String? {
     didSet {
       talkerNameLabel.text = name
     }
   }
-  
+
   // Conform to protocol. Setting message:
   var message: String? {
     didSet {
@@ -28,11 +28,11 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
       }
     }
   }
-  
+
   // Conform to protocol. Setting date:
   var date: Date? {
     didSet {
-      
+
       // Checking date and time for date format:
       if date != nil {
         let dateFormatter = DateFormatter()
@@ -47,7 +47,7 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
       }
     }
   }
-  
+
   // Conform to protocol. Checking online status:
   var online: Bool = false {
     didSet {
@@ -58,22 +58,24 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
       }
     }
   }
-  
+
   // Conform to protocol. Checking if unread messages there:
   var hasUnreadMessages = false {
     didSet {
       fontUpdate()
     }
   }
-  
+
   // Function to get initials of name for avatar:
   var avatarSymbols = "" {
     didSet {
-      let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
-      avatarLabel.text = initials
+      if !avatarSymbols.isEmpty {
+        let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
+        avatarLabel.text = initials
+      }
     }
   }
-  
+
   // Function to update last message font:
   private func fontUpdate () {
     lastMessageLabel.textColor = UIColor.darkGray
@@ -88,19 +90,19 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
         }
       }
   }
-  
+
   // Outlets:
   @IBOutlet var talkerNameLabel: UILabel!
   @IBOutlet var lastMessageLabel: UILabel!
   @IBOutlet var lastMessageDateLabel: UILabel!
   @IBOutlet var avatarLabel: UILabel!
-  
+
   override func layoutSubviews() {
     super.layoutSubviews()
-    
+
     // No selection for rows:
     self.selectionStyle = .none
-    
+
     // Setting up the avatar label:
     avatarLabel.layer.cornerRadius = 25.0
     avatarLabel.clipsToBounds = true

@@ -7,144 +7,133 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationListViewController: UITableViewController, ManagerDelegate {
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
-  
+
+  //fetchResultsController instance:
+  var fetchResultsController: NSFetchedResultsController<Conversation>!
+
   // Outlet for funny placeholder when on chat users:
   @IBOutlet var tablePlaceHolder: UIView!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.tableView.dataSource = self
-    
+
     // Remove separator + large navbar title:
     self.tableView.separatorStyle = .none
     navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationController!.navigationBar.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    
+
     //Themes: calling update function for current theme:
     updateForCurrentTheme()
-    
+
     //Prepare for tableview placeholder:
     tableView.backgroundView = tablePlaceHolder
     tableView.backgroundView?.isHidden = true
+
+    // Initial conversations fetch:
+    initialConversationFetching()
   }
-  
   override func viewWillAppear(_ animated: Bool) {
     super .viewWillAppear(Constants.animated)
-    
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
-    globalUpdate()
   }
-  
+
   func globalUpdate() {
-    // Data transfer from Manager:
-    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
-    sortBlabbers()
     tableView.reloadData()
   }
-  
-  // Sort function:
-  func sortBlabbers() {
-    blabbers.sort(by: sortFunc(first:second:))
-  }
-  
-  func sortFunc(first: Blabber, second: Blabber) -> Bool {
-    if let firstDate = first.messageDate.last, let firstName = first.name {
-      if let secondDate = second.messageDate.last, let secondName = second.name {
-        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
-          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
-        }
-        return firstName > secondName
-      }
-      return true
-    } else  {
-      return false
+
+  // Initial dialogs fetching:
+  func initialConversationFetching() {
+    let request = FetchRequestManager.shared.fetchConversations()
+    request.fetchBatchSize = 20
+    fetchResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+    fetchResultsController.delegate = self
+    do {
+      try fetchResultsController.performFetch()
+    } catch let error {
+      print("fetchConversations() method:   \(error)")
     }
   }
-  
-  // ----------- Другая сортировка, которая не работает ---------
-  
-  //  func sortFunc (first: Blabber, second: Blabber) -> Bool {
-  //      if first.messageDate.last != second.messageDate.last {
-  //        return first.messageDate.last!.timeIntervalSinceNow > second.messageDate.last!.timeIntervalSinceNow
-  //      } else {
-  //        return first.name! > second.name!
-  //      }
-  //  }
-  
-  
+
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
-      return 1 //sections.count
+      return 1
     }
-  
+
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if blabbers.count > 0 {
-     return "Online"
-    } else {
-      return " "
-    }
+     return "Диалоги"
   }
-  
+
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if blabbers.count > 0 {
+    if fetchResultsController.fetchedObjects?.count ?? 0 > 0 {
       tableView.backgroundView?.isHidden = true
     } else {
       tableView.backgroundView?.isHidden = false
     }
-    return blabbers.count //TalkerName[section].count
+    return fetchResultsController.fetchedObjects?.count ?? 0
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
-    
-    let conversation = blabbers[indexPath.row]
-    cell.name = conversation.name
-    cell.avatarSymbols = conversation.name ?? "XX"
-    cell.message = conversation.message.last
-    cell.date = conversation.messageDate.last
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as? ConversationListTableViewCell else {
+      return UITableViewCell()
+    }
+
+    let conversation = fetchResultsController.object(at: indexPath)
+    cell.name = conversation.user?.name
+    cell.avatarSymbols = conversation.user?.name ?? "XX"
+    cell.message = conversation.lastMessage?.text
+    cell.date = conversation.date
+    cell.online = conversation.isOnline
     cell.hasUnreadMessages = conversation.hasUnreadMessages
     return cell
   }
-  
+
   // Segue to chat:
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showConversation" {
       if let indexPath = tableView.indexPathForSelectedRow {
-        let destinationController = segue.destination as!
-        ConversationViewController
-        
+        guard let destinationController = segue.destination as?
+          ConversationViewController else {
+            return
+        }
+
+        let conversation = fetchResultsController.object(at: indexPath)
+        destinationController.blabberChat = conversation
+
         // Transfer name into navbar:
-        let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ConversationListTableViewCell else {
+          return
+        }
         destinationController.navigationItem.title = cell.name
-        
-        // Tranfer blabber info:
-        let blabberChat = blabbers[indexPath.row]
-        destinationController.blabberChat = blabberChat
       }
     }
-    
+
     //Themes: segue to ThemeViewController:
     if segue.identifier == "themeMenu" {
-      guard let navController = segue.destination as? UINavigationController else {return}
-      let destination = navController.topViewController as! ThemesViewController
-      
+      guard let navController = segue.destination as? UINavigationController else {
+        return
+      }
+      guard let destination = navController.topViewController as? ThemesViewController else {
+        return
+      }
+
       // Themes class protocol:
       destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
       self?.logThemeChanging(selectedTheme: selectedTheme) }
-      
     }
   }
-  
+
   // Function for ThemesView delegate and closure:
   func logThemeChanging(selectedTheme: UIColor) {
     print(selectedTheme)
   }
-  
+
   //Themes: update function for current theme with User Defaults:
   func updateForCurrentTheme () {
     if let currentTheme = UserDefaults.standard.colorForKey(key: "currentTheme") {
@@ -153,7 +142,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       UserDefaults.standard.setColor(value: UIColor.white, forKey: "currentTheme")
       updateForCurrentTheme()
     }
-    
+
     // Views updating:
     let windows = UIApplication.shared.windows
     for window in windows {
@@ -165,18 +154,41 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
 }
 
-//MARK: - Themes: extention for passing and reading UIColor in User Defaults:
+//Themes: extention for passing and reading UIColor in User Defaults:
 extension UserDefaults {
   func setColor(value: UIColor?, forKey: String) {
     guard let value = value else {
-      set(nil, forKey:  forKey)
+      set(nil, forKey: forKey)
       return
     }
     set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: forKey)
   }
-  func colorForKey(key:String) -> UIColor? {
+  func colorForKey(key: String) -> UIColor? {
     guard let data = data(forKey: key), let color = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
       else { return nil }
     return color
+  }
+}
+
+// FetchResultController extention:
+extension ConversationListViewController: NSFetchedResultsControllerDelegate {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    switch type {
+    case .update:
+      tableView.reloadRows(at: [newIndexPath!], with: .none)
+    case .insert:
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    case .delete:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+    case.move:
+      tableView.deleteRows(at: [indexPath!], with: .none)
+      tableView.insertRows(at: [newIndexPath!], with: .none)
+    }
+  }
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.beginUpdates()
+  }
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    tableView.endUpdates()
   }
 }

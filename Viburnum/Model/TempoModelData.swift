@@ -9,7 +9,7 @@
 import Foundation
 
 // Data storage for Communication Homework:
-class Blabber: NSObject{
+class Blabber: NSObject {
   var id: String
   var name: String?
   var online: Bool
@@ -17,7 +17,7 @@ class Blabber: NSObject{
   var messageDate: [Date]
   var messageType: [MessageType]
   var hasUnreadMessages: Bool
-  
+
   init(id: String, name: String?) {
     self.id = id
     self.name = name

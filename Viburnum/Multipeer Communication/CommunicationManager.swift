@@ -10,73 +10,80 @@ import Foundation
 import MultipeerConnectivity
 
 class CommunicationManager: CommunicatorDelegate {
-  
+
   // Making singleton:
   static let shared = CommunicationManager()
   var multiPeerCommunicator: MultiPeerCommunicator!
   // Delegate to talk to ViewController:
-  var delegate: ManagerDelegate!
-  
+  weak var delegate: ManagerDelegate!
+
   private init() {
     //Setting up the instance of MultiPeerCommunicator
     self.multiPeerCommunicator = MultiPeerCommunicator()
     // Setting up the delegate
     self.multiPeerCommunicator.delegate = self
   }
-  
+
   // List of conversations associated with their UserIDs:
-  var listOfBlabbers: [String : Blabber] = [:]
-  
+  var listOfBlabbers: [String: Blabber] = [:]
+
   func didFoundUser(userID: String, userName: String?) {
-    // If Blabber already exsists, just making him online:
-    if let newBlabber = listOfBlabbers[userID] {
-      newBlabber.online = true
-    } else {
-      // If Blabber do not exist adding him to the list:
-      let newBlabber = Blabber(id: userID, name: userName)
-      newBlabber.online = true
-      listOfBlabbers[userID] = newBlabber
-    }
-    DispatchQueue.main.async {
-      self.delegate.globalUpdate()
+    print("User found")
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      guard let user = User.findOrInsertUser(id: userID, in: saveContext) else { return }
+      let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
+      user.name = userName
+      conversation.isOnline = true
+      conversation.user = user
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
-  
+
   func didLostUser(userID: String) {
-    if let newBlabber = listOfBlabbers[userID] {
-      newBlabber.online = false
-      listOfBlabbers.removeValue(forKey: userID)
-    }
-    DispatchQueue.main.async {
-      self.delegate.globalUpdate()
+
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
+      conversation.isOnline = false
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
-  
+
   func failedToStartBrowsingForUsers(error: Error) {
     print(error.localizedDescription)
   }
-  
+
   func failedToStartAdvertisingForUsers(error: Error) {
     print(error.localizedDescription)
   }
-  
+
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-    // If income message (sener on the list):
-    if (listOfBlabbers[fromUser] != nil) {
-      listOfBlabbers[fromUser]?.message.append(text)
-      listOfBlabbers[fromUser]?.messageType.append(.income)
-      listOfBlabbers[fromUser]?.messageDate.append(Date())
-      listOfBlabbers[fromUser]?.hasUnreadMessages = true
-      
-      // If outcome message (receipt on the list):
-    } else if (listOfBlabbers[toUser] != nil) {
-        listOfBlabbers[toUser]?.message.append(text)
-        listOfBlabbers[toUser]?.messageType.append(.outcome)
-        listOfBlabbers[toUser]?.messageDate.append(Date())
-    }
-    guard let delegate = delegate else { return }
-    DispatchQueue.main.async {
-      delegate.globalUpdate()
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      let message: Message
+      if let conversation = Conversation.findConversationWith(id: fromUser, in: saveContext) {
+        message = Message.insertNewMessage(in: saveContext)
+        message.isIncome = true
+        message.conversationId = conversation.conversationId
+        message.text = text
+        conversation.date = Date()
+        message.date = Date()
+        conversation.hasUnreadMessages = true
+        conversation.addToMessages(message)
+        conversation.lastMessage = message
+      } else if let conversation = Conversation.findConversationWith(id: toUser, in: saveContext) {
+        message = Message.insertNewMessage(in: saveContext)
+        message.isIncome = false
+        message.conversationId = conversation.conversationId
+        message.text = text
+        conversation.date = Date()
+        message.date = Date()
+        conversation.hasUnreadMessages = false
+        conversation.addToMessages(message)
+        conversation.lastMessage = message
+      }
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
 }
