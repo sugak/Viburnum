@@ -32,7 +32,7 @@
 		28C5982A224A2F6800CA37D3 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C59829224A2F6800CA37D3 /* AppUser.swift */; };
 		28D181382215721200E56148 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D181372215721200E56148 /* ProfileViewController.swift */; };
 		28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5EC72224A1AAA00B0F271 /* StorageManager.swift */; };
-		28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* messageViewCell.swift */; };
+		28FC00122222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */; };
 		28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */; };
 		28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */; };
 		28FF0CC92238D8D400ECF643 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FF0CC82238D8D400ECF643 /* UserProfile.swift */; };
@@ -67,7 +67,7 @@
 		28C59829224A2F6800CA37D3 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		28D181372215721200E56148 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		28E5EC72224A1AAA00B0F271 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		28FC00112222C8A9003C9161 /* messageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messageViewCell.swift; sourceTree = "<group>"; };
+		28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.temp_caseinsensitive_rename.swift; sourceTree = "<group>"; };
 		28FD9D302248C0C800BCCDD2 /* Viburnum.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Viburnum.xcdatamodel; sourceTree = "<group>"; };
 		28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		28FF0CC82238D8D400ECF643 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 				287C48EC2220636900256F0B /* ConversationListViewController.swift */,
 				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
 				28AB8DCF222080D500C190F4 /* ConversationListTableViewCell.swift */,
-				28FC00112222C8A9003C9161 /* messageViewCell.swift */,
+				28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */,
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
 			);
@@ -338,7 +338,7 @@
 				288446E6225349740095D24D /* Message.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
 				286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */,
-				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,
+				28FC00122222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift in Sources */,
 				288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */,
 				286A996F2252BCCB000CF970 /* Conversation.swift in Sources */,
 				2898B8E422364BDB00EAF4A2 /* UIProfileButton.swift in Sources */,

@@ -15,7 +15,7 @@ class CommunicationManager: CommunicatorDelegate {
   static let shared = CommunicationManager()
   var multiPeerCommunicator: MultiPeerCommunicator!
   // Delegate to talk to ViewController:
-  var delegate: ManagerDelegate!
+  weak var delegate: ManagerDelegate!
 
   private init() {
     //Setting up the instance of MultiPeerCommunicator

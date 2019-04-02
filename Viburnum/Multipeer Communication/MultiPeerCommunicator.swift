@@ -51,9 +51,9 @@ class MultiPeerCommunicator: NSObject, Communicator {
   }
 
   // Send message function:
-  func sendMessage(string: String, to UserID: String, completionHandler: ((Bool, Error?) -> Void)?) {
+  func sendMessage(string: String, to userID: String, completionHandler: ((Bool, Error?) -> Void)?) {
     // Get user from array:
-    guard let session = activeSessions[UserID] else {return}
+    guard let session = activeSessions[userID] else {return}
 
     // Prepare the message:
     let preparedMessageToSend = ["eventType": "TextMessage", "messageId": generateMessageId(), "text": string]
@@ -66,7 +66,7 @@ class MultiPeerCommunicator: NSObject, Communicator {
       try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 
       // Work with sent message:
-      delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: UserID)
+      delegate?.didReceiveMessage(text: string, fromUser: myPeer.displayName, toUser: userID)
       if let completion = completionHandler {
         completion(true, nil)
       }

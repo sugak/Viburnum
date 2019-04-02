@@ -51,13 +51,10 @@ class ThemesViewController: UIViewController {
       switch button.tag {
       case 1:
         applyTheme(with: model.theme1)
-        break
       case 2:
         applyTheme(with: model.theme2)
-        break
       case 3:
         applyTheme(with: model.theme3)
-        break
       default:
         break
       }

@@ -69,8 +69,10 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   // Function to get initials of name for avatar:
   var avatarSymbols = "" {
     didSet {
-      let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
-      avatarLabel.text = initials
+      if !avatarSymbols.isEmpty {
+        let initials = avatarSymbols.components(separatedBy: " ").reduce("") { ($0 == "" ? "" : "\($0.first!)") + "\($1.first!)" }
+        avatarLabel.text = initials
+      }
     }
   }
 

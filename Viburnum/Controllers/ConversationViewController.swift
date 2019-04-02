@@ -16,6 +16,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
   // FetchResultsController:
   var fetchResultsController: NSFetchedResultsController<Message>!
+  
+  //Keyboard observers:
+  var observerShow: AnyObject?
+  var observerHide: AnyObject?
 
   // Outlets:
   @IBOutlet var tableView: UITableView!
@@ -72,9 +76,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Tuning message input field:
     messageInputField.clipsToBounds = true
 
-    // Tuning keyboard:
-    keyBoardSettings()
-
     //TextField delegate:
     messageInputField.delegate = self
 
@@ -92,13 +93,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     super.viewWillAppear(Constants.animated)
     blabberChat.hasUnreadMessages = false
     scrollChatDown()
+    
+    // Tuning keyboard:
+    keyBoardSettings()
 
     // Initial sendButton state:
     sendButton.isEnabled = false
   }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(self)
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    // Removing keyboard observers
+    removeObservers()
   }
 
   private func initialMessagesFetching() {
@@ -147,24 +153,36 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     } else {
       cellID = "outcomeCell"
     }
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! messageViewCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? MessageViewCell else {
+      return MessageViewCell()
+    }
     cell.textMess = message.text
     cell.textDate = message.date
     return cell
   }
-
+  
+  // Keyboard notifications:
   func keyBoardSettings() {
-    // Keyboard notifications:
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
+   observerShow = NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = -270
       // Scroll down to the last message:
       self.scrollChatDown()
     }
-    NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillHideNotification, object: nil, queue: nil) { (_) in
+    observerHide = NotificationCenter.default.addObserver(forName: UIWindow.keyboardWillShowNotification, object: nil, queue: nil) { (_) in
       self.view.frame.origin.y = 0.0
       // Scroll down to the last message:
       self.scrollChatDown()
     }
+  }
+  
+  private func removeObservers() {
+    if let observer = observerShow {
+      NotificationCenter.default.removeObserver(observer)
+    }
+    if let observer = observerHide {
+      NotificationCenter.default.removeObserver(observer)
+    }
+
   }
 
   // Hide keyboard on textView Return tap:

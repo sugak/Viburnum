@@ -80,7 +80,9 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as! ConversationListTableViewCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversationСell", for: indexPath) as? ConversationListTableViewCell else {
+      return UITableViewCell()
+    }
 
     let conversation = fetchResultsController.object(at: indexPath)
     cell.name = conversation.user?.name
@@ -96,22 +98,30 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showConversation" {
       if let indexPath = tableView.indexPathForSelectedRow {
-        let destinationController = segue.destination as!
-        ConversationViewController
+        guard let destinationController = segue.destination as?
+          ConversationViewController else {
+            return
+        }
 
         let conversation = fetchResultsController.object(at: indexPath)
         destinationController.blabberChat = conversation
 
         // Transfer name into navbar:
-        let cell = tableView.cellForRow(at: indexPath) as! ConversationListTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ConversationListTableViewCell else {
+          return
+        }
         destinationController.navigationItem.title = cell.name
       }
     }
 
     //Themes: segue to ThemeViewController:
     if segue.identifier == "themeMenu" {
-      guard let navController = segue.destination as? UINavigationController else {return}
-      let destination = navController.topViewController as! ThemesViewController
+      guard let navController = segue.destination as? UINavigationController else {
+        return
+      }
+      guard let destination = navController.topViewController as? ThemesViewController else {
+        return
+      }
 
       // Themes class protocol:
       destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in

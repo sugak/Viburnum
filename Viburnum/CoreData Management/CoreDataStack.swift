@@ -17,7 +17,7 @@ class CoreDataStack: NSObject {
   var storeURL: URL {
     let documentUrl = FileManager.default.urls(for: .documentDirectory,
                                                in: .userDomainMask).first!
-    return documentUrl.appendingPathComponent("MyStore")
+    return documentUrl.appendingPathComponent("Store.sqlite")
   }
 
   // Managed Object:

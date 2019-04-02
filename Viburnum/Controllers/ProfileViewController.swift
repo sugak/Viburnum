@@ -106,7 +106,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     editMode = !editMode
   }
 
-  @IBAction func pushSaveButton(_sender: UIButton) {
+  @IBAction func pushSaveButton(_ sender: UIButton) {
     saveUserProfile()
   }
 
@@ -185,7 +185,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     if text == "\n" {
       textView.resignFirstResponder()
-      pushSaveButton(_sender: saveButton)
       return true
     }
     return true
@@ -255,7 +254,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
   // Func to check if text has been changed and apply to buttons state:
   private func saveButtonsControl() {
-    if (!dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage)))) {
+    if !dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage))) {
 
       // Change button UI:
       saveButton.isEnabled = true
