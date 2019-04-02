@@ -9,10 +9,9 @@
 import Foundation
 import CoreData
 
-class CoreDataStack: NSObject {
+final class CoreDataStack: NSObject {
   // Init let:
   static let shared = CoreDataStack()
-
   // URL:
   var storeURL: URL {
     let documentUrl = FileManager.default.urls(for: .documentDirectory,
