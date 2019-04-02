@@ -42,7 +42,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
-    globalUpdate()
+ //   globalUpdate()
   }
   
   func globalUpdate() {
@@ -112,9 +112,9 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     let conversation = fetchResultsController.object(at: indexPath)
     cell.name = conversation.user?.name
     cell.avatarSymbols = conversation.user?.name ?? "XX"
-//    cell.message = conversation.message.last
-//    cell.date = conversation.messageDate.last
-//    cell.hasUnreadMessages = conversation.hasUnreadMessages
+    cell.message = conversation.lastMessage?.text
+    cell.date = conversation.date
+    cell.online = conversation.isOnline
     return cell
   }
   

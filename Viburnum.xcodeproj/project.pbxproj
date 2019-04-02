@@ -13,6 +13,7 @@
 		287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C48EC2220636900256F0B /* ConversationListViewController.swift */; };
 		287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40BE2219C61400C87D11 /* PhotoButton.swift */; };
 		287F40C22219D4D300C87D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40C02219CF8C00C87D11 /* Constants.swift */; };
+		288446E6225349740095D24D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288446E5225349740095D24D /* Message.swift */; };
 		288DEA7A220C25AD007D5263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288DEA79220C25AD007D5263 /* AppDelegate.swift */; };
 		288DEA7F220C25AD007D5263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA7D220C25AD007D5263 /* Main.storyboard */; };
 		288DEA81220C25AF007D5263 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288DEA80220C25AF007D5263 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		287C48EC2220636900256F0B /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		287F40BE2219C61400C87D11 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		287F40C02219CF8C00C87D11 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		288446E5225349740095D24D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		288DEA76220C25AD007D5263 /* Viburnum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viburnum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288DEA79220C25AD007D5263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		288DEA7E220C25AD007D5263 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				28E5EC72224A1AAA00B0F271 /* StorageManager.swift */,
 				28FD9D32224A131C00BCCDD2 /* CoreDataStack.swift */,
 				28C59829224A2F6800CA37D3 /* AppUser.swift */,
+				288446E5225349740095D24D /* Message.swift */,
 				28FF0CC82238D8D400ECF643 /* UserProfile.swift */,
 				28FD9D2F2248C0C800BCCDD2 /* Viburnum.xcdatamodeld */,
 				286A996A2252BBED000CF970 /* User.swift */,
@@ -262,6 +265,7 @@
 				28FD9D312248C0C800BCCDD2 /* Viburnum.xcdatamodeld in Sources */,
 				2898852B223E609A00200873 /* MultiPeerCommunicator.swift in Sources */,
 				28C5982A224A2F6800CA37D3 /* AppUser.swift in Sources */,
+				288446E6225349740095D24D /* Message.swift in Sources */,
 				28AB8DD222208C5A00C190F4 /* Protocols.swift in Sources */,
 				286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */,
 				28FC00122222C8A9003C9161 /* messageViewCell.swift in Sources */,

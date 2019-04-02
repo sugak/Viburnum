@@ -83,22 +83,55 @@ class CommunicationManager: CommunicatorDelegate {
   }
   
   func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-    // If income message (sener on the list):
-    if (listOfBlabbers[fromUser] != nil) {
-      listOfBlabbers[fromUser]?.message.append(text)
-      listOfBlabbers[fromUser]?.messageType.append(.income)
-      listOfBlabbers[fromUser]?.messageDate.append(Date())
-      listOfBlabbers[fromUser]?.hasUnreadMessages = true
-      
-      // If outcome message (receipt on the list):
-    } else if (listOfBlabbers[toUser] != nil) {
-        listOfBlabbers[toUser]?.message.append(text)
-        listOfBlabbers[toUser]?.messageType.append(.outcome)
-        listOfBlabbers[toUser]?.messageDate.append(Date())
-    }
-    guard let delegate = delegate else { return }
-    DispatchQueue.main.async {
-      delegate.globalUpdate()
+    let saveContext = CoreDataStack.shared.saveContext
+    saveContext.perform {
+      let message: Message
+      if let conversation = Conversation.findConversationWith(id: fromUser, in: saveContext) {
+        message = Message.insertNewMessage(in: saveContext)
+        message.isIncome = true
+        message.conversationId = conversation.conversationId
+        message.text = text
+        conversation.date = Date()
+        message.date = Date()
+        conversation.hasUnreadMessages = true
+        conversation.addToMessages(message)
+        conversation.lastMessage = message
+      } else if let conversation = Conversation.findConversationWith(id: toUser, in: saveContext) {
+        message = Message.insertNewMessage(in: saveContext)
+        message.isIncome = false
+        message.conversationId = conversation.conversationId
+        message.text = text
+        conversation.date = Date()
+        message.date = Date()
+        conversation.hasUnreadMessages = false
+        conversation.addToMessages(message)
+        conversation.lastMessage = message
+      }
+      CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
+    
+    
+    
+    
+    
+    
+//    // If income message (sener on the list):
+//    if (listOfBlabbers[fromUser] != nil) {
+//      listOfBlabbers[fromUser]?.message.append(text)
+//      listOfBlabbers[fromUser]?.messageType.append(.income)
+//      listOfBlabbers[fromUser]?.messageDate.append(Date())
+//      listOfBlabbers[fromUser]?.hasUnreadMessages = true
+//
+//      // If outcome message (receipt on the list):
+//    } else if (listOfBlabbers[toUser] != nil) {
+//        listOfBlabbers[toUser]?.message.append(text)
+//        listOfBlabbers[toUser]?.messageType.append(.outcome)
+//        listOfBlabbers[toUser]?.messageDate.append(Date())
+//    }
+//    guard let delegate = delegate else { return }
+//    DispatchQueue.main.async {
+//      delegate.globalUpdate()
+//    }
+//  }
 }
