@@ -45,31 +45,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
   
   func globalUpdate() {
-    // Data transfer from Manager:
-//    blabbers = Array(CommunicationManager.shared.listOfBlabbers.values)
-//    sortBlabbers()
     tableView.reloadData()
   }
   
-//  // Sort function:
-//  func sortBlabbers() {
-//    blabbers.sort(by: sortFunc(first:second:))
-//  }
-//
-//  func sortFunc(first: Blabber, second: Blabber) -> Bool {
-//    if let firstDate = first.messageDate.last, let firstName = first.name {
-//      if let secondDate = second.messageDate.last, let secondName = second.name {
-//        if firstDate.timeIntervalSinceNow != secondDate.timeIntervalSinceNow {
-//          return firstDate.timeIntervalSinceNow > secondDate.timeIntervalSinceNow
-//        }
-//        return firstName > secondName
-//      }
-//      return true
-//    } else  {
-//      return false
-//    }
-//  }
-
+  // Initial dialogs fetching:
   func initialConversationFetching() {
     let request = FetchRequestManager.shared.fetchConversations()
     request.fetchBatchSize = 20
@@ -109,6 +88,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     cell.message = conversation.lastMessage?.text
     cell.date = conversation.date
     cell.online = conversation.isOnline
+    cell.hasUnreadMessages = conversation.hasUnreadMessages
     return cell
   }
   
@@ -136,7 +116,6 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       // Themes class protocol:
       destination.themeProtocol = { [weak self] (selectedTheme: UIColor) in
       self?.logThemeChanging(selectedTheme: selectedTheme) }
-      
     }
   }
   
@@ -165,7 +144,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
   }
 }
 
-//MARK: - Themes: extention for passing and reading UIColor in User Defaults:
+//Themes: extention for passing and reading UIColor in User Defaults:
 extension UserDefaults {
   func setColor(value: UIColor?, forKey: String) {
     guard let value = value else {
@@ -181,6 +160,7 @@ extension UserDefaults {
   }
 }
 
+// FetchResultController extention:
 extension ConversationListViewController: NSFetchedResultsControllerDelegate {
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     switch type {
@@ -200,22 +180,5 @@ extension ConversationListViewController: NSFetchedResultsControllerDelegate {
   }
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.endUpdates()
-  }
-  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-    return sectionName
-  }
-  
-  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-    let indexSet = IndexSet(integer: sectionIndex)
-    switch type {
-    case .insert:
-      tableView.insertSections(indexSet, with: .none)
-    case .delete:
-      tableView.deleteSections(indexSet, with: .none)
-    case .update:
-      tableView.reloadSections(indexSet, with: .none)
-    default:
-      return
-    }
   }
 }

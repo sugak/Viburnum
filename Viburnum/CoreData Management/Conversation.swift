@@ -35,18 +35,8 @@ extension Conversation {
       return nil
     }
   }
-  
-  static func findOnlineConversations(in context: NSManagedObjectContext) -> [Conversation]? {
-    let fetchRequest = FetchRequestManager.shared.fetchOnlineConversations()
-    do {
-      let conversations = try context.fetch(fetchRequest)
-      return conversations
-    } catch {
-      assertionFailure("Unable to fetch conversations")
-      return nil
-    }
-  }
-  
+    
+  // Find or insert Conversation:
   static func findOrInsertConversationWith(id: String, in context: NSManagedObjectContext) -> Conversation {
     guard let conversation = Conversation.findConversationWith(id: id, in: context) else {
       return Conversation.insertConversationWith(id:id, in: context)

@@ -34,25 +34,10 @@ class CommunicationManager: CommunicatorDelegate {
       guard let user = User.findOrInsertUser(id: userID, in: saveContext) else { return }
       let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
       user.name = userName
-      //user.isOnline = true
       conversation.isOnline = true
       conversation.user = user
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
-    
-    
-//    // If Blabber already exsists, just making him online:
-//    if let newBlabber = listOfBlabbers[userID] {
-//      newBlabber.online = true
-//    } else {
-//      // If Blabber do not exist adding him to the list:
-//      let newBlabber = Blabber(id: userID, name: userName)
-//      newBlabber.online = true
-//      listOfBlabbers[userID] = newBlabber
-//    }
-//    DispatchQueue.main.async {
-//      self.delegate.globalUpdate()
-//    }
   }
   
   func didLostUser(userID: String) {
@@ -61,17 +46,8 @@ class CommunicationManager: CommunicatorDelegate {
     saveContext.perform {
       let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
       conversation.isOnline = false
-//      conversation.user?.isOnline = false
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
-    
-//    if let newBlabber = listOfBlabbers[userID] {
-//      newBlabber.online = false
-//      listOfBlabbers.removeValue(forKey: userID)
-//    }
-//    DispatchQueue.main.async {
-//      self.delegate.globalUpdate()
-//    }
   }
   
   func failedToStartBrowsingForUsers(error: Error) {
@@ -110,28 +86,4 @@ class CommunicationManager: CommunicatorDelegate {
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
   }
-    
-    
-    
-    
-    
-    
-//    // If income message (sener on the list):
-//    if (listOfBlabbers[fromUser] != nil) {
-//      listOfBlabbers[fromUser]?.message.append(text)
-//      listOfBlabbers[fromUser]?.messageType.append(.income)
-//      listOfBlabbers[fromUser]?.messageDate.append(Date())
-//      listOfBlabbers[fromUser]?.hasUnreadMessages = true
-//
-//      // If outcome message (receipt on the list):
-//    } else if (listOfBlabbers[toUser] != nil) {
-//        listOfBlabbers[toUser]?.message.append(text)
-//        listOfBlabbers[toUser]?.messageType.append(.outcome)
-//        listOfBlabbers[toUser]?.messageDate.append(Date())
-//    }
-//    guard let delegate = delegate else { return }
-//    DispatchQueue.main.async {
-//      delegate.globalUpdate()
-//    }
-//  }
 }

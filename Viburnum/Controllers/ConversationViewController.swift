@@ -33,6 +33,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
   }
   
+  // Send message:
   @IBAction func sendMessageButton(_ sender: UIButton) {
     let messageToSend = messageInputField.text
     let conversationId = blabberChat.conversationId
@@ -46,7 +47,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       if let error = error {
         self.view.endEditing(true)
         let alert = UIAlertController(title: "Ошибка при отправке сообщения: \(error.localizedDescription)", message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        let action = UIAlertAction(title: "ОК", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: Constants.animated, completion: nil)
       }
@@ -78,24 +79,26 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     messageInputField.delegate = self
     
     CommunicationManager.shared.delegate = self
+    
+    // Initial messages fetching:
     initialMessagesFetching()
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    NotificationCenter.default.removeObserver(self)
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     self.customView.superview?.setNeedsLayout()
   }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(Constants.animated)
     blabberChat.hasUnreadMessages = false
+    scrollChatDown()
     
     // Initial sendButton state:
     sendButton.isEnabled = false
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self)
   }
   
   private func initialMessagesFetching() {
@@ -177,16 +180,16 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     }
     return true
   }
-
 }
 
+// FetchResultController extention:
 extension ConversationViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.beginUpdates()
   }
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.endUpdates()
-    globalUpdate()
+    scrollChatDown()
   }
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                   didChange anObject: Any, at indexPath: IndexPath?,

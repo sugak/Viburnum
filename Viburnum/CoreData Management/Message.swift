@@ -10,12 +10,14 @@ import Foundation
 import CoreData
 
 extension Message {
+  // New message:
   static func insertNewMessage(in context: NSManagedObjectContext) -> Message {
     guard let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as? Message else {
       fatalError("Unable to create message entry")
     }
     return message
   }
+  // Find messages for conversation:
   static func findMessagesFrom(conversationId: String, in context: NSManagedObjectContext) -> [Message]? {
     let request = FetchRequestManager.shared.fetchMessagesFrom(conversationID: conversationId)
     do {

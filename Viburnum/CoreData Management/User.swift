@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension User {
+  // Insert User with:
   static func insertUserWith(id: String, in context: NSManagedObjectContext) -> User {
     guard let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as? User else {
       fatalError("Unable to insert User")
@@ -17,6 +18,7 @@ extension User {
     user.userId = id
     return user
   }
+  // Find or insert User:
   static func findOrInsertUser(id: String, in context: NSManagedObjectContext) -> User? {
     let request = FetchRequestManager.shared.fetchUserWithID(id: id)
     do {
