@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 class StorageManager: NSObject {
+  
   // Init core data stack:
   private let coreDataStack = CoreDataStack.shared
 
