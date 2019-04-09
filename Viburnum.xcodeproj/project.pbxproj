@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2814431E225CD4D7008CBD9D /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2814431D225CD4D7008CBD9D /* RootAssembly.swift */; };
 		286A996B2252BBED000CF970 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996A2252BBED000CF970 /* User.swift */; };
 		286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996C2252BC5C000CF970 /* FetchRequestManager.swift */; };
 		286A996F2252BCCB000CF970 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996E2252BCCB000CF970 /* Conversation.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2814431D225CD4D7008CBD9D /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		286A996A2252BBED000CF970 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		286A996C2252BC5C000CF970 /* FetchRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestManager.swift; sourceTree = "<group>"; };
 		286A996E2252BCCB000CF970 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
@@ -89,6 +91,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2814431A225CD342008CBD9D /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		2814431B225CD371008CBD9D /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Service Layer";
+			sourceTree = "<group>";
+		};
+		2814431C225CD37B008CBD9D /* Core Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Core Layer";
+			sourceTree = "<group>";
+		};
 		288DEA6D220C25AD007D5263 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +133,11 @@
 		288DEA78220C25AD007D5263 /* Viburnum */ = {
 			isa = PBXGroup;
 			children = (
+				2814431A225CD342008CBD9D /* Presentation Layer */,
+				2814431B225CD371008CBD9D /* Service Layer */,
+				2814431C225CD37B008CBD9D /* Core Layer */,
+				2814431D225CD4D7008CBD9D /* RootAssembly.swift */,
+				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 				288DEA80220C25AF007D5263 /* Assets.xcassets */,
 				288DEA85220C25AF007D5263 /* Info.plist */,
 				2890F1572224687400F42965 /* Model */,
@@ -171,7 +199,6 @@
 			children = (
 				28AB8DD122208C5A00C190F4 /* Protocols.swift */,
 				287F40C02219CF8C00C87D11 /* Constants.swift */,
-				288DEA79220C25AD007D5263 /* AppDelegate.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -348,6 +375,7 @@
 				28988531223E874400200873 /* MultiPeerCommunicatorExtention.swift in Sources */,
 				28FD9D33224A131C00BCCDD2 /* CoreDataStack.swift in Sources */,
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
+				2814431E225CD4D7008CBD9D /* RootAssembly.swift in Sources */,
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
