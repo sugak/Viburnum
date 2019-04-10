@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class MultiPeerCommunicator: NSObject, Communicator {
+class MultiPeerCommunicator: NSObject, ICommunicator {
   var online: Bool = false
  // var storageManager = StorageManager()
 

@@ -22,12 +22,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let rootAssembly = RootAssembly()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       showLog(from: "Not running", to: "Foreground Inactive")
-      
-      // TODO: HW 9
-      
+       
+      // Homework 9:
+      self.window = UIWindow(frame: UIScreen.main.bounds)
+      let controller = rootAssembly.presentationAssembly.navigationController()
+      window?.rootViewController = controller
+      window?.makeKeyAndVisible()
       return true
     }
 

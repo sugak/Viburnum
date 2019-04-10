@@ -1,31 +1,31 @@
 //
-//  messageViewCell.swift
+//  MessageViewCell.swift
 //  Viburnum
 //
-//  Created by Maksim Sugak on 24/02/2019.
+//  Created by Maksim Sugak on 10/04/2019.
 //  Copyright © 2019 Maksim Sugak. All rights reserved.
 //
 
 import UIKit
 
 class MessageViewCell: UITableViewCell, messageCellConfiguration {
-
+  
   override func layoutSubviews() {
     super .layoutSubviews()
-
+    
     //Styling chat bubbles:
     self.selectionStyle = .none
     messageView.layer.cornerRadius = 14.0
     messageView.clipsToBounds = true
   }
-
+  
   // Confirming to protocol:
   var textMess: String? {
     didSet {
       messageText.text = textMess
     }
   }
-
+  
   var textDate: Date? {
     didSet {
       // Checking date and time for date format:
@@ -42,7 +42,7 @@ class MessageViewCell: UITableViewCell, messageCellConfiguration {
       }
     }
   }
-
+  
   // Outlets:
   @IBOutlet var messageView: UIView! // View for bubble background
   @IBOutlet var messageText: UILabel!

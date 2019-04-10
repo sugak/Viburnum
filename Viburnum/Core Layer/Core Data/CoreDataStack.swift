@@ -9,7 +9,11 @@
 import Foundation
 import CoreData
 
-class CoreDataStack: NSObject {
+protocol ICoreDataStack {
+  func performSave(context: NSManagedObjectContext, completion: ((Error?) -> Void)?)
+}
+
+class CoreDataStack: NSObject, ICoreDataStack {
   // Init let:
   static let shared = CoreDataStack()
 
