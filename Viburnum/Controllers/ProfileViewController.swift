@@ -126,11 +126,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
     let galleryButton = actionForPhotoPickUp(title: "Выбрать из галереи", sourceType: .photoLibrary)
     let cameraButton = actionForPhotoPickUp(title: "Сделать снимок", sourceType: .camera)
+    let downloadButton = UIAlertAction(title: "Загрузить", style: .default) { (action: UIAlertAction) in
+      self.performSegue(withIdentifier: "download", sender: nil)
+    }
 
     // Adding buttons on action sheet:
     choosePhotoMenu.addAction(cancelButton)
     choosePhotoMenu.addAction(galleryButton)
     choosePhotoMenu.addAction(cameraButton)
+    choosePhotoMenu.addAction(downloadButton)
 
     // Showing action sheet:
     present(choosePhotoMenu, animated: Constants.animated, completion: nil)
@@ -312,6 +316,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @objc func keyboardWillHide(notification: NSNotification) {
     if self.view.frame.origin.y != 0 {
       self.view.frame.origin.y = 0
+    }
+  }
+  
+  // Segue to chat:
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "download" {
+      print("Segue!")
     }
   }
 }

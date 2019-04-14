@@ -10,6 +10,7 @@
 		286A996B2252BBED000CF970 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996A2252BBED000CF970 /* User.swift */; };
 		286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996C2252BC5C000CF970 /* FetchRequestManager.swift */; };
 		286A996F2252BCCB000CF970 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996E2252BCCB000CF970 /* Conversation.swift */; };
+		2871765B226347960025C461 /* DownloadCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871765A226347950025C461 /* DownloadCollectionViewController.swift */; };
 		287C48ED2220636900256F0B /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287C48EC2220636900256F0B /* ConversationListViewController.swift */; };
 		287F40BF2219C61400C87D11 /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40BE2219C61400C87D11 /* PhotoButton.swift */; };
 		287F40C22219D4D300C87D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287F40C02219CF8C00C87D11 /* Constants.swift */; };
@@ -43,6 +44,7 @@
 		286A996A2252BBED000CF970 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		286A996C2252BC5C000CF970 /* FetchRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestManager.swift; sourceTree = "<group>"; };
 		286A996E2252BCCB000CF970 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		2871765A226347950025C461 /* DownloadCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCollectionViewController.swift; sourceTree = "<group>"; };
 		287C48EC2220636900256F0B /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		287F40BE2219C61400C87D11 /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		287F40C02219CF8C00C87D11 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				28FC00112222C8A9003C9161 /* MessageViewCell.temp_caseinsensitive_rename.swift */,
 				28D181372215721200E56148 /* ProfileViewController.swift */,
 				2890AA02222E9E9900FFE199 /* ThemesViewController.swift */,
+				2871765A226347950025C461 /* DownloadCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				287F40C22219D4D300C87D11 /* Constants.swift in Sources */,
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
+				2871765B226347960025C461 /* DownloadCollectionViewController.swift in Sources */,
 				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
 				286A996B2252BBED000CF970 /* User.swift in Sources */,
 			);
