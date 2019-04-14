@@ -113,6 +113,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBAction func pushCancelButton(_ sender: UIButton) {
      editMode = !editMode
   }
+  
+  @IBAction func unwindToProfile (segue: UIStoryboardSegue) { }
 
   // Styling photo image view:
   func photoImageViewStyle (for image: UIImageView) {
@@ -126,8 +128,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
     let galleryButton = actionForPhotoPickUp(title: "Выбрать из галереи", sourceType: .photoLibrary)
     let cameraButton = actionForPhotoPickUp(title: "Сделать снимок", sourceType: .camera)
-    let downloadButton = UIAlertAction(title: "Загрузить", style: .default) { (action: UIAlertAction) in
-      self.performSegue(withIdentifier: "download", sender: nil)
+    let downloadButton = UIAlertAction(title: "Загрузить", style: .default) { [weak self] (_) in
+      self?.performSegue(withIdentifier: "download", sender: nil)
     }
 
     // Adding buttons on action sheet:

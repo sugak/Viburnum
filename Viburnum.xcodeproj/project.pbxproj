@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2839163F22636A7E002F9A17 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839163E22636A7E002F9A17 /* ImageStorage.swift */; };
 		286A996B2252BBED000CF970 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996A2252BBED000CF970 /* User.swift */; };
 		286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996C2252BC5C000CF970 /* FetchRequestManager.swift */; };
 		286A996F2252BCCB000CF970 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996E2252BCCB000CF970 /* Conversation.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2839163E22636A7E002F9A17 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		286A996A2252BBED000CF970 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		286A996C2252BC5C000CF970 /* FetchRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestManager.swift; sourceTree = "<group>"; };
 		286A996E2252BCCB000CF970 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2839162D226358DD002F9A17 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2839163E22636A7E002F9A17 /* ImageStorage.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		288DEA6D220C25AD007D5263 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +129,7 @@
 				2890F1572224687400F42965 /* Model */,
 				28B2DEEA222A7CE000F2DAA6 /* View */,
 				2890F1582224887800F42965 /* Controllers */,
+				2839162D226358DD002F9A17 /* Network */,
 				28988529223E5E9C00200873 /* Multipeer Communication */,
 				28FF0CC72238D8A500ECF643 /* CoreData Management */,
 				28B2DEEB222A7CE800F2DAA6 /* Support */,
@@ -358,6 +369,7 @@
 				289C404522310ACC00CEF579 /* ThemesViewController.swift in Sources */,
 				28AB8DD42221344F00C190F4 /* TempoModelData.swift in Sources */,
 				2871765B226347960025C461 /* DownloadCollectionViewController.swift in Sources */,
+				2839163F22636A7E002F9A17 /* ImageStorage.swift in Sources */,
 				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
 				286A996B2252BBED000CF970 /* User.swift in Sources */,
 			);

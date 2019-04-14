@@ -10,10 +10,5 @@ import UIKit
 
 class DownloadCollectionCellCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet var profileImage: UIImageView!
-  
-  func displayContent(image: UIImage) {
-    profileImage.image = image
-  }
-    
+  @IBOutlet var downloadedImageView: UIImageView!   
 }

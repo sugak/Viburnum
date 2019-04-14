@@ -195,7 +195,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="508"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeCell" rowHeight="80" id="YGE-Yz-qd3" customClass="MessageViewCell" customModule="Viburnum" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeCell" rowHeight="80" id="YGE-Yz-qd3" customClass="MessageViewCell" customModule="Viburnum" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YGE-Yz-qd3" id="zrW-yl-TNF">
@@ -250,7 +250,7 @@
                                             <outlet property="messageView" destination="xCX-6i-h4w" id="c4b-sc-Rqr"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="outcomeCell" rowHeight="80" id="Lw8-lL-6zP" customClass="MessageViewCell" customModule="Viburnum" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="outcomeCell" rowHeight="80" id="Lw8-lL-6zP" customClass="MessageViewCell" customModule="Viburnum" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lw8-lL-6zP" id="U0V-i9-YEd">
@@ -622,7 +622,7 @@
                                             <constraint firstAttribute="bottom" secondItem="ApA-1Q-qDi" secondAttribute="bottom" id="t4Q-uh-Ht8"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="profileImage" destination="ApA-1Q-qDi" id="ZxC-WA-F84"/>
+                                            <outlet property="downloadedImageView" destination="ApA-1Q-qDi" id="ZxC-WA-F84"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -631,13 +631,20 @@
                                     <outlet property="delegate" destination="4UG-qe-6vD" id="55f-1N-aNk"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jJo-Z6-XbS">
+                                <rect key="frame" x="141.5" y="265.5" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="jJo-Z6-XbS" firstAttribute="centerX" secondItem="yOt-kO-Pmf" secondAttribute="centerX" id="63Z-Ta-XqR"/>
                             <constraint firstItem="6r8-P4-SeW" firstAttribute="trailing" secondItem="LbB-m5-YhQ" secondAttribute="trailing" id="FyL-mR-Nxb"/>
                             <constraint firstItem="LbB-m5-YhQ" firstAttribute="leading" secondItem="6r8-P4-SeW" secondAttribute="leading" id="I57-ms-Pcw"/>
                             <constraint firstItem="6r8-P4-SeW" firstAttribute="bottom" secondItem="LbB-m5-YhQ" secondAttribute="bottom" id="RW1-zN-EGM"/>
                             <constraint firstItem="LbB-m5-YhQ" firstAttribute="top" secondItem="6r8-P4-SeW" secondAttribute="top" id="rxG-ff-GjX"/>
+                            <constraint firstItem="jJo-Z6-XbS" firstAttribute="centerY" secondItem="yOt-kO-Pmf" secondAttribute="centerY" id="tzA-rW-hJf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6r8-P4-SeW"/>
                     </view>
@@ -646,18 +653,21 @@
                         <barButtonItem key="leftBarButtonItem" title="Назад" id="GcX-6s-9An">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="backButton:" destination="4UG-qe-6vD" id="xCu-bp-ufl"/>
+                                <action selector="backButton:" destination="4UG-qe-6vD" id="owb-hY-ajT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="jJo-Z6-XbS" id="1bb-Lq-bZD"/>
                         <outlet property="collectionView" destination="LbB-m5-YhQ" id="Laf-3u-5Af"/>
+                        <segue destination="bhA-Su-t3w" kind="unwind" identifier="backToProfile" unwindAction="unwindToProfileWithSegue:" id="HJ0-te-CVc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f27-as-vhz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bhA-Su-t3w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2499.375" y="1728.1690140845071"/>
+            <point key="canvasLocation" x="2700" y="1728"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jHa-V0-Ebb">
@@ -736,7 +746,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xF-aS-mxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597.5" y="1729.2253521126761"/>
+            <point key="canvasLocation" x="1571" y="1727"/>
         </scene>
     </scenes>
     <resources>
