@@ -577,7 +577,7 @@
                         <outlet property="photoButton" destination="lYd-iy-XmU" id="S6n-eE-g7x"/>
                         <outlet property="photoImageView" destination="UZ4-Ma-90O" id="tBx-ta-NfZ"/>
                         <outlet property="saveButton" destination="dLf-2i-THp" id="T1d-vU-qcj"/>
-                        <segue destination="hbl-rE-AF5" kind="presentation" identifier="download" id="4Ln-Yj-1Af"/>
+                        <segue destination="hbl-rE-AF5" kind="presentation" identifier="download" modalTransitionStyle="coverVertical" id="4Ln-Yj-1Af"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -591,7 +591,54 @@
                     <view key="view" contentMode="scaleToFill" id="yOt-kO-Pmf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LbB-m5-YhQ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ad6-m1-K8n">
+                                    <size key="itemSize" width="122" height="117"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="AS0-hb-PTY" customClass="DownloadCollectionCellCollectionViewCell" customModule="Viburnum" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="117"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="122" height="117"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="ApA-1Q-qDi">
+                                                    <rect key="frame" x="0.0" y="0.0" width="122" height="117"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="ApA-1Q-qDi" firstAttribute="top" secondItem="AS0-hb-PTY" secondAttribute="top" id="Grv-OD-7u8"/>
+                                            <constraint firstAttribute="trailing" secondItem="ApA-1Q-qDi" secondAttribute="trailing" id="h5A-gs-bIb"/>
+                                            <constraint firstItem="ApA-1Q-qDi" firstAttribute="leading" secondItem="AS0-hb-PTY" secondAttribute="leading" id="k8y-Gd-3DK"/>
+                                            <constraint firstAttribute="bottom" secondItem="ApA-1Q-qDi" secondAttribute="bottom" id="t4Q-uh-Ht8"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="profileImage" destination="ApA-1Q-qDi" id="ZxC-WA-F84"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="4UG-qe-6vD" id="AOs-ka-0Qg"/>
+                                    <outlet property="delegate" destination="4UG-qe-6vD" id="55f-1N-aNk"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6r8-P4-SeW" firstAttribute="trailing" secondItem="LbB-m5-YhQ" secondAttribute="trailing" id="FyL-mR-Nxb"/>
+                            <constraint firstItem="LbB-m5-YhQ" firstAttribute="leading" secondItem="6r8-P4-SeW" secondAttribute="leading" id="I57-ms-Pcw"/>
+                            <constraint firstItem="6r8-P4-SeW" firstAttribute="bottom" secondItem="LbB-m5-YhQ" secondAttribute="bottom" id="RW1-zN-EGM"/>
+                            <constraint firstItem="LbB-m5-YhQ" firstAttribute="top" secondItem="6r8-P4-SeW" secondAttribute="top" id="rxG-ff-GjX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6r8-P4-SeW"/>
                     </view>
                     <toolbarItems/>
@@ -604,10 +651,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="LbB-m5-YhQ" id="Laf-3u-5Af"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f27-as-vhz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2501" y="1729"/>
+            <point key="canvasLocation" x="2499.375" y="1728.1690140845071"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jHa-V0-Ebb">
@@ -691,6 +741,7 @@
     </scenes>
     <resources>
         <image name="3855595-32" width="32" height="32"/>
+        <image name="avatar" width="340" height="340"/>
         <image name="empty" width="310" height="372"/>
         <image name="placeholder-user" width="600" height="600"/>
         <image name="sendIcon" width="32" height="32"/>
