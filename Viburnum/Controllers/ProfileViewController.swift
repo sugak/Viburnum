@@ -259,7 +259,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
 
   // Func to check if text has been changed and apply to buttons state:
-  private func saveButtonsControl() {
+  func saveButtonsControl() {
     if !dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage))) {
 
       // Change button UI:
@@ -321,7 +321,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
   }
   
-  // Segue to chat:
+  // Segue to Image collection view:
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "download" {
       print("Segue!")

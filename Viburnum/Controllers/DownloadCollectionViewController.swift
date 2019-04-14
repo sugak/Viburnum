@@ -10,8 +10,8 @@ import UIKit
 
 class DownloadCollectionViewController: UIViewController {
   let itemsPerRow = 3
-  let space: CGFloat = 10
-  private let loadURL = "https://pixabay.com/api/?key=12166192-4c9c421077c6998eccbae7630&q=portrait&image_type=photo&pretty=true"
+  let collectionViewSpace: CGFloat = 10
+  private let loadURL = "https://pixabay.com/api/?key=12166192-4c9c421077c6998eccbae7630&q=portrait&image_type=photo&pretty=true&per_page=27"
   private var profileImages = [ProfileImage]()
   
   @IBOutlet var collectionView: UICollectionView!
@@ -23,8 +23,8 @@ class DownloadCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       getLatestLoans()
-//      activityIndicator.isHidden = false
-//      activityIndicator.startAnimating()
+      activityIndicator.isHidden = false
+      activityIndicator.startAnimating()
     }
   
   func getLatestLoans() {
@@ -80,6 +80,7 @@ class DownloadCollectionViewController: UIViewController {
         let cell = collectionView.cellForItem(at: indexPath) as? DownloadCollectionCellCollectionViewCell,
         let profileVC = segue.destination as? ProfileViewController else { return }
       profileVC.photoImageView.image = cell.downloadedImageView.image
+      profileVC.saveButtonsControl()
   }
 }
 }
@@ -98,12 +99,14 @@ extension DownloadCollectionViewController: UICollectionViewDataSource {
                                                         for: indexPath) as?
       DownloadCollectionCellCollectionViewCell else { return UICollectionViewCell() }
     
-    cell.downloadedImageView.load(url: URL(string: profileImages[indexPath.row].webformatURL)!)
+    DispatchQueue.main.async {
+      cell.downloadedImageView.load(url: URL(string: self.profileImages[indexPath.row].webformatURL)!)
+    }
     
-//    if indexPath.row == profileImages.count {
-//      activityIndicator.stopAnimating()
-//      activityIndicator.isHidden = true
-//    }
+    if indexPath.row == profileImages.count - 1 {
+      activityIndicator.stopAnimating()
+      activityIndicator.isHidden = true
+    }
     return cell
   }
   
@@ -117,20 +120,20 @@ extension DownloadCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let paddingSpace = space * CGFloat(itemsPerRow + 1)
+    let paddingSpace = collectionViewSpace * CGFloat(itemsPerRow + 1)
     let availableWidth = view.frame.width - paddingSpace
     let widthPerItem = availableWidth / CGFloat(itemsPerRow)
-    return CGSize(width: widthPerItem, height: widthPerItem * 0.8)
+    return CGSize(width: widthPerItem, height: widthPerItem)
   }
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: space, left: space, bottom: space, right: space)
+    return UIEdgeInsets(top: collectionViewSpace, left: collectionViewSpace, bottom: collectionViewSpace, right: collectionViewSpace)
   }
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return space
+    return collectionViewSpace
   }
 }
 
