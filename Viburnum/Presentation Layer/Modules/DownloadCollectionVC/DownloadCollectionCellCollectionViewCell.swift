@@ -10,5 +10,6 @@ import UIKit
 
 class DownloadCollectionCellCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet var downloadedImageView: UIImageView!   
+  @IBOutlet var downloadedImageView: UIImageView!
+  var wasLoaded = false
 }

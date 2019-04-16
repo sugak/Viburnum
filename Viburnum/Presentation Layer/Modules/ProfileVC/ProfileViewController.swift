@@ -322,9 +322,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
   
   // Segue to Image collection view:
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "download" {
-      print("Segue!")
-    }
-  }
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "download" {
+//      print("Segue!")
+//    }
+//  }
 }

@@ -174,8 +174,6 @@
 			children = (
 				288DEA7D220C25AD007D5263 /* Main.storyboard */,
 				288DEA82220C25AF007D5263 /* LaunchScreen.storyboard */,
-				287F40BE2219C61400C87D11 /* PhotoButton.swift */,
-				2898B8E322364BDB00EAF4A2 /* UIProfileButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				28D181372215721200E56148 /* ProfileViewController.swift */,
+				287F40BE2219C61400C87D11 /* PhotoButton.swift */,
+				2898B8E322364BDB00EAF4A2 /* UIProfileButton.swift */,
 			);
 			path = ProfileVC;
 			sourceTree = "<group>";

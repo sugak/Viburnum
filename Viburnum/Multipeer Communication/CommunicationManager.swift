@@ -23,7 +23,7 @@ class CommunicationManager: CommunicatorDelegate {
     // Setting up the delegate
     self.multiPeerCommunicator.delegate = self
   }
-
+  
   // List of conversations associated with their UserIDs:
   var listOfBlabbers: [String: Blabber] = [:]
 

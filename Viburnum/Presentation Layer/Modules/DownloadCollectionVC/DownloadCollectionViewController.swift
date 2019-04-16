@@ -11,7 +11,10 @@ import UIKit
 class DownloadCollectionViewController: UIViewController {
   let itemsPerRow = 3
   let collectionViewSpace: CGFloat = 10
-  private let loadURL = "https://pixabay.com/api/?key=12166192-4c9c421077c6998eccbae7630&q=portrait&image_type=photo&pretty=true&per_page=27"
+  let perPage = 18
+  var page = 1
+  var isWaiting = false
+  var loadURL = ""
   private var profileImages = [ProfileImage]()
   
   @IBOutlet var collectionView: UICollectionView!
@@ -22,12 +25,14 @@ class DownloadCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      getLatestLoans()
       activityIndicator.isHidden = false
       activityIndicator.startAnimating()
+      
+      getLatestLoans(for: page)
     }
   
-  func getLatestLoans() {
+  func getLatestLoans(for page: Int) {
+    loadURL = "https://pixabay.com/api/?key=12166192-4c9c421077c6998eccbae7630&q=portrait&image_type=photo&pretty=true&per_page=\(perPage)&page=\(page)"
     guard let url = URL(string: loadURL) else {
       return
     }
@@ -43,21 +48,20 @@ class DownloadCollectionViewController: UIViewController {
       
       // Parse JSON data
       if let data = data {
-        self.profileImages = self.parseJsonData(data: data)
+        let newElements = self.parseJsonData(data: data)
+        self.profileImages += newElements
         print(self.profileImages)
         
-        OperationQueue.main.addOperation({
-        self.collectionView.reloadData()
-        })
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
       }
     })
-    
     task.resume()
   }
   
   func parseJsonData(data: Data) -> [ProfileImage] {
     var profileImages = [ProfileImage]()
-    
     do {
       let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
       
@@ -65,28 +69,14 @@ class DownloadCollectionViewController: UIViewController {
       for json in jsonImages! {
         var profileImage = ProfileImage()
         profileImage.webformatURL = (json["webformatURL"] as? String)!
+        profileImage.previewURL = (json["previewURL"] as? String)!
         profileImages.append(profileImage)
       }
-    
     } catch {
       print(error)
-    }
-    return profileImages
+      }
+      return profileImages
   }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "backToProfile" {
-      guard let indexPath = collectionView.indexPathsForSelectedItems?.first,
-        let cell = collectionView.cellForItem(at: indexPath) as? DownloadCollectionCellCollectionViewCell,
-        let profileVC = segue.destination as? ProfileViewController else { return }
-      profileVC.photoImageView.image = cell.downloadedImageView.image
-      profileVC.saveButtonsControl()
-  }
-}
-}
-
-extension DownloadCollectionViewController: UICollectionViewDelegate {
-  
 }
 
 extension DownloadCollectionViewController: UICollectionViewDataSource {
@@ -94,28 +84,62 @@ extension DownloadCollectionViewController: UICollectionViewDataSource {
     return profileImages.count
   }
   
+  // Making cell:
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell",
                                                         for: indexPath) as?
       DownloadCollectionCellCollectionViewCell else { return UICollectionViewCell() }
     
     DispatchQueue.main.async {
-      cell.downloadedImageView.load(url: URL(string: self.profileImages[indexPath.row].webformatURL)!)
+      cell.downloadedImageView.load(url: URL(string: self.profileImages[indexPath.row].previewURL)!)
     }
     
     if indexPath.row == profileImages.count - 1 {
+      self.page += 1
+      getLatestLoans(for: page)
       activityIndicator.stopAnimating()
       activityIndicator.isHidden = true
     }
     return cell
   }
   
+  // Call segue by cell tap:
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath) as? DownloadCollectionCellCollectionViewCell else { return }
-      performSegue(withIdentifier: "backToProfile", sender: cell.downloadedImageView.image)
+      performSegue(withIdentifier: "backToProfile", sender: cell)
+  }
+  
+//  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//    print("------------Will display------------\(indexPath)-----\(indexPath.row)")
+//
+//    if indexPath.row == profileImages.count - 2 {
+//      self.isWaiting = true
+//      self.page += 1
+//      self.doPaging()
+//    }
+//  }
+//  
+//  func doPaging() {
+//    getLatestLoans(for: page)
+//    self.collectionView.reloadData()
+//    self.isWaiting = false
+//  }
+
+  // Segue to Profile:
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "backToProfile" {
+      guard let indexPath = collectionView.indexPathsForSelectedItems?.first,
+        let profileVC = segue.destination as? ProfileViewController else { return }
+      DispatchQueue.main.async {
+        profileVC.photoImageView.load(url: URL(string: self.profileImages[indexPath.row].webformatURL)!)
+      }
+      profileVC.saveButton.isEnabled = true
+      profileVC.saveButton.setTitleColor(UIColor.black, for: .normal)
+    }
   }
 }
 
+// Extention for collection view layout:
 extension DownloadCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
@@ -137,6 +161,7 @@ extension DownloadCollectionViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
+// Extention to load image from URL:
 extension UIImageView {
   func load(url: URL) {
     DispatchQueue.global().async { [weak self] in
