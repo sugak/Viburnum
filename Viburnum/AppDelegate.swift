@@ -32,6 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
       showLog(from: "Not running", to: "Foreground Inactive")
+      
+      // SOA Assembly:
+//      self.window = UIWindow(frame: UIScreen.main.bounds)
+//      let controller = rootAssembly.presentationAssembly.demoViewCotnroller()
+//      window?.rootViewController = controller
+//      window?.makeKeyAndVisible()
+      
       return true
     }
 
