@@ -9,6 +9,7 @@
 import UIKit
 
 class DownloadCollectionViewController: UIViewController {
+  // Variables:
   let itemsPerRow = 3 // for collection layout
   let collectionViewSpace: CGFloat = 10 //for collection layout: space btwn cells
   let perPage = 9 // loading per page
