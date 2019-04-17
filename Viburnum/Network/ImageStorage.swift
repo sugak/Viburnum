@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProfileImage: Codable {
+struct ProfileImage {
   var webformatURL: String = ""
   var previewURL: String = ""
 }

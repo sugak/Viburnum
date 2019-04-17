@@ -9,51 +9,58 @@
 import UIKit
 
 class DownloadCollectionViewController: UIViewController {
-  let itemsPerRow = 3
-  let collectionViewSpace: CGFloat = 10
-  let perPage = 18
-  var page = 1
-  var isWaiting = false
-  var loadURL = ""
-  private var profileImages = [ProfileImage]()
+  let itemsPerRow = 3 // for collection layout
+  let collectionViewSpace: CGFloat = 10 //for collection layout: space btwn cells
+  let perPage = 9 // loading per page
+  var page = 1 // starting page
+  var loadURL = "" // loading url var
+  let appKey = "12166192-4c9c421077c6998eccbae7630" // app token
+  private var profileImages = [ProfileImage]()  // model array
   
+  // Outlets:
   @IBOutlet var collectionView: UICollectionView!
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
+  
+  // Actions:
   @IBAction func backButton(_ sender: UIBarButtonItem) {
     dismiss(animated: true, completion: nil)
   }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      activityIndicator.isHidden = false
-      activityIndicator.startAnimating()
-      
-      getLatestLoans(for: page)
+      // Calling for initial images fetching for page 1:
+      fetchLatestImages(for: page)
     }
   
-  func getLatestLoans(for page: Int) {
-    loadURL = "https://pixabay.com/api/?key=12166192-4c9c421077c6998eccbae7630&q=portrait&image_type=photo&pretty=true&per_page=\(perPage)&page=\(page)"
-    guard let url = URL(string: loadURL) else {
-      return
-    }
+  func fetchLatestImages(for page: Int) {
+    // Spinner starting:
+    activityIndicator.isHidden = false
+    activityIndicator.startAnimating()
+    
+    // URL preparation:
+    loadURL = "https://pixabay.com/api/?key=\(appKey)&q=portrait&image_type=photo&pretty=true&per_page=\(perPage)&page=\(page)"
+    guard let url = URL(string: loadURL) else { return }
     
     let request = URLRequest(url: url)
     let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
       
+      // Catching error:
       if let error = error {
         print(response ?? "Null response")
         print(error)
         return
       }
       
-      // Parse JSON data
+      // Parse JSON data:
       if let data = data {
         let newElements = self.parseJsonData(data: data)
         self.profileImages += newElements
-        print(self.profileImages)
         
         DispatchQueue.main.async {
           self.collectionView.reloadData()
+          // Spinner stopping:
+          self.activityIndicator.isHidden = true
+          self.activityIndicator.stopAnimating()
         }
       }
     })
@@ -65,6 +72,7 @@ class DownloadCollectionViewController: UIViewController {
     do {
       let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
       
+      // Getting 
       let jsonImages = jsonResult?["hits"] as? [AnyObject]
       for json in jsonImages! {
         var profileImage = ProfileImage()
@@ -79,6 +87,7 @@ class DownloadCollectionViewController: UIViewController {
   }
 }
 
+// Extention for Collection data source:
 extension DownloadCollectionViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return profileImages.count
@@ -90,15 +99,17 @@ extension DownloadCollectionViewController: UICollectionViewDataSource {
                                                         for: indexPath) as?
       DownloadCollectionCellCollectionViewCell else { return UICollectionViewCell() }
     
+    // Loading image by URL:
     DispatchQueue.main.async {
       cell.downloadedImageView.load(url: URL(string: self.profileImages[indexPath.row].previewURL)!)
+      cell.wasLoaded = true
     }
     
+    // Loading the next page when previous loading was finished:
     if indexPath.row == profileImages.count - 1 {
       self.page += 1
-      getLatestLoans(for: page)
-      activityIndicator.stopAnimating()
-      activityIndicator.isHidden = true
+      print("New page ------------\(page)")
+      fetchLatestImages(for: page)
     }
     return cell
   }
@@ -106,35 +117,23 @@ extension DownloadCollectionViewController: UICollectionViewDataSource {
   // Call segue by cell tap:
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath) as? DownloadCollectionCellCollectionViewCell else { return }
-      performSegue(withIdentifier: "backToProfile", sender: cell)
+    
+    // Making segue only if image was loaded:
+    if cell.wasLoaded {
+            performSegue(withIdentifier: "backToProfile", sender: cell)
+    }
   }
-  
-//  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//    print("------------Will display------------\(indexPath)-----\(indexPath.row)")
-//
-//    if indexPath.row == profileImages.count - 2 {
-//      self.isWaiting = true
-//      self.page += 1
-//      self.doPaging()
-//    }
-//  }
-//  
-//  func doPaging() {
-//    getLatestLoans(for: page)
-//    self.collectionView.reloadData()
-//    self.isWaiting = false
-//  }
 
   // Segue to Profile:
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "backToProfile" {
       guard let indexPath = collectionView.indexPathsForSelectedItems?.first,
-        let profileVC = segue.destination as? ProfileViewController else { return }
+        let profileViewController = segue.destination as? ProfileViewController else { return }
       DispatchQueue.main.async {
-        profileVC.photoImageView.load(url: URL(string: self.profileImages[indexPath.row].webformatURL)!)
+        profileViewController.photoImageView.load(url: URL(string: self.profileImages[indexPath.row].webformatURL)!)
       }
-      profileVC.saveButton.isEnabled = true
-      profileVC.saveButton.setTitleColor(UIColor.black, for: .normal)
+      profileViewController.saveButton.isEnabled = true
+      profileViewController.saveButton.setTitleColor(UIColor.black, for: .normal)
     }
   }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class DownloadCollectionCellCollectionViewCell: UICollectionViewCell {
-  
   @IBOutlet var downloadedImageView: UIImageView!
+  // Load check:
   var wasLoaded = false
 }
