@@ -93,6 +93,9 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
     // Initial messages fetching:
     initialMessagesFetching()
+    
+    // Initial setup of title label:
+    setupTitleLabel()
   }
 
   override func viewDidLayoutSubviews() {
@@ -115,6 +118,17 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     super.viewDidDisappear(animated)
     // Removing keyboard observers
     removeObservers()
+  }
+  
+  func setupTitleLabel () {
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+    navigationItem.titleView = label
+    
+    label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+    
+    label.text = blabberChat.user?.name
   }
 
   private func initialMessagesFetching() {

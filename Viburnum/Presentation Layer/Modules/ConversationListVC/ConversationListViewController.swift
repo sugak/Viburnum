@@ -107,10 +107,10 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
         destinationController.blabberChat = conversation
 
         // Transfer name into navbar:
-        guard let cell = tableView.cellForRow(at: indexPath) as? ConversationListTableViewCell else {
-          return
-        }
-        destinationController.navigationItem.title = cell.name
+//        guard let cell = tableView.cellForRow(at: indexPath) as? ConversationListTableViewCell else {
+//          return
+//        }
+//        destinationController.navigationItem.title = cell.name
       }
     }
 
