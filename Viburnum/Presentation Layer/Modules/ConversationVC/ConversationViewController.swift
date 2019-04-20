@@ -30,9 +30,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
   // Actions:
   @IBAction func messageInputFieldChanged(_ sender: Any) {
-    if (messageInputField.text != "") && (blabberChat.isOnline) {
+    if (messageInputField.text != "") && (blabberChat.isOnline) && (!(messageInputField.text?.hasPrefix(" "))!) {
+      if !sendButton.isEnabled {
+      sendButton.changeSendButton(for: "inactive")
+      sendButton.sendButtonAnimation()
+      }
       sendButton.isEnabled = true
+      
     } else {
+      if sendButton.isEnabled {
+        sendButton.changeSendButton(for: "active")
+        sendButton.sendButtonAnimation()
+      }
       sendButton.isEnabled = false
     }
   }
@@ -47,6 +56,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       if success {
         self.messageInputField.text = ""
         self.sendButton.isEnabled = false
+        self.sendButton.sendButtonAnimation()
       }
       if let error = error {
         self.view.endEditing(true)

@@ -174,7 +174,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="fh9-cR-AXZ" secondAttribute="height" multiplier="16:15" id="W3c-DH-xwJ"/>
                                                 </constraints>
-                                                <state key="normal" image="sendIcon"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <state key="normal" image="sendButtonInactive"/>
                                                 <connections>
                                                     <action selector="sendMessageButton:" destination="bof-sf-8XC" eventType="touchUpInside" id="8ep-Md-puQ"/>
                                                 </connections>
@@ -754,7 +755,7 @@
         <image name="avatar" width="340" height="340"/>
         <image name="empty" width="310" height="372"/>
         <image name="placeholder-user" width="600" height="600"/>
-        <image name="sendIcon" width="32" height="32"/>
+        <image name="sendButtonInactive" width="48" height="48"/>
         <image name="settings" width="32" height="32"/>
     </resources>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28379524226B2EF2005BF1E6 /* UIButtonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28379523226B2EF2005BF1E6 /* UIButtonExtention.swift */; };
 		2839163F22636A7E002F9A17 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839163E22636A7E002F9A17 /* ImageStorage.swift */; };
 		286A996B2252BBED000CF970 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996A2252BBED000CF970 /* User.swift */; };
 		286A996D2252BC5C000CF970 /* FetchRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286A996C2252BC5C000CF970 /* FetchRequestManager.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28379523226B2EF2005BF1E6 /* UIButtonExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtention.swift; sourceTree = "<group>"; };
 		2839163E22636A7E002F9A17 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		286A996A2252BBED000CF970 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		286A996C2252BC5C000CF970 /* FetchRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestManager.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				28A087D72221FE4E002D08D2 /* ConversationViewController.swift */,
 				28FC00112222C8A9003C9161 /* MessageViewCell.swift */,
+				28379523226B2EF2005BF1E6 /* UIButtonExtention.swift */,
 			);
 			path = ConversationVC;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				2871765B226347960025C461 /* DownloadCollectionViewController.swift in Sources */,
 				2839163F22636A7E002F9A17 /* ImageStorage.swift in Sources */,
 				28E5EC73224A1AAA00B0F271 /* StorageManager.swift in Sources */,
+				28379524226B2EF2005BF1E6 /* UIButtonExtention.swift in Sources */,
 				286A996B2252BBED000CF970 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
