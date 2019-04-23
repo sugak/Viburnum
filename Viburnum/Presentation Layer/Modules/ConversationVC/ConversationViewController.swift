@@ -10,9 +10,15 @@ import UIKit
 import CoreData
 
 class ConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ManagerDelegate, UITextFieldDelegate {
-
+  // -----
+  let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
   // User for data transfer:
-  var blabberChat: Conversation!
+  
+  var blabberChat: Conversation! {
+    didSet {
+      setupTitleLabelAnimation()
+    }
+  }
 
   // FetchResultsController:
   var fetchResultsController: NSFetchedResultsController<Message>!
@@ -30,9 +36,18 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
 
   // Actions:
   @IBAction func messageInputFieldChanged(_ sender: Any) {
-    if (messageInputField.text != "") && (blabberChat.isOnline) {
+    if (messageInputField.text != "") && (blabberChat.isOnline) && (!(messageInputField.text?.hasPrefix(" "))!) {
+      if !sendButton.isEnabled {
+      sendButton.changeSendButton(for: "inactive")
+      sendButton.sendButtonAnimation()
+      }
       sendButton.isEnabled = true
+      
     } else {
+      if sendButton.isEnabled {
+        sendButton.changeSendButton(for: "active")
+        sendButton.sendButtonAnimation()
+      }
       sendButton.isEnabled = false
     }
   }
@@ -47,6 +62,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       if success {
         self.messageInputField.text = ""
         self.sendButton.isEnabled = false
+        self.sendButton.sendButtonAnimation()
       }
       if let error = error {
         self.view.endEditing(true)
@@ -79,10 +95,14 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     //TextField delegate:
     messageInputField.delegate = self
 
-    CommunicationManager.shared.delegate = self
-
     // Initial messages fetching:
     initialMessagesFetching()
+    
+    // Initial setup of title label:
+    setupTitleLabel(with: titleLabel)
+    
+    //Animation for title label:
+    setupTitleLabelAnimation()
   }
 
   override func viewDidLayoutSubviews() {
@@ -91,6 +111,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(Constants.animated)
+    CommunicationManager.shared.delegate = self
     blabberChat.hasUnreadMessages = false
     scrollChatDown()
     
@@ -106,7 +127,26 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     // Removing keyboard observers
     removeObservers()
   }
-
+  
+  func setupTitleLabel (with label: UILabel) {
+    navigationItem.titleView = label
+    
+    label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+    //label.lineBreakMode = NSLineBreakMode.byWordWrapping
+    
+    label.text = blabberChat.user?.name
+  }
+  
+  func setupTitleLabelAnimation () {
+    if blabberChat.isOnline {
+      titleLabel.titleLabelIsOnline()
+    } else {
+      titleLabel.titleLabelisOffline()
+    }
+  }
+  
   private func initialMessagesFetching() {
     guard let conversationId = blabberChat.conversationId else { return }
     fetchResultsController = NSFetchedResultsController(fetchRequest: FetchRequestManager.shared.fetchMessagesFrom(conversationID: conversationId), managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -118,14 +158,20 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
   }
 
   // Delegate funcntion:
-  func globalUpdate() {
+  func chatUpdate() {
     blabberChat.hasUnreadMessages = false
     tableView.reloadData()
-
+    
     // Scroll down to the last message:
     scrollChatDown()
   }
-
+  
+  func userUpdate() {
+    blabberChat.isOnline = !blabberChat.isOnline
+    setupTitleLabelAnimation()
+    print("CONVERSATION")
+  }
+  
   // Scroll down to the last message:
   func scrollChatDown() {
     guard let fetchedObjects = fetchResultsController.fetchedObjects else { return }

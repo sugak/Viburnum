@@ -52,9 +52,9 @@ class ConversationListTableViewCell: UITableViewCell, ConversationCellConfigurat
   var online: Bool = false {
     didSet {
       if online {
-        self.backgroundColor = #colorLiteral(red: 0.965354383, green: 0.9575526118, blue: 0.8513519168, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
       } else {
-        self.backgroundColor = .white
+        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
       }
     }
   }

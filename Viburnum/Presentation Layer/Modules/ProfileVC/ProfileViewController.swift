@@ -113,6 +113,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   @IBAction func pushCancelButton(_ sender: UIButton) {
      editMode = !editMode
   }
+  
+  @IBAction func unwindToProfile (segue: UIStoryboardSegue) { }
 
   // Styling photo image view:
   func photoImageViewStyle (for image: UIImageView) {
@@ -126,11 +128,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let cancelButton  = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
     let galleryButton = actionForPhotoPickUp(title: "Выбрать из галереи", sourceType: .photoLibrary)
     let cameraButton = actionForPhotoPickUp(title: "Сделать снимок", sourceType: .camera)
+    let downloadButton = UIAlertAction(title: "Загрузить", style: .default) { [weak self] (_) in
+      self?.performSegue(withIdentifier: "download", sender: nil)
+    }
 
     // Adding buttons on action sheet:
     choosePhotoMenu.addAction(cancelButton)
     choosePhotoMenu.addAction(galleryButton)
     choosePhotoMenu.addAction(cameraButton)
+    choosePhotoMenu.addAction(downloadButton)
 
     // Showing action sheet:
     present(choosePhotoMenu, animated: Constants.animated, completion: nil)
@@ -253,7 +259,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
   }
 
   // Func to check if text has been changed and apply to buttons state:
-  private func saveButtonsControl() {
+  func saveButtonsControl() {
     if !dataSavingInProgress && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextView.text != userProfile.description || (photoImageView.image! != userProfile.profileImage))) {
 
       // Change button UI:
@@ -314,4 +320,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       self.view.frame.origin.y = 0
     }
   }
+  
+  // Segue to Image collection view:
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "download" {
+//      print("Segue!")
+//    }
+//  }
 }

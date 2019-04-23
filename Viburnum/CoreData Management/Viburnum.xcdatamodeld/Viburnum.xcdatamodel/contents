@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AppUser" representedClassName="AppUser" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +33,7 @@
     <elements>
         <element name="AppUser" positionX="-11988.265625" positionY="-13388.4140625" width="128" height="90"/>
         <element name="Conversation" positionX="-11979" positionY="-13356" width="128" height="150"/>
-        <element name="User" positionX="-11988" positionY="-13365" width="128" height="120"/>
         <element name="Message" positionX="-11979" positionY="-13329" width="128" height="135"/>
+        <element name="User" positionX="-11988" positionY="-13365" width="128" height="120"/>
     </elements>
 </model>
