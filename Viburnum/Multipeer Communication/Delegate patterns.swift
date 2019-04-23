@@ -29,5 +29,6 @@ protocol CommunicatorDelegate: class {
 
 protocol ManagerDelegate: class {
   // Manager delegation functions:
-  func globalUpdate()
+  func chatUpdate()
+  func userUpdate()
 }

@@ -28,3 +28,18 @@ extension UIButton {
     }
   }
 }
+
+extension UILabel {
+  func titleLabelIsOnline() {
+    UIView.animate(withDuration: 1.0) {
+      self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+      self.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+    }
+  }
+  func titleLabelisOffline() {
+    UIView.animate(withDuration: 1.0) {
+      self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+      self.textColor = .black
+    }
+  }
+}

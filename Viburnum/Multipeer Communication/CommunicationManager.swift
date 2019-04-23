@@ -28,7 +28,6 @@ class CommunicationManager: CommunicatorDelegate {
   var listOfBlabbers: [String: Blabber] = [:]
 
   func didFoundUser(userID: String, userName: String?) {
-    print("User found")
     let saveContext = CoreDataStack.shared.saveContext
     saveContext.perform {
       guard let user = User.findOrInsertUser(id: userID, in: saveContext) else { return }
@@ -38,15 +37,20 @@ class CommunicationManager: CommunicatorDelegate {
       conversation.user = user
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
+    DispatchQueue.main.async {
+      self.delegate.userUpdate()
+    }
   }
 
   func didLostUser(userID: String) {
-
     let saveContext = CoreDataStack.shared.saveContext
     saveContext.perform {
       let conversation = Conversation.findOrInsertConversationWith(id: userID, in: saveContext)
       conversation.isOnline = false
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
+    }
+    DispatchQueue.main.async {
+      self.delegate.userUpdate()
     }
   }
 
@@ -85,5 +89,9 @@ class CommunicationManager: CommunicatorDelegate {
       }
       CoreDataStack.shared.performSave(context: saveContext, completion: nil)
     }
+    DispatchQueue.main.async {
+      self.delegate.chatUpdate()
+    }
+
   }
 }

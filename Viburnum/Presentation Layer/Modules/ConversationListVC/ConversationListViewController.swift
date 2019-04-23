@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class ConversationListViewController: UITableViewController, ManagerDelegate {
+
   // Creating empty array of existing blabbers (users)
   var blabbers: [Blabber] = []
 
@@ -42,10 +43,7 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
     super .viewWillAppear(Constants.animated)
     // Initilize Communication manager:
     CommunicationManager.shared.delegate = self
-  }
-
-  func globalUpdate() {
-    tableView.reloadData()
+    chatUpdate()
   }
 
   // Initial dialogs fetching:
@@ -60,7 +58,18 @@ class ConversationListViewController: UITableViewController, ManagerDelegate {
       print("fetchConversations() method:   \(error)")
     }
   }
-
+  
+  //Delegate functions:
+  func chatUpdate() {
+    initialConversationFetching()
+    tableView.reloadData()
+  }
+  
+  func userUpdate() {
+    tableView.reloadData()
+      print("CONVERSATION LIST")
+  }
+  
   // Tableview functions:
   override func numberOfSections(in tableView: UITableView) -> Int {
       return 1
