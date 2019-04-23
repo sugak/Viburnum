@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 class StorageManager: NSObject {
+
   // Init core data stack:
   private let coreDataStack = CoreDataStack.shared
 
@@ -39,7 +40,7 @@ class StorageManager: NSObject {
     let appUser = AppUser.findOrInsertAppUser(in: coreDataStack.mainContext)
     let profile: UserProfile
     let name = appUser?.name ?? "Пользователь \(UIDevice.current.name)"
-    let description = appUser?.info ?? "Если вы видите этот текст, значит Core Data завелась, а девайс был запущен впервые. Ура! 👻"
+    let description = appUser?.info ?? "Core Data завелась, а девайс был запущен впервые. Ура! 👻"
     let image: UIImage
 
     //Image handling:
